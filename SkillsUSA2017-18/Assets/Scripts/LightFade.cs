@@ -29,6 +29,5 @@ public class LightFade : MonoBehaviour {
     {
         GetComponent<Light>().intensity = intens;
         initIntens = intens;
-        print(intens);
     }
 }
