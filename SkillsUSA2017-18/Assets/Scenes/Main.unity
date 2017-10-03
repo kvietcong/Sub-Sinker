@@ -342,6 +342,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  illuminationRadius: 10
+  light: {fileID: 1093109617}
+  maxRad: 25
+  minRad: 8
 --- !u!1 &1093109615
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,7 +384,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 2
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5514706, g: 0.87008125, b: 1, a: 1}
   m_Intensity: 6
   m_Range: 10
   m_SpotAngle: 30
