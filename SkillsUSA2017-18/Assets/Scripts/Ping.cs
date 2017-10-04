@@ -10,6 +10,7 @@ public class Ping : MonoBehaviour
     public GameObject PingLight;
     public float lightZOffset = -3f;
     public float firstLightIntensity = 6f;
+    public float force;
 
     // num collisions with wall
     int collCount;
@@ -41,7 +42,7 @@ public class Ping : MonoBehaviour
     {
         transform.position = player.transform.position;
         Vector2 mousePos = new Vector2(Input.mousePosition.x - Screen.width / 2, Input.mousePosition.y - Screen.height / 2);
-        rb.AddForce(mousePos.normalized * 500);
+        rb.AddForce(mousePos.normalized * force);
     }
 
     void OnCollisionEnter2D(Collision2D coll)

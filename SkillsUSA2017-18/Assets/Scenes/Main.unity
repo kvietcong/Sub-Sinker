@@ -174,12 +174,12 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RenderingPath: -1
+  m_RenderingPath: 3
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
-  m_AllowMSAA: 1
+  m_AllowMSAA: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -389,7 +389,7 @@ Light:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 6
   m_Range: 6
-  m_SpotAngle: 30
+  m_SpotAngle: 179
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -477,7 +477,7 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 0.5514706, g: 0.87008125, b: 1, a: 1}
-  m_Intensity: 6
+  m_Intensity: 15
   m_Range: 20
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -816,7 +816,7 @@ Transform:
   m_GameObject: {fileID: 1439002465}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.85, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -851,6 +851,7 @@ MonoBehaviour:
   PingLight: {fileID: 1024374798}
   lightZOffset: -3
   firstLightIntensity: 6
+  force: 1000
   totalColls: 5
 --- !u!1 &1523603441
 GameObject:
