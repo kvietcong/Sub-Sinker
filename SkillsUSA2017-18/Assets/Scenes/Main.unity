@@ -345,7 +345,7 @@ MonoBehaviour:
   speed: 5
   illuminationRadius: 10
   light: {fileID: 1093109617}
-  maxRad: 25
+  maxRad: 12.5
   minRad: 8
 --- !u!114 &593490667
 MonoBehaviour:
