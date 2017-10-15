@@ -359,7 +359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ping: {fileID: 1439002465}
-  rateOfFire: 3
+  rateOfFire: 2
 --- !u!1 &1024374798
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,7 +376,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &1024374799
 Light:
   m_ObjectHideFlags: 0
