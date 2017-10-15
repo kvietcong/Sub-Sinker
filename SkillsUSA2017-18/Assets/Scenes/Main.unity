@@ -1038,7 +1038,7 @@ MonoBehaviour:
   height: 40
   seed: JUDEAHWHEELIEISMYREALNAME
   useRandomSeed: 1
-  randomFillPercent: 45
+  randomFillPercent: 43
 --- !u!4 &1797540950
 Transform:
   m_ObjectHideFlags: 0
