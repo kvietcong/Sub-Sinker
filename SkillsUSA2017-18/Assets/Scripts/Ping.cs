@@ -51,7 +51,6 @@ public class Ping : MonoBehaviour
         // spawn new light
 
 
-        // TODO: FIX FOR BARREL OFFSET VALUE: (0.211, 0.055)
         Vector3 pos = transform.position;
         pos.z = lightZOffset;
 
