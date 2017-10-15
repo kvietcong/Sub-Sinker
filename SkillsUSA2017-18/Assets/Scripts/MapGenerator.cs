@@ -39,7 +39,7 @@ public class MapGenerator : MonoBehaviour
     {
         if(useRandomSeed)
         {
-            seed = Time.time.ToString();
+            seed = UnityEngine.Random.Range(0.0f, 1.0f).ToString();
         }
 
         System.Random psuedoRandom = new System.Random(seed.GetHashCode());
