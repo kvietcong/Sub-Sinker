@@ -11,6 +11,12 @@ public class MapGenerator : MonoBehaviour
     public string seed;
     public bool useRandomSeed;
 
+    [Range(0,1000)]
+    public int minimumChunkSize = 50;
+
+    [Range(0, 1000)]
+    public int minimumRoomSize = 50;
+
     [Range(0, 100)]
     public int randomFillPercent;
 
@@ -31,8 +37,43 @@ public class MapGenerator : MonoBehaviour
             SmoothMap();
         }
 
+        ProccessMap();
+
         MeshGenerator meshGen = GetComponent<MeshGenerator>();
         meshGen.GenerateMesh(map, 1);
+    }
+
+    void ProccessMap()
+    {
+        //Chunk Deleting
+        List<List<Coord>> wallRegions = GetRegions(1);
+
+        int wallThresholdSize = minimumChunkSize;
+        foreach(List<Coord> wallRegion in wallRegions)
+        {
+            if(wallRegion.Count < wallThresholdSize)
+            {
+                foreach(Coord tile in wallRegion)
+                {
+                    map[tile.tileX, tile.tileY] = 0;
+                }
+            }
+        }
+
+        //Room Filling
+        List<List<Coord>> roomRegions = GetRegions(0);
+
+        int roomThresholdSize = minimumRoomSize;
+        foreach (List<Coord> roomRegion in roomRegions)
+        {
+            if (roomRegion.Count < roomThresholdSize)
+            {
+                foreach (Coord tile in roomRegion)
+                {
+                    map[tile.tileX, tile.tileY] = 1;
+                }
+            }
+        }
     }
 
     List<List<Coord>> GetRegions(int tileType)
@@ -40,8 +81,24 @@ public class MapGenerator : MonoBehaviour
         List<List<Coord>> regions = new List<List<Coord>>();
         int[,] mapFlags = new int[width, height];
 
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                if(mapFlags[x,y] == 0 && map[x, y] == tileType)
+                {
+                    List<Coord> newRegion = GetRegionTiles(x, y);
+                    regions.Add(newRegion);
+                    foreach(Coord tile in newRegion)
+                    {
+                        mapFlags[tile.tileX, tile.tileY] = 1;
+                    }
+                }
+            }
+        }
 
-    }
+        return regions;
+     }
 
     List<Coord> GetRegionTiles(int startX, int startY)
     {
@@ -134,7 +191,7 @@ public class MapGenerator : MonoBehaviour
         {
             for (int neighbourY = gridY - 1; neighbourY <= gridY + 1; neighbourY++)
             {
-                if (IsInMapRange(neighbourX,neighbourY)
+                if (IsInMapRange(neighbourX,neighbourY))
                 {
                     if (neighbourX != gridX || neighbourY != gridY)
                     {

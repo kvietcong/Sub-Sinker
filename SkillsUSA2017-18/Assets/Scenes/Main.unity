@@ -870,7 +870,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &1523603442
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1034,10 +1034,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44bda69583bb60343a56ba91388a6bdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 70
-  height: 40
-  seed: JUDEAHWHEELIEISMYREALNAME
-  useRandomSeed: 1
+  width: 128
+  height: 72
+  seed: 0
+  useRandomSeed: 0
+  minimumChunkSize: 15
+  minimumRoomSize: 0
   randomFillPercent: 45
 --- !u!4 &1797540950
 Transform:
