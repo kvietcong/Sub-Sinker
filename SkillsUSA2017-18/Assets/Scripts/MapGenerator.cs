@@ -35,6 +35,53 @@ public class MapGenerator : MonoBehaviour
         meshGen.GenerateMesh(map, 1);
     }
 
+    List<List<Coord>> GetRegions(int tileType)
+    {
+        List<List<Coord>> regions = new List<List<Coord>>();
+        int[,] mapFlags = new int[width, height];
+
+
+    }
+
+    List<Coord> GetRegionTiles(int startX, int startY)
+    {
+        List<Coord> tiles = new List<Coord>();
+        int[,] mapFlags = new int[width, height];
+        int tileType=map[startX,startY];
+
+        Queue<Coord> queue = new Queue<Coord>();
+        queue.Enqueue(new Coord(startX, startY));
+        mapFlags[startX, startY]=1;
+
+        while(queue.Count>0)
+        {
+            Coord tile = queue.Dequeue();
+            tiles.Add(tile);
+
+            for(int x = tile.tileX-1;x <= tile.tileX + 1;x++)
+            {
+                for (int y = tile.tileY - 1; y <= tile.tileY + 1; y++)
+                {
+                    if (IsInMapRange(x, y) && (y == tile.tileY || x == tile.tileX)) 
+                    {
+                        if (mapFlags[x, y] == 0 && map[x, y] == tileType)
+                        {
+                            mapFlags[x, y] = 1;
+                            queue.Enqueue(new Coord(x, y));
+                        }
+                    }
+                }
+            }
+        }
+
+        return tiles;
+    }
+
+    bool IsInMapRange(int x,int y)
+    {
+        return x >= 0 && x < width && y >= 0 && y < height;
+    }
+
     void RandomFillMap()
     {
         if(useRandomSeed)
@@ -87,7 +134,7 @@ public class MapGenerator : MonoBehaviour
         {
             for (int neighbourY = gridY - 1; neighbourY <= gridY + 1; neighbourY++)
             {
-                if (neighbourX >= 0 && neighbourX < width && neighbourY >= 0 && neighbourY < height)
+                if (IsInMapRange(neighbourX,neighbourY)
                 {
                     if (neighbourX != gridX || neighbourY != gridY)
                     {
@@ -101,6 +148,18 @@ public class MapGenerator : MonoBehaviour
             }
         }
         return wallCount++;
+    }
+
+    struct Coord
+    {
+        public int tileX;
+        public int tileY;
+
+        public Coord(int x, int y)
+        {
+            tileX = x;
+            tileY = y;
+        }
     }
 
     void OnDrawGizmos()
