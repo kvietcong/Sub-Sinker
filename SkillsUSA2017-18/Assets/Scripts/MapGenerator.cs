@@ -32,7 +32,7 @@ public class MapGenerator : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.F5))
         {
             GenerateMap();
         }
@@ -203,7 +203,7 @@ public class MapGenerator : MonoBehaviour
     void CreatePassage(Room roomA, Room roomB, Coord tileA, Coord tileB)
     {
         Room.ConnectRooms(roomA, roomB);
-        if(debugLines) Debug.DrawLine(CoordToWorldPoint(tileA), CoordToWorldPoint(tileB), Color.green, 100);
+        if(debugLines) Debug.DrawLine(CoordToWorldPoint(tileA)*3, CoordToWorldPoint(tileB)*3, Color.green, 100);
 
         List<Coord> line = GetLine(tileA, tileB);
         foreach (Coord c in line)
