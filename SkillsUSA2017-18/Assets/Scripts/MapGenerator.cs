@@ -25,8 +25,11 @@ public class MapGenerator : MonoBehaviour
 
     int[,] map;
 
+    List<Coord> spawnableCoords;
+
     void Start()
     {
+        spawnableCords = new List<Coord>();
         GenerateMap();
     }
 
@@ -70,6 +73,15 @@ public class MapGenerator : MonoBehaviour
 
         MeshGenerator meshGen = GetComponent<MeshGenerator>();
         meshGen.GenerateMesh(borderedMap, 1);
+
+        List<List<Coord>> roomRegions = GetRegions(0);
+        foreach (List<Coord> roomRegion in roomRegions)
+        {
+            foreach (Coord tile in roomRegion)
+            {
+                spawnableCoords.Add(tile);
+	    }
+        }
     }
 
     void ProcessMap()
