@@ -25,7 +25,7 @@ public class MapGenerator : MonoBehaviour
 
     int[,] map;
 
-    public List<Coord> spawnableCoords;
+    List<Coord> spawnableCoords;
 
     void Start()
     {
