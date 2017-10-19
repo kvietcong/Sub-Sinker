@@ -25,11 +25,11 @@ public class MapGenerator : MonoBehaviour
 
     int[,] map;
 
-    List<Coord> spawnableCoords;
+    public List<Coord> spawnableCoords;
 
     void Start()
     {
-        spawnableCords = new List<Coord>();
+        spawnableCoords = new List<Coord>();
         GenerateMap();
     }
 
@@ -80,7 +80,7 @@ public class MapGenerator : MonoBehaviour
             foreach (Coord tile in roomRegion)
             {
                 spawnableCoords.Add(tile);
-	    }
+	        }
         }
     }
 
