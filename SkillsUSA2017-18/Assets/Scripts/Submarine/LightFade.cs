@@ -1,8 +1,9 @@
 ﻿    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class LightFade : MonoBehaviour {
+public class LightFade : NetworkBehaviour {
     Light lt;
     public float timeToFade = 1f;
     float initIntens;
@@ -24,10 +25,4 @@ public class LightFade : MonoBehaviour {
         lt.intensity = Mathf.Lerp(initIntens, 0, elapsedTime / timeToFade);
         elapsedTime += Time.deltaTime;
 	}
-
-    public void SetIntensity (float intens)
-    {
-        GetComponent<Light>().intensity = intens;
-        initIntens = intens;
-    }
 }
