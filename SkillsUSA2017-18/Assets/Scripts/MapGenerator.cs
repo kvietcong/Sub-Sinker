@@ -23,7 +23,7 @@ public class MapGenerator : MonoBehaviour
 
     public bool debugLines = false;
 
-    int[,] map;
+    public int[,] map;
 
     List<Coord> spawnableCoords;
 
