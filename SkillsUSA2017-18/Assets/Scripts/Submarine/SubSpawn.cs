@@ -5,15 +5,33 @@ using UnityEngine.Networking;
 
 public class SubSpawn : NetworkBehaviour
 {
-    public GameObject mapGen;
+    public GameObject mapGenPrefab;
+    private Vector2 newPos;
+    GameObject mapGen;
+
+    bool spawned;
 
     // Use this for initialization
     void Start () {
-        //int[,] tileSet = mapGen.getComponent<ScriptableObject>("MapGenerator").map;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        spawned = false;
+
+        // create map generator on server only
+        if (isServer)
+        {
+            mapGen = Instantiate(mapGenPrefab, new Vector3(), Quaternion.identity);
+            NetworkServer.Spawn(mapGen);
+        }
+    }
+
+    void Update()
+    {
+        // wait until map is generated
+        if (MapGenerator.generated && !spawned) { 
+            newPos = mapGen.GetComponent<MapGenerator>().GetSpawnPos();
+            transform.position = newPos;
+            spawned = true;
+
+            print(newPos);
+        }
+    }
 }

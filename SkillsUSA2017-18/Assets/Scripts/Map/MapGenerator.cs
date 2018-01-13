@@ -24,10 +24,11 @@ public class MapGenerator : NetworkBehaviour
 
     public bool debugLines = false;
 
-    [SyncVar]
     int[,] map;
 
     List<Coord> spawnableCoords;
+
+    public static bool generated = false;
 
     void Start()
     {
@@ -37,6 +38,7 @@ public class MapGenerator : NetworkBehaviour
         }
         spawnableCoords = new List<Coord>();
         GenerateMap();
+        generated = true;
     }
 
     void Update()
@@ -533,4 +535,21 @@ public class MapGenerator : NetworkBehaviour
         }
     }
 
+    public Vector2 GetSpawnPos()
+    {
+        int tileset_width = map.GetLength(0);
+        int tileset_height = map.GetLength(1);
+        int map_x = UnityEngine.Random.Range(0, tileset_width);
+        int map_y = UnityEngine.Random.Range(0, tileset_height);
+
+        while (map[map_x,map_y] == 1)
+        {
+            map_x = UnityEngine.Random.Range(0, tileset_width);
+            map_y = UnityEngine.Random.Range(0, tileset_height);
+        }
+        float x = map_x - (width * 1.5f); // 3x scale
+        float y = map_y - (height * 1.5f);
+
+        return new Vector2(x, y);
+    }
 }

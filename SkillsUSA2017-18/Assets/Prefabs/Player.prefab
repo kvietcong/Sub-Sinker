@@ -226,6 +226,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc3e96758060c1b4ab92cab5033ccc01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mapGenPrefab: {fileID: 1565039067421404, guid: 4f4b410c65667ae488e94695bfc8d1a3,
+    type: 2}
 --- !u!114 &114087934296098440
 MonoBehaviour:
   m_ObjectHideFlags: 1
