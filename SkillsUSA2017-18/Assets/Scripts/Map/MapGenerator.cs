@@ -32,9 +32,9 @@ public class MapGenerator : NetworkBehaviour
 
     void Start()
     {
-        if (!isServer)
+        if (isServer && useRandomSeed)
         {
-            return;
+            seed = UnityEngine.Random.value.ToString();
         }
         spawnableCoords = new List<Coord>();
         GenerateMap();
@@ -383,11 +383,6 @@ public class MapGenerator : NetworkBehaviour
 
     void RandomFillMap()
     {
-        if (useRandomSeed)
-        {
-            seed = UnityEngine.Random.value.ToString();
-        }
-
         System.Random pseudoRandom = new System.Random(seed.GetHashCode());
 
         for (int x = 0; x < width; x++)

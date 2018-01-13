@@ -15,12 +15,8 @@ public class SubSpawn : NetworkBehaviour
     void Start () {
         spawned = false;
 
-        // create map generator on server only
-        if (isServer)
-        {
-            mapGen = Instantiate(mapGenPrefab, new Vector3(), Quaternion.identity);
-            NetworkServer.Spawn(mapGen);
-        }
+        // create map generator
+        mapGen = Instantiate(mapGenPrefab, new Vector3(), Quaternion.identity);
     }
 
     void Update()
