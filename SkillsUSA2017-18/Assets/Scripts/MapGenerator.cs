@@ -377,7 +377,7 @@ public class MapGenerator : MonoBehaviour
     {
         if (useRandomSeed)
         {
-            seed = Time.time.ToString();
+            seed = UnityEngine.Random.value.ToString();
         }
 
         System.Random pseudoRandom = new System.Random(seed.GetHashCode());
