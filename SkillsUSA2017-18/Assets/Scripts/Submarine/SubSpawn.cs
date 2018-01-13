@@ -9,7 +9,7 @@ public class SubSpawn : NetworkBehaviour
 
     // Use this for initialization
     void Start () {
-        int[,] tileSet = mapGen.getComponent("MapGenerator").map;
+        //int[,] tileSet = mapGen.getComponent<ScriptableObject>("MapGenerator").map;
 	}
 	
 	// Update is called once per frame
