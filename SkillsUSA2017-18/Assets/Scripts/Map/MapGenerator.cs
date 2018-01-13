@@ -2,8 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using UnityEngine.Networking;
 
-public class MapGenerator : MonoBehaviour
+public class MapGenerator : NetworkBehaviour
 {
 
     public int width;
@@ -23,22 +24,27 @@ public class MapGenerator : MonoBehaviour
 
     public bool debugLines = false;
 
+    [SyncVar]
     int[,] map;
 
     List<Coord> spawnableCoords;
 
     void Start()
     {
+        if (!isServer)
+        {
+            return;
+        }
         spawnableCoords = new List<Coord>();
         GenerateMap();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F5))
-        {
-            GenerateMap();
-        }
+        //if (Input.GetKeyDown(KeyCode.F5))
+        //{
+        //    GenerateMap();
+        //}
     }
 
     void GenerateMap()

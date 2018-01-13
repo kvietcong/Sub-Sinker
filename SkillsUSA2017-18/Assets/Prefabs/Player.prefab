@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 114087934296098440}
   - component: {fileID: 114035209823051436}
   - component: {fileID: 114113694837001752}
+  - component: {fileID: 114047700211889498}
   - component: {fileID: 114535771607137402}
   - component: {fileID: 114633834135408960}
   m_Layer: 9
@@ -214,6 +215,17 @@ MonoBehaviour:
   PingPrefab: {fileID: 1287140479821922, guid: bbeb9229da4bbf446ad7cdd21d17f97a, type: 2}
   force: 1000
   rateOfFire: 3
+--- !u!114 &114047700211889498
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1751889999122524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc3e96758060c1b4ab92cab5033ccc01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114087934296098440
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -241,7 +253,6 @@ MonoBehaviour:
   currentRad: 0
   maxRad: 20
   minRad: 8
-  startRad: 10
 --- !u!114 &114535771607137402
 MonoBehaviour:
   m_ObjectHideFlags: 1
