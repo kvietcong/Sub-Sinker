@@ -12,7 +12,7 @@ public class PropellerSpin : MonoBehaviour {
         speed = 5;
     }
     void Update () {
-        transform.Rotate(vel * speed, 0, 0);
+        transform.Rotate(vel * speed, 3, 0);
 	}
 	
 	// Update is called once per frame

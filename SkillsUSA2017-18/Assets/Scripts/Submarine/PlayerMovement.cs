@@ -11,8 +11,12 @@ public class PlayerMovement : NetworkBehaviour {
     
     GameObject camera;
 
-    void Start ()
+    void Start()
     {
+        if (!isLocalPlayer)
+        {
+            gameObject.layer = 10;
+        }
         rb = GetComponent<Rigidbody2D>();
         prevXVel = rb.velocity[0];
     }
