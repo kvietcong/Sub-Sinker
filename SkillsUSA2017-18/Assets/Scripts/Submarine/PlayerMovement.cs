@@ -7,12 +7,14 @@ public class PlayerMovement : NetworkBehaviour {
 
     public float speed;
     private Rigidbody2D rb;
+    private float prevXVel;
     
     GameObject camera;
 
     void Start ()
     {
         rb = GetComponent<Rigidbody2D>();
+        prevXVel = rb.velocity[0];
     }
 
     void FixedUpdate ()
@@ -27,6 +29,23 @@ public class PlayerMovement : NetworkBehaviour {
         Vector2 movement = new Vector2 (moveHorizontal, moveVertical);
 
         rb.AddForce (movement.normalized * speed);
+    }
+
+    private void Update()
+    {
+        if (prevXVel <= 0 && rb.velocity[0] > 0)
+        {
+            // check if sub is already in this dir
+            BroadcastMessage("Flip", "right");
+            gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(0.155f, 0.62f);
+        }
+        else if (prevXVel >= 0 && rb.velocity[0] < 0)
+        {
+            BroadcastMessage("Flip", "left");
+            gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(-0.14f, 0.62f);
+        }
+
+        prevXVel = rb.velocity[0];
     }
 
     public override void OnStartLocalPlayer() // local player only
