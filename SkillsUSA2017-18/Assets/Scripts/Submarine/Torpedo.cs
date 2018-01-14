@@ -35,12 +35,11 @@ public class Torpedo : NetworkBehaviour
         // deal damage
         // spawn explosion light + particles
         gameObject.GetComponent<MeshRenderer>().enabled = false;
-        CmdSpawnExplosion();
+        SpawnExplosion();
         Destroy(this.gameObject);
     }
 
-    [Command]
-    void CmdSpawnExplosion()
+    void SpawnExplosion()
     {
         //Vector3 pos = transform.position;
         //pos.z = lightZOffset;
