@@ -2,9 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
-using UnityEngine.Networking;
 
-public class MapGenerator : NetworkBehaviour
+public class MapGenerator : MonoBehaviour
 {
 
     public int width;
@@ -24,29 +23,22 @@ public class MapGenerator : NetworkBehaviour
 
     public bool debugLines = false;
 
-    int[,] map;
+    public int[,] map;
 
     List<Coord> spawnableCoords;
 
-    public static bool generated = false;
-
     void Start()
     {
-        if (isServer && useRandomSeed)
-        {
-            seed = UnityEngine.Random.value.ToString();
-        }
         spawnableCoords = new List<Coord>();
         GenerateMap();
-        generated = true;
     }
 
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.F5))
-        //{
-        //    GenerateMap();
-        //}
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            GenerateMap();
+        }
     }
 
     void GenerateMap()
@@ -383,6 +375,11 @@ public class MapGenerator : NetworkBehaviour
 
     void RandomFillMap()
     {
+        if (useRandomSeed)
+        {
+            seed = Time.time.ToString();
+        }
+
         System.Random pseudoRandom = new System.Random(seed.GetHashCode());
 
         for (int x = 0; x < width; x++)
@@ -530,23 +527,4 @@ public class MapGenerator : NetworkBehaviour
         }
     }
 
-    public Vector2 GetSpawnPos()
-    {
-        int tileset_width = map.GetLength(0);
-        int tileset_height = map.GetLength(1);
-        int map_x = UnityEngine.Random.Range(0, tileset_width);
-        int map_y = UnityEngine.Random.Range(0, tileset_height);
-
-        while (map[map_x - 1, map_y + 1] == 1 || map[map_x, map_y + 1] == 1 || map[map_x + 1, map_y + 1] == 1 ||
-            map[map_x - 1, map_y] == 1 || map[map_x, map_y] == 1 || map[map_x + 1, map_y] == 1 ||
-            map[map_x - 1, map_y - 1] == 1 || map[map_x, map_y - 1] == 1 || map[map_x + 1, map_y - 1] == 1) // BREAK when all conditions are not 1, i.e. open space
-        {
-            map_x = UnityEngine.Random.Range(0, tileset_width);
-            map_y = UnityEngine.Random.Range(0, tileset_height);
-        }
-        float x = 3*(map_x - width / 2); // 3x scale
-        float y = 3*(map_y - height / 2);
-
-        return new Vector2(x, y);
-    }
 }

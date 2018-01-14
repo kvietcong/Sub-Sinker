@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Camera : MonoBehaviour
 {
-    GameObject player;
+    public GameObject player;
 
     private Vector3 offset;
     public float m_DampTime = 0.2f;                 // Approximate time for the camera to refocus.
@@ -16,26 +16,12 @@ public class Camera : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        
+        offset = transform.position - player.transform.position;
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (player == null)
-        {
-            return;
-        }
-
         transform.position = Vector3.SmoothDamp(transform.position, player.transform.position + offset, ref m_MoveVelocity, m_DampTime);
-    }
-
-    public void SetPlayer(GameObject thePlayer)
-    {
-        player = thePlayer;
-        transform.position = new Vector3(player.transform.position.x,
-            player.transform.position.y,
-            transform.position.z);
-        offset = transform.position - player.transform.position;
     }
 }
