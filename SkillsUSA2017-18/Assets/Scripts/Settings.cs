@@ -11,7 +11,6 @@ public class Settings : MonoBehaviour
     void Update()
     {
         AudioListener.volume = musicLevel.value;
-
     }
 
     public void onClick()
