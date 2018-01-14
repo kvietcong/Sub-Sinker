@@ -34,6 +34,9 @@ public class PlayerMovement : NetworkBehaviour {
 
         rb.AddForce (movement.normalized * speed);
         BroadcastMessage("AdjustVel", Mathf.Abs(rb.velocity[0]));
+
+        // todo: send to ui
+        print(transform.position);
     }
 
     // visual effects
