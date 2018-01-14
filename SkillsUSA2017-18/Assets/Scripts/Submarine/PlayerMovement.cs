@@ -29,10 +29,15 @@ public class PlayerMovement : NetworkBehaviour {
         Vector2 movement = new Vector2 (moveHorizontal, moveVertical);
 
         rb.AddForce (movement.normalized * speed);
+        BroadcastMessage("AdjustVel", Mathf.Abs(rb.velocity[0]));
     }
 
+    // visual effects
     private void Update()
     {
+        // NOT local only
+        BroadcastMessage("AdjustVel", Mathf.Abs(rb.velocity[0]));
+
         if (prevXVel <= 0 && rb.velocity[0] > 0)
         {
             // check if sub is already in this dir
