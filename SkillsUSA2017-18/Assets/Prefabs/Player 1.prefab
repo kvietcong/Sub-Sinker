@@ -555,8 +555,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PingPrefab: {fileID: 1287140479821922, guid: bbeb9229da4bbf446ad7cdd21d17f97a, type: 2}
-  force: 1000
-  rateOfFire: 3
+  TorpedoPrefab: {fileID: 1488159262083760, guid: 2e5793c7fbeb0d44699f6e178bcf3311,
+    type: 2}
+  pingForce: 1000
+  torpedoForce: 1500
+  pingRateOfFire: 1
+  torpedoRateOfFire: 2
 --- !u!114 &114615937666519338
 MonoBehaviour:
   m_ObjectHideFlags: 1

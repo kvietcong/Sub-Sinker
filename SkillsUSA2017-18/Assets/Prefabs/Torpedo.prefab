@@ -9,51 +9,49 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1287140479821922}
+  m_RootGameObject: {fileID: 1488159262083760}
   m_IsPrefabParent: 1
---- !u!1 &1287140479821922
+--- !u!1 &1488159262083760
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4799517581326764}
-  - component: {fileID: 33226298615994078}
-  - component: {fileID: 23253918259105408}
-  - component: {fileID: 58348666457360018}
-  - component: {fileID: 50373834958074006}
-  - component: {fileID: 114988787172153180}
-  - component: {fileID: 114395819082022792}
-  - component: {fileID: 114112384375339510}
-  - component: {fileID: 114652424244864466}
-  m_Layer: 8
-  m_Name: Ping
+  - component: {fileID: 4580517841276302}
+  - component: {fileID: 33252972054730096}
+  - component: {fileID: 23273474305946894}
+  - component: {fileID: 114890519128121370}
+  - component: {fileID: 114971955974945146}
+  - component: {fileID: 50816314739411256}
+  - component: {fileID: 70071478831653518}
+  m_Layer: 0
+  m_Name: Torpedo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4799517581326764
+--- !u!4 &4580517841276302
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1287140479821922}
+  m_GameObject: {fileID: 1488159262083760}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.85, z: 0}
+  m_LocalPosition: {x: -0.7141107, y: 1.937181, z: -0.67084545}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23253918259105408
+--- !u!23 &23273474305946894
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1287140479821922}
-  m_Enabled: 0
+  m_GameObject: {fileID: 1488159262083760}
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -81,20 +79,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33226298615994078
+--- !u!33 &33252972054730096
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1287140479821922}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!50 &50373834958074006
+  m_GameObject: {fileID: 1488159262083760}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!50 &50816314739411256
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1287140479821922}
+  m_GameObject: {fileID: 1488159262083760}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -103,17 +101,17 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 6200000, guid: e21151c52f946b4448f9d3a3a17e2579, type: 2}
+  m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &58348666457360018
-CircleCollider2D:
+--- !u!70 &70071478831653518
+CapsuleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1287140479821922}
+  m_GameObject: {fileID: 1488159262083760}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -121,14 +119,14 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
---- !u!114 &114112384375339510
+  m_Size: {x: 1, y: 2}
+  m_Direction: 0
+--- !u!114 &114890519128121370
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1287140479821922}
+  m_GameObject: {fileID: 1488159262083760}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
@@ -137,30 +135,30 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 187
-    i1: 235
-    i2: 146
-    i3: 41
-    i4: 218
-    i5: 75
-    i6: 191
+    i0: 46
+    i1: 87
+    i2: 147
+    i3: 199
+    i4: 251
+    i5: 235
+    i6: 13
     i7: 68
-    i8: 106
-    i9: 215
-    i10: 205
-    i11: 210
-    i12: 29
-    i13: 23
-    i14: 249
-    i15: 122
+    i8: 105
+    i9: 159
+    i10: 110
+    i11: 23
+    i12: 139
+    i13: 207
+    i14: 51
+    i15: 17
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
---- !u!114 &114395819082022792
+  m_LocalPlayerAuthority: 0
+--- !u!114 &114971955974945146
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1287140479821922}
+  m_GameObject: {fileID: 1488159262083760}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 847a412fe126b1c4ea30497f9b4ca1a5, type: 3}
@@ -170,41 +168,3 @@ MonoBehaviour:
   lightZOffset: -3
   firstLightIntensity: 6
   pinger: {fileID: 0}
-  totalColls: 5
---- !u!114 &114652424244864466
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1287140479821922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 2
-  m_SendInterval: 0.11111111
-  m_SyncRotationAxis: 3
-  m_RotationSyncCompression: 0
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
---- !u!114 &114988787172153180
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1287140479821922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3c04f0f0498c6c40926c127f693f18c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PingLight: {fileID: 1058100825843036, guid: 9eb8492db75244044b04be6642818b24, type: 2}
-  lightZOffset: -3
-  firstLightIntensity: 6
-  pinger: {fileID: 0}
-  totalColls: 5
