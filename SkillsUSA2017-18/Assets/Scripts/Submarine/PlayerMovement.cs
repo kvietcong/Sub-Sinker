@@ -13,12 +13,13 @@ public class PlayerMovement : NetworkBehaviour {
 
     void Start()
     {
-        //if (!isLocalPlayer)
-        //{
-        //    gameObject.layer = 10; // set to "OtherPlayer"
-        //}
         rb = GetComponent<Rigidbody2D>();
         prevXVel = rb.velocity[0];
+        if (!isLocalPlayer)
+        {
+            // implement this?
+            //BroadcastMessage("ChangeColor");
+        }
     }
 
     void FixedUpdate ()
