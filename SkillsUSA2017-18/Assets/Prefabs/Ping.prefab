@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 58348666457360018}
   - component: {fileID: 50373834958074006}
   - component: {fileID: 114988787172153180}
-  - component: {fileID: 114395819082022792}
   - component: {fileID: 114112384375339510}
   - component: {fileID: 114652424244864466}
   m_Layer: 8
@@ -53,7 +52,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1287140479821922}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -155,22 +154,6 @@ MonoBehaviour:
     i15: 122
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
---- !u!114 &114395819082022792
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1287140479821922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 847a412fe126b1c4ea30497f9b4ca1a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PingLight: {fileID: 0}
-  lightZOffset: -3
-  firstLightIntensity: 6
-  pinger: {fileID: 0}
-  totalColls: 5
 --- !u!114 &114652424244864466
 MonoBehaviour:
   m_ObjectHideFlags: 1
