@@ -24,7 +24,7 @@ public class MapGenerator : NetworkBehaviour
 
     public bool debugLines = false;
 
-    public int[,] map;
+    int[,] map;
 
     List<Coord> spawnableCoords;
 
@@ -383,15 +383,6 @@ public class MapGenerator : NetworkBehaviour
 
     void RandomFillMap()
     {
-<<<<<<< HEAD:SkillsUSA2017-18/Assets/Scripts/Map/MapGenerator.cs
-=======
-        if (useRandomSeed)
-        {
-            //seed = Time.time.ToString(); // results in 0 every time, so alternate method must be used
-            seed = UnityEngine.Random.value.ToString(); // will give a random decimal value
-        }
-
->>>>>>> master:SkillsUSA2017-18/Assets/Scripts/MapGenerator.cs
         System.Random pseudoRandom = new System.Random(seed.GetHashCode());
 
         for (int x = 0; x < width; x++)
