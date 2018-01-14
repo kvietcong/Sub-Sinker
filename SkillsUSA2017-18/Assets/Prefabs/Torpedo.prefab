@@ -21,10 +21,11 @@ GameObject:
   - component: {fileID: 4580517841276302}
   - component: {fileID: 33252972054730096}
   - component: {fileID: 23273474305946894}
-  - component: {fileID: 114890519128121370}
   - component: {fileID: 114971955974945146}
   - component: {fileID: 50816314739411256}
+  - component: {fileID: 114890519128121370}
   - component: {fileID: 70071478831653518}
+  - component: {fileID: 114845969382419622}
   m_Layer: 0
   m_Name: Torpedo
   m_TagString: Untagged
@@ -121,6 +122,27 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
+--- !u!114 &114845969382419622
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1488159262083760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 2
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 3
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!114 &114890519128121370
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -152,7 +174,7 @@ MonoBehaviour:
     i14: 51
     i15: 17
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114971955974945146
 MonoBehaviour:
   m_ObjectHideFlags: 1

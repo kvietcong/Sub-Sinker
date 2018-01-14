@@ -35,7 +35,7 @@ public class Shoot : NetworkBehaviour {
         {
             timeSinceTorpedo = 0;
             Vector2 mousePos = new Vector2(Input.mousePosition.x - Screen.width / 2, Input.mousePosition.y - Screen.height / 2);
-            CmdFireProj(mousePos, TorpedoPrefab, torpedoForce);
+            CmdFireTorp(mousePos, torpedoForce);
         }
 
         // right click: ping
@@ -43,7 +43,7 @@ public class Shoot : NetworkBehaviour {
         {
             timeSincePing = 0;
             Vector2 mousePos = new Vector2(Input.mousePosition.x - Screen.width / 2, Input.mousePosition.y - Screen.height / 2);
-            CmdFireProj(mousePos, PingPrefab, pingForce);
+            CmdFirePing(mousePos, pingForce);
         }
 
         timeSincePing += Time.deltaTime;
@@ -52,13 +52,26 @@ public class Shoot : NetworkBehaviour {
 
     // called by client, run on server
     [Command]
-    void CmdFireProj(Vector2 mousePos, GameObject prefab, float firingForce)
+    void CmdFirePing(Vector2 mousePos, float firingForce)
     {
         float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
-        var projectile = Instantiate(prefab, transform.position, Quaternion.Euler(new Vector3(0, 0, angle + 90)));
-        //ping.GetComponent<Ping>().pinger = gameObject; // ignore collision solution
-        projectile.GetComponent<Rigidbody2D>().AddForce(mousePos.normalized * firingForce);
+        var ping = Instantiate(PingPrefab, transform.position, Quaternion.identity);
 
-        NetworkServer.Spawn(projectile);    
+        ping.GetComponent<Rigidbody2D>().AddForce(mousePos.normalized * firingForce);
+        ping.GetComponent<Ping>().spawnedBy = netId;
+
+        NetworkServer.Spawn(ping);    
+    }
+
+    [Command]
+    void CmdFireTorp(Vector2 mousePos, float firingForce)
+    {
+        float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
+        var torpedo = Instantiate(TorpedoPrefab, transform.position, Quaternion.Euler(new Vector3(0, 0, angle + 90)));
+
+        torpedo.GetComponent<Rigidbody2D>().AddForce(mousePos.normalized * firingForce);
+        torpedo.GetComponent<Torpedo>().spawnedBy = netId;
+
+        NetworkServer.Spawn(torpedo);
     }
 }
