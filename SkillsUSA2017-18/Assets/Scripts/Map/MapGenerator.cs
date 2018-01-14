@@ -537,9 +537,7 @@ public class MapGenerator : NetworkBehaviour
         int map_x = UnityEngine.Random.Range(0, tileset_width);
         int map_y = UnityEngine.Random.Range(0, tileset_height);
 
-        while (map[map_x - 1, map_y + 1] == 1 || map[map_x, map_y + 1] == 1 || map[map_x + 1, map_y + 1] == 1 ||
-            map[map_x - 1, map_y] == 1 || map[map_x, map_y] == 1 || map[map_x + 1, map_y] == 1 ||
-            map[map_x - 1, map_y - 1] == 1 || map[map_x, map_y - 1] == 1 || map[map_x + 1, map_y - 1] == 1) // BREAK when all conditions are not 1, i.e. open space
+        while (map[map_x,map_y] == 1)
         {
             map_x = UnityEngine.Random.Range(0, tileset_width);
             map_y = UnityEngine.Random.Range(0, tileset_height);
