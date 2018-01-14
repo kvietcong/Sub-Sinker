@@ -542,8 +542,8 @@ public class MapGenerator : NetworkBehaviour
             map_x = UnityEngine.Random.Range(0, tileset_width);
             map_y = UnityEngine.Random.Range(0, tileset_height);
         }
-        float x = map_x - (width * 1.5f); // 3x scale
-        float y = map_y - (height * 1.5f);
+        float x = 3*(map_x - width / 2); // 3x scale
+        float y = 3*(map_y - height / 2);
 
         return new Vector2(x, y);
     }
