@@ -42,6 +42,7 @@ public class PingShoot : NetworkBehaviour {
     void CmdFirePing(Vector2 mousePos)
     {
         var ping = Instantiate(PingPrefab, transform.position, Quaternion.identity);
+        ping.GetComponent<Ping>().pinger = gameObject;
         ping.GetComponent<Rigidbody2D>().AddForce(mousePos.normalized * force);
 
         NetworkServer.Spawn(ping);    

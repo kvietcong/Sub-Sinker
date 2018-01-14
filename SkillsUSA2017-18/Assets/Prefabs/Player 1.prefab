@@ -629,4 +629,4 @@ MonoBehaviour:
   engineLight: {fileID: 108822388080846010}
   currentRad: 0
   maxRad: 20
-  minRad: 8
+  minRad: 7

@@ -189,4 +189,5 @@ MonoBehaviour:
   PingLight: {fileID: 1058100825843036, guid: 9eb8492db75244044b04be6642818b24, type: 2}
   lightZOffset: -3
   firstLightIntensity: 6
+  pinger: {fileID: 0}
   totalColls: 5

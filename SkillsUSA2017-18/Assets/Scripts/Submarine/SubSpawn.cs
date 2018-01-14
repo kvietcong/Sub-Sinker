@@ -26,8 +26,6 @@ public class SubSpawn : NetworkBehaviour
             newPos = mapGen.GetComponent<MapGenerator>().GetSpawnPos();
             transform.position = newPos;
             spawned = true;
-
-            print(newPos);
         }
     }
 }
