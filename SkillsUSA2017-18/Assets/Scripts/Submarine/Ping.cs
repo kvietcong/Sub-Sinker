@@ -56,5 +56,7 @@ public class Ping : NetworkBehaviour
 
         GameObject light = Instantiate(PingLight, pos, transform.rotation);
         light.GetComponent<Light>().intensity = firstLightIntensity / collCount;
+
+        NetworkServer.Spawn(light);
     }
 }

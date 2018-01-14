@@ -35,6 +35,34 @@ public class Torpedo : NetworkBehaviour
         // deal damage
         // spawn explosion light + particles
         gameObject.GetComponent<MeshRenderer>().enabled = false;
+
+        GameObject hit = coll.gameObject;
+
+        // direct hit
+        if (hit.tag == "Player")
+        {
+            var health = hit.GetComponent<PlayerHealth>();
+            if (health != null)
+            {
+                health.TakeDamage(35); 
+            }
+        }
+
+        // splash damage
+        GameObject[] enemies;
+
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        // needs rigidbody for explosion to work
+        foreach (GameObject enemy in enemies)
+        {
+            if (enemy.GetComponent<Rigidbody>() != null)
+            {
+                // add an explosion function to the enemies that takes position as argument
+                enemy.SendMessage("AddPineappleExplosion", transform.position);
+            }
+        }
+
         SpawnExplosion();
         Destroy(this.gameObject);
     }
