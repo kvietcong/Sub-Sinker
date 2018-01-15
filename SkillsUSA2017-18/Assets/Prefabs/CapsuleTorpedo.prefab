@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 2
-  m_SendInterval: 0.1
+  m_SendInterval: 0.05
   m_SyncRotationAxis: 3
   m_RotationSyncCompression: 0
   m_SyncSpin: 0
@@ -186,3 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 847a412fe126b1c4ea30497f9b4ca1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionForce: 1000
+  explosionRadius: 10
+  hitDmg: 35
+  splashDmgMax: 20

@@ -13,10 +13,6 @@ public class PlayerMovement : NetworkBehaviour {
 
     void Start()
     {
-        //if (!isLocalPlayer)
-        //{
-        //    gameObject.layer = 10; // set to "OtherPlayer"
-        //}
         rb = GetComponent<Rigidbody2D>();
         prevXVel = rb.velocity[0];
     }
@@ -32,11 +28,11 @@ public class PlayerMovement : NetworkBehaviour {
 
         Vector2 movement = new Vector2 (moveHorizontal, moveVertical);
 
-        rb.AddForce (movement.normalized * speed);
+        CmdAddForce(movement.normalized * speed);
         BroadcastMessage("AdjustVel", Mathf.Abs(rb.velocity[0]));
 
         // todo: send to ui
-        print(transform.position);
+        //print(transform.position);
     }
 
     // visual effects
@@ -66,9 +62,16 @@ public class PlayerMovement : NetworkBehaviour {
         GameObject[] cameras;
         cameras = GameObject.FindGameObjectsWithTag("MainCamera");
         camera = cameras[0];
-
+        
         // does not work in editor
         camera.SendMessage("SetPlayer", gameObject);
+    }
+
+    // server does physics 
+    [Command]
+    public void CmdAddForce(Vector2 force)
+    {
+        rb.AddForce(force);
     }
 
 }

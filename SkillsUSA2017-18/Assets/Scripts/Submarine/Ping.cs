@@ -46,11 +46,10 @@ public class Ping : NetworkBehaviour
         collCount++;
 
         // spawn new light
-        CmdSpawnLight();
+        SpawnLight();
     }
 
-    [Command]
-    void CmdSpawnLight()
+    void SpawnLight()
     {
         Vector3 pos = transform.position;
         pos.z = lightZOffset;

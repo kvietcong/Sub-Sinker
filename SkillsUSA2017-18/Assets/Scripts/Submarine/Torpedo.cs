@@ -12,6 +12,12 @@ public class Torpedo : NetworkBehaviour
     [SyncVar]
     public NetworkInstanceId spawnedBy;
 
+    public float explosionForce = 20f;
+    public float explosionRadius = 20f;
+
+    public float hitDmg = 35f;
+    public float splashDmgMax = 30f;
+
     // ignore collisions on the server
     public override void OnStartClient()
     {
@@ -35,19 +41,58 @@ public class Torpedo : NetworkBehaviour
         // deal damage
         // spawn explosion light + particles
         gameObject.GetComponent<MeshRenderer>().enabled = false;
-        CmdSpawnExplosion();
+
+        GameObject hit = coll.gameObject;
+
+        // direct hit
+        if (hit.tag == "Player")
+        {
+            var health = hit.GetComponent<PlayerHealth>();
+            if (health != null)
+            {
+                health.TakeDamage(hitDmg); 
+            }
+        }
+
+        // splash damage
+        GameObject[] players;
+
+        players = GameObject.FindGameObjectsWithTag("Player");
+
+        // a_player meaning generic player, not the current player
+        foreach (GameObject a_player in players)
+        {
+            // do not deal damage to direct hit
+            if (a_player.GetComponent<Rigidbody2D>() != null)
+            {
+                // no splash + direct hit compounding
+                if (a_player != hit.gameObject)
+                {
+                    var health = a_player.GetComponent<PlayerHealth>();
+                    if (health != null)
+                    {
+                        float damage = Mathf.SmoothStep(0, splashDmgMax, (explosionRadius - Vector3.Distance(transform.position, a_player.transform.position)) / explosionRadius);
+                        health.TakeDamage(damage);
+                    }
+                }
+
+                // add explosion force to player hit
+                ExplosionForce expl = a_player.GetComponent<ExplosionForce>();
+                expl.AddExplosionForce(a_player.GetComponent<Rigidbody2D>(), explosionForce, transform.position, explosionRadius);
+            }
+        }
+
+        SpawnExplosion();
         Destroy(this.gameObject);
     }
 
-    [Command]
-    void CmdSpawnExplosion()
+    void SpawnExplosion()
     {
         //Vector3 pos = transform.position;
         //pos.z = lightZOffset;
 
-        //GameObject light = Instantiate(PingLight, pos, transform.rotation);
-        //light.GetComponent<Light>().intensity = firstLightIntensity / collCount;
+        //GameObject exp = Instantiate(Explosion, pos, transform.rotation);
 
-        //NetworkServer.Spawn(light);
+        //NetworkServer.Spawn(exp);
     }
 }

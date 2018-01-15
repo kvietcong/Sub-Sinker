@@ -42,9 +42,11 @@ GameObject:
   - component: {fileID: 61173145060559292}
   - component: {fileID: 70207170443280878}
   - component: {fileID: 114736690885068518}
+  - component: {fileID: 114206073131304922}
   - component: {fileID: 114363019448606508}
   - component: {fileID: 114931108912621290}
   - component: {fileID: 114897067608013104}
+  - component: {fileID: 114702343182691306}
   - component: {fileID: 114291586599902284}
   - component: {fileID: 114842349309058240}
   m_Layer: 9
@@ -500,6 +502,18 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114206073131304922
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1057947457608500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7df9e058d92cd3a4eb4119ec4d921ddb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 100
 --- !u!114 &114291586599902284
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -531,7 +545,7 @@ MonoBehaviour:
     i14: 139
     i15: 65
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114297652240836928
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -573,6 +587,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flipDuration: 0.6
+--- !u!114 &114702343182691306
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1057947457608500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13cc0da3a2ee4134cb21d400a21e0ff1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114736690885068518
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -597,7 +622,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 2
-  m_SendInterval: 0.1
+  m_SendInterval: 0.05
   m_SyncRotationAxis: 3
   m_RotationSyncCompression: 0
   m_SyncSpin: 0
