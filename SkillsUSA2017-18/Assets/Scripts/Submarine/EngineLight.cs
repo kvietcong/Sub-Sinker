@@ -19,6 +19,7 @@ public class EngineLight : NetworkBehaviour {
     private float startIntensity;
 
     public RectTransform circle;
+    public GameObject model;
 
     // Use this for initialization
     void Start () {
@@ -31,13 +32,18 @@ public class EngineLight : NetworkBehaviour {
     // Update is called once per frame
     void Update() {
         GameObject localPlayer = GameObject.Find("LocalPlayer");
-        if(Vector3.Distance(transform.position, localPlayer.transform.position) > circle.sizeDelta.x)
+
+        // i eyeballed this value....
+        if(Vector3.Distance(transform.position, localPlayer.transform.position) > currentRad * currentRad * 0.08f)
         {
+            // hide sub/light when not within distance of localplayer
             engineLight.intensity = 0;
+            model.SetActive(false);
         }
         else
         {
             engineLight.intensity = startIntensity;
+            model.SetActive(true);
         }
 
         // network awareness

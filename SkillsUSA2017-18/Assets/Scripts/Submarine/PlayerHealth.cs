@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 public class PlayerHealth : NetworkBehaviour
 {
     public const float maxHealth = 100;
-    [SyncVar]
+    [SyncVar(hook = "OnChangeHealth")]
     public float currentHealth = maxHealth;
     public RectTransform healthBar;
     float barWidth;
@@ -22,7 +22,7 @@ public class PlayerHealth : NetworkBehaviour
         {
             return;
         }
-
+        print("oof");
         currentHealth -= amount;
         if (currentHealth <= 0)
         {
@@ -30,7 +30,10 @@ public class PlayerHealth : NetworkBehaviour
             Debug.Log("Dead!");
 
         }
+    }
 
-        healthBar.sizeDelta = new Vector2((currentHealth / maxHealth) * barWidth, healthBar.sizeDelta.y);
+    void OnChangeHealth(float health)
+    {
+        healthBar.sizeDelta = new Vector2((health / maxHealth) * barWidth, healthBar.sizeDelta.y);
     }
 }
