@@ -22,12 +22,11 @@ public class PlayerHealth : NetworkBehaviour
         {
             return;
         }
-        print("oof");
         currentHealth -= amount;
         if (currentHealth <= 0)
-        {
+        { 
+            // dead
             currentHealth = 0;
-            Debug.Log("Dead!");
 
         }
     }

@@ -20,6 +20,10 @@ public class EngineLight : NetworkBehaviour {
 
     public RectTransform circle;
     public GameObject model;
+    MeshRenderer[] rends;
+    Text debugText;
+
+    GameObject localPlayer;
 
     // Use this for initialization
     void Start () {
@@ -27,24 +31,37 @@ public class EngineLight : NetworkBehaviour {
         engineLight.range = newRad;
         scrollSpeed = 10;
         startIntensity = engineLight.intensity;
+        debugText = GameObject.Find("Debug").GetComponentInChildren<Text>();
+        rends = model.GetComponentsInChildren<MeshRenderer>();
+        localPlayer = GameObject.Find("LocalPlayer");
     }
 
     // Update is called once per frame
     void Update() {
-        GameObject localPlayer = GameObject.Find("LocalPlayer");
-        Debug.Log(localPlayer.transform.position);
-
         // i eyeballed this value....
+        if (!isLocalPlayer)
+        {
+            debugText.text = "Current enemy radius: " + currentRad;
+            print(currentRad);
+        }
         if(Vector3.Distance(transform.position, localPlayer.transform.position) > currentRad * currentRad * 0.08f)
         {
             // hide sub/light when not within distance of localplayer
             engineLight.intensity = 0;
-            model.SetActive(false); // bad fix... model should be visible when in light
+
+            // bad fix... model should be visible when in light
+            foreach (MeshRenderer rend in rends)
+            {
+                rend.enabled = false;
+            }
         }
         else
         {
             engineLight.intensity = startIntensity;
-            model.SetActive(true);
+            foreach (MeshRenderer rend in rends)
+            {
+                rend.enabled = true;
+            }
         }
 
         // network awareness
@@ -79,6 +96,7 @@ public class EngineLight : NetworkBehaviour {
 
     void OnLightRadiusChange(float radius)
     {
+        currentRad = radius;
         engineLight.range = radius;
         engineLight.spotAngle = radius * 7;
         circle.sizeDelta = new Vector2(radius * radius * 2.5f, radius * radius * 2.5f);

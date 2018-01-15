@@ -14,7 +14,7 @@ public class PlayerMovement : NetworkBehaviour {
 
     public Canvas[] canvases;
     
-    GameObject camera;
+    Camera cam;
 
     void Start()
     {
@@ -62,11 +62,8 @@ public class PlayerMovement : NetworkBehaviour {
 
     public override void OnStartLocalPlayer() // local player only
     {
-        // get camera
-        GameObject[] cameras;
-        cameras = GameObject.FindGameObjectsWithTag("MainCamera");
-        camera = cameras[0];
-        camera.SendMessage("SetPlayer", gameObject);
+        cam = Camera.main;
+        cam.SendMessage("SetPlayer", gameObject);
  
         gameObject.name = "LocalPlayer";
 
