@@ -12,6 +12,12 @@ public class Torpedo : NetworkBehaviour
     [SyncVar]
     public NetworkInstanceId spawnedBy;
 
+    public float explosionForce = 20f;
+    public float explosionRadius = 20f;
+
+    public float hitDmg = 35f;
+    public float splashDmgMax = 30f;
+
     // ignore collisions on the server
     public override void OnStartClient()
     {
@@ -44,22 +50,35 @@ public class Torpedo : NetworkBehaviour
             var health = hit.GetComponent<PlayerHealth>();
             if (health != null)
             {
-                health.TakeDamage(35); 
+                health.TakeDamage(hitDmg); 
             }
         }
 
         // splash damage
-        GameObject[] enemies;
+        GameObject[] players;
 
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        players = GameObject.FindGameObjectsWithTag("Player");
 
-        // needs rigidbody for explosion to work
-        foreach (GameObject enemy in enemies)
+        // a_player meaning generic player, not the current player
+        foreach (GameObject a_player in players)
         {
-            if (enemy.GetComponent<Rigidbody>() != null)
+            // do not deal damage to direct hit
+            if (a_player.GetComponent<Rigidbody2D>() != null)
             {
-                // add an explosion function to the enemies that takes position as argument
-                enemy.SendMessage("AddPineappleExplosion", transform.position);
+                // no splash + direct hit compounding
+                if (a_player != hit.gameObject)
+                {
+                    var health = a_player.GetComponent<PlayerHealth>();
+                    if (health != null)
+                    {
+                        float damage = Mathf.SmoothStep(0, splashDmgMax, (explosionRadius - Vector3.Distance(transform.position, a_player.transform.position)) / explosionRadius);
+                        health.TakeDamage(damage);
+                    }
+                }
+
+                // add explosion force to player hit
+                ExplosionForce expl = a_player.GetComponent<ExplosionForce>();
+                expl.AddExplosionForce(a_player.GetComponent<Rigidbody2D>(), explosionForce, transform.position, explosionRadius);
             }
         }
 
@@ -72,9 +91,8 @@ public class Torpedo : NetworkBehaviour
         //Vector3 pos = transform.position;
         //pos.z = lightZOffset;
 
-        //GameObject light = Instantiate(PingLight, pos, transform.rotation);
-        //light.GetComponent<Light>().intensity = firstLightIntensity / collCount;
+        //GameObject exp = Instantiate(Explosion, pos, transform.rotation);
 
-        //NetworkServer.Spawn(light);
+        //NetworkServer.Spawn(exp);
     }
 }

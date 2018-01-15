@@ -10,7 +10,7 @@ public class PlayerHealth : NetworkBehaviour
     [SyncVar]
     public float currentHealth = maxHealth;
 
-   public void TakeDamage(float amount)
+    public void TakeDamage(float amount)
     {
         if (!isServer)
         {
@@ -22,6 +22,7 @@ public class PlayerHealth : NetworkBehaviour
         {
             currentHealth = 0;
             Debug.Log("Dead!");
+
         }
     }
 }

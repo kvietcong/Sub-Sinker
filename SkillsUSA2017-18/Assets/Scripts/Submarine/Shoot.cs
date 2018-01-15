@@ -54,7 +54,6 @@ public class Shoot : NetworkBehaviour {
     [Command]
     void CmdFirePing(Vector2 mousePos, float firingForce)
     {
-        float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
         var ping = Instantiate(PingPrefab, transform.position, Quaternion.identity);
 
         ping.GetComponent<Rigidbody2D>().AddForce(mousePos.normalized * firingForce);
