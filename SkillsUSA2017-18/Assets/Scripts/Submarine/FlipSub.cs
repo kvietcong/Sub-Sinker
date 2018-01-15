@@ -10,9 +10,12 @@ public class FlipSub : MonoBehaviour {
     float startDir;
     float targetDir;
 
+    bool flipped;
+
 	// Use this for initialization
 	void Start () {
         targetDir = 0;
+        flipped = true;
 	}
 
     // Update is called once per frame
@@ -24,10 +27,17 @@ public class FlipSub : MonoBehaviour {
         }
 
         flipTimer += Time.deltaTime;
+
+        if (flipTimer >= flipDuration && flipped == false)
+        {
+            SendMessageUpwards("FlipCollider", targetDir == 180 ? "right" : "left");
+            flipped = true;
+        }
     }
 
     void Flip (string dir)
     {
+        flipped = false;
         if (dir == "right")
         {
             if (transform.rotation.eulerAngles.y != 180)

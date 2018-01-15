@@ -8,6 +8,7 @@ public class PlayerMovement : NetworkBehaviour {
     public float speed;
     private Rigidbody2D rb;
     private float prevXVel;
+    private float prevVel;
     
     GameObject camera;
 
@@ -45,15 +46,14 @@ public class PlayerMovement : NetworkBehaviour {
         {
             // check if sub is already in this dir
             BroadcastMessage("Flip", "right");
-            gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(0.155f, 0.62f);
         }
         else if (prevXVel >= 0 && rb.velocity[0] < 0)
         {
             BroadcastMessage("Flip", "left");
-            gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(-0.14f, 0.62f);
         }
 
         prevXVel = rb.velocity[0];
+        prevVel = rb.velocity.magnitude;
     }
 
     public override void OnStartLocalPlayer() // local player only
@@ -65,6 +65,30 @@ public class PlayerMovement : NetworkBehaviour {
         
         // does not work in editor
         camera.SendMessage("SetPlayer", gameObject);
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!isServer)
+            return;
+
+        if (collision.gameObject.tag == "Map")
+        {
+            // damage proportional to vel
+            gameObject.GetComponent<PlayerHealth>().TakeDamage(prevVel * 2);
+        }
+    }
+
+    public void FlipCollider(string dir)
+    {
+        if (dir == "left")
+        {
+            gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(-0.14f, 0.62f);
+        }
+        else if (dir == "right")
+        {
+            gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(0.155f, 0.62f);
+        }
     }
 
     // server does physics 

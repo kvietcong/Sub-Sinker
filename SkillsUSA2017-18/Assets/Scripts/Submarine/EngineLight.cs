@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class EngineLight : NetworkBehaviour {
     public Light engineLight;
@@ -16,7 +17,7 @@ public class EngineLight : NetworkBehaviour {
     public float maxRad = 25;
     public float minRad = 2;
 
-
+    public RectTransform circle;
 
     // Use this for initialization
     void Start () {
@@ -60,5 +61,7 @@ public class EngineLight : NetworkBehaviour {
     void OnLightRadiusChange(float radius)
     {
         engineLight.range = radius;
+        engineLight.spotAngle = radius * 7;
+        circle.sizeDelta = new Vector2(radius * radius * 2.5f, radius * radius * 2.5f);
     }
 }
