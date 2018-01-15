@@ -32,13 +32,14 @@ public class EngineLight : NetworkBehaviour {
     // Update is called once per frame
     void Update() {
         GameObject localPlayer = GameObject.Find("LocalPlayer");
+        Debug.Log(localPlayer.transform.position);
 
         // i eyeballed this value....
         if(Vector3.Distance(transform.position, localPlayer.transform.position) > currentRad * currentRad * 0.08f)
         {
             // hide sub/light when not within distance of localplayer
             engineLight.intensity = 0;
-            model.SetActive(false);
+            model.SetActive(false); // bad fix... model should be visible when in light
         }
         else
         {
