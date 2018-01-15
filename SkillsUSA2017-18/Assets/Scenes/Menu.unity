@@ -1736,8 +1736,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78c359414b437b949a6cf4bdea658e15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicLevel: {fileID: 0}
-  sensitivityLevel: {fileID: 0}
+  musicLevel: {fileID: 436891602}
+  mainMenu: {fileID: 22716714}
+  settingsMenu: {fileID: 2123336112}
 --- !u!1 &1478960569
 GameObject:
   m_ObjectHideFlags: 0

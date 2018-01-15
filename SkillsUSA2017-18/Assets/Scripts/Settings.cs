@@ -6,7 +6,18 @@ using UnityEngine.UI;
 public class Settings : MonoBehaviour
 {
     public Slider musicLevel;
-    public Slider sensitivityLevel;
+    public GameObject mainMenu;
+    public GameObject settingsMenu;
+
+    private void Start()
+    {
+        if(Screen.width/Screen.height<1.4)
+        {
+            float scalingFactor = Screen.width / Screen.height;
+            mainMenu.transform.localScale = mainMenu.transform.localScale * .75f * scalingFactor;
+            settingsMenu.transform.localScale = new Vector3(.8f, .8f, .8f);
+        }
+    }
 
     void Update()
     {
