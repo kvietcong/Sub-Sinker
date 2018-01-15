@@ -16,6 +16,7 @@ public class EngineLight : NetworkBehaviour {
 
     public float maxRad = 25;
     public float minRad = 2;
+    private float startIntensity;
 
     public RectTransform circle;
 
@@ -24,10 +25,21 @@ public class EngineLight : NetworkBehaviour {
         newRad = startRad;
         engineLight.range = newRad;
         scrollSpeed = 10;
+        startIntensity = engineLight.intensity;
     }
 
     // Update is called once per frame
     void Update() {
+        GameObject localPlayer = GameObject.Find("LocalPlayer");
+        if(Vector3.Distance(transform.position, localPlayer.transform.position) > circle.sizeDelta.x)
+        {
+            engineLight.intensity = 0;
+        }
+        else
+        {
+            engineLight.intensity = startIntensity;
+        }
+
         // network awareness
         if (!isLocalPlayer)
             return;

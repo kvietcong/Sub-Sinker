@@ -11,6 +11,8 @@ public class PlayerMovement : NetworkBehaviour {
     private Vector2 prevVel;
     public float wallPushbackForce = 300f;
     public RectTransform indicator;
+
+    public Canvas[] canvases;
     
     GameObject camera;
 
@@ -64,9 +66,14 @@ public class PlayerMovement : NetworkBehaviour {
         GameObject[] cameras;
         cameras = GameObject.FindGameObjectsWithTag("MainCamera");
         camera = cameras[0];
-        
-        // does not work in editor
         camera.SendMessage("SetPlayer", gameObject);
+ 
+        gameObject.name = "LocalPlayer";
+
+        foreach (Canvas ui in canvases)
+        {
+            ui.gameObject.SetActive(true);
+        }
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
