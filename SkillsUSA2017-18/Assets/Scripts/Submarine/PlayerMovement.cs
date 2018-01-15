@@ -10,6 +10,7 @@ public class PlayerMovement : NetworkBehaviour {
     private float prevXVel;
     private Vector2 prevVel;
     public float wallPushbackForce = 300f;
+    public RectTransform indicator;
     
     GameObject camera;
 
@@ -34,7 +35,7 @@ public class PlayerMovement : NetworkBehaviour {
         BroadcastMessage("AdjustVel", Mathf.Abs(rb.velocity[0]));
 
         // todo: send to ui
-        //print(transform.position);
+        indicator.anchoredPosition = transform.position / 2;
     }
 
     // visual effects
