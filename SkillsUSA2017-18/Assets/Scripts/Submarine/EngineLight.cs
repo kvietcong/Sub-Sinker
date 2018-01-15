@@ -50,18 +50,18 @@ public class EngineLight : NetworkBehaviour {
             engineLight.intensity = 0;
 
             // bad fix... model should be visible when in light
-            foreach (MeshRenderer rend in rends)
-            {
-                rend.enabled = false;
-            }
+            //foreach (MeshRenderer rend in rends)
+            //{
+            //    rend.enabled = false;
+            //}
         }
         else
         {
             engineLight.intensity = startIntensity;
-            foreach (MeshRenderer rend in rends)
-            {
-                rend.enabled = true;
-            }
+            //foreach (MeshRenderer rend in rends)
+            //{
+            //    rend.enabled = true;
+            //}
         }
 
         // network awareness
