@@ -8,7 +8,8 @@ public class PlayerMovement : NetworkBehaviour {
     public float speed;
     private Rigidbody2D rb;
     private float prevXVel;
-    private float prevVel;
+    private Vector2 prevVel;
+    public float wallPushbackForce = 300f;
     
     GameObject camera;
 
@@ -53,7 +54,7 @@ public class PlayerMovement : NetworkBehaviour {
         }
 
         prevXVel = rb.velocity[0];
-        prevVel = rb.velocity.magnitude;
+        prevVel = rb.velocity;
     }
 
     public override void OnStartLocalPlayer() // local player only
@@ -75,7 +76,8 @@ public class PlayerMovement : NetworkBehaviour {
         if (collision.gameObject.tag == "Map")
         {
             // damage proportional to vel
-            gameObject.GetComponent<PlayerHealth>().TakeDamage(prevVel * 2);
+            gameObject.GetComponent<PlayerHealth>().TakeDamage(prevVel.magnitude * 2);
+            CmdAddForce(-1 * prevVel * wallPushbackForce);
         }
     }
 

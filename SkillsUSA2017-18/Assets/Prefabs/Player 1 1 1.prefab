@@ -603,6 +603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  wallPushbackForce: 50
 --- !u!114 &114210992334188036
 MonoBehaviour:
   m_ObjectHideFlags: 1
