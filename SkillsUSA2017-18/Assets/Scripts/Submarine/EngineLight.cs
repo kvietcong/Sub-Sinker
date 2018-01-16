@@ -39,28 +39,14 @@ public class EngineLight : NetworkBehaviour {
     // Update is called once per frame
     void Update() {
         // i eyeballed this value....
-        if (!isLocalPlayer)
-        {
-            //debugText.text = "Current enemy radius: " + currentRad;
-        }
         if(Vector3.Distance(transform.position, localPlayer.transform.position) > currentRad * currentRad * 0.08f)
         {
-            // hide sub/light when not within distance of localplayer
+            // hide light when not within distance of localplayer
             engineLight.intensity = 0;
-
-            // bad fix... model should be visible when in light
-            //foreach (MeshRenderer rend in rends)
-            //{
-            //    rend.enabled = false;
-            //}
         }
         else
         {
             engineLight.intensity = startIntensity;
-            //foreach (MeshRenderer rend in rends)
-            //{
-            //    rend.enabled = true;
-            //}
         }
 
         // network awareness
@@ -98,6 +84,6 @@ public class EngineLight : NetworkBehaviour {
         currentRad = radius;
         engineLight.range = radius;
         engineLight.spotAngle = radius * 7;
-        circle.sizeDelta = new Vector2(radius * radius * 2.5f, radius * radius * 2.5f);
+        circle.sizeDelta = new Vector2(radius * radius * 2.8f, radius * radius * 2.8f);
     }
 }
