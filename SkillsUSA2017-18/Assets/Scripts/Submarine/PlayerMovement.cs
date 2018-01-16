@@ -14,7 +14,6 @@ public class PlayerMovement : NetworkBehaviour {
 
     public Canvas[] canvases;
     
-    Camera cam;
     PlayerHealth health;
 
     void Start()
@@ -66,11 +65,9 @@ public class PlayerMovement : NetworkBehaviour {
 
     public override void OnStartLocalPlayer() // local player only
     {
-        cam = Camera.main;
-        cam.SendMessage("SetPlayer", gameObject);
- 
         gameObject.name = "LocalPlayer";
 
+        // set ui active for local player only
         foreach (Canvas ui in canvases)
         {
             ui.gameObject.SetActive(true);
