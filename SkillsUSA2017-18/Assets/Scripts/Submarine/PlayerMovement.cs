@@ -78,7 +78,7 @@ public class PlayerMovement : NetworkBehaviour {
         if (!isServer)
             return;
 
-        if (collision.gameObject.tag == "Map")
+        if (collision.gameObject.CompareTag("Map"))
         {
             // damage proportional to vel
             gameObject.GetComponent<PlayerHealth>().TakeDamage(prevVel.magnitude * 2);

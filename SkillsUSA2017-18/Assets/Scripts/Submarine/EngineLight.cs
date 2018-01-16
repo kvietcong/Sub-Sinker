@@ -41,8 +41,7 @@ public class EngineLight : NetworkBehaviour {
         // i eyeballed this value....
         if (!isLocalPlayer)
         {
-            debugText.text = "Current enemy radius: " + currentRad;
-            print(currentRad);
+            //debugText.text = "Current enemy radius: " + currentRad;
         }
         if(Vector3.Distance(transform.position, localPlayer.transform.position) > currentRad * currentRad * 0.08f)
         {

@@ -5,7 +5,6 @@ using UnityEngine.Networking;
 
 public class SubSpawn : NetworkBehaviour
 {
-    public GameObject mapGenPrefab;
     private Vector2 newPos;
     GameObject mapGen;
 
@@ -15,8 +14,8 @@ public class SubSpawn : NetworkBehaviour
     void Start () {
         spawned = false;
 
-        // create map generator
-        mapGen = Instantiate(mapGenPrefab, new Vector3(), Quaternion.identity);
+        //not fool proof
+        mapGen = GameObject.FindGameObjectsWithTag("Map")[0];
     }
 
     void Update()

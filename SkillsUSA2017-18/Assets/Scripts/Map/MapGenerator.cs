@@ -534,16 +534,18 @@ public class MapGenerator : NetworkBehaviour
     {
         int tileset_width = map.GetLength(0);
         int tileset_height = map.GetLength(1);
-        int map_x = UnityEngine.Random.Range(0, tileset_width);
-        int map_y = UnityEngine.Random.Range(0, tileset_height);
+
+        // exclude edges
+        int map_x = UnityEngine.Random.Range(1, tileset_width - 1);
+        int map_y = UnityEngine.Random.Range(1, tileset_height - 1);
 
         // sometimes this check makes it go out of bounds
         while (map[map_x - 1, map_y + 1] == 1 || map[map_x, map_y + 1] == 1 || map[map_x + 1, map_y + 1] == 1 ||
             map[map_x - 1, map_y] == 1 || map[map_x, map_y] == 1 || map[map_x + 1, map_y] == 1 ||
             map[map_x - 1, map_y - 1] == 1 || map[map_x, map_y - 1] == 1 || map[map_x + 1, map_y - 1] == 1) // BREAK when all conditions are not 1, i.e. open space
         {
-            map_x = UnityEngine.Random.Range(0, tileset_width);
-            map_y = UnityEngine.Random.Range(0, tileset_height);
+            map_x = UnityEngine.Random.Range(1, tileset_width - 1);
+            map_y = UnityEngine.Random.Range(1, tileset_height - 1);
         }
         float x = 3*(map_x - width / 2); // 3x scale
         float y = 3*(map_y - height / 2);

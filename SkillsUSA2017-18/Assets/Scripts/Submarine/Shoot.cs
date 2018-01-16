@@ -18,11 +18,14 @@ public class Shoot : NetworkBehaviour {
     public float torpedoRateOfFire = 2f;
     float timeSinceTorpedo;
 
+    PlayerInventory ammo;
+
     // Use this for initialization
     void Start()
     {
         timeSincePing = pingRateOfFire;
         timeSinceTorpedo = torpedoRateOfFire;
+        ammo = GetComponent<PlayerInventory>();
     }
 
     void Update()
@@ -33,9 +36,15 @@ public class Shoot : NetworkBehaviour {
         // left click: torpedo
         if (Input.GetButton("Fire1") && timeSinceTorpedo >= torpedoRateOfFire)
         {
-            timeSinceTorpedo = 0;
-            Vector2 mousePos = new Vector2(Input.mousePosition.x - Screen.width / 2, Input.mousePosition.y - Screen.height / 2);
-            CmdFireTorp(mousePos, torpedoForce);
+            if (ammo.ChangeAmmo(-1, "torpedo"))
+            {
+                timeSinceTorpedo = 0;
+                Vector2 mousePos = new Vector2(Input.mousePosition.x - Screen.width / 2, Input.mousePosition.y - Screen.height / 2);
+                CmdFireTorp(mousePos, torpedoForce);
+            } else
+            {
+                print("No ammo for torpedo.");
+            }
         }
 
         // right click: ping
