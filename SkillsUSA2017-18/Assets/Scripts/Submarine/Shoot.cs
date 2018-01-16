@@ -19,13 +19,14 @@ public class Shoot : NetworkBehaviour {
     float timeSinceTorpedo;
 
     PlayerInventory ammo;
+    PlayerHealth health;
 
     // Use this for initialization
     void Start()
     {
-        timeSincePing = pingRateOfFire;
-        timeSinceTorpedo = torpedoRateOfFire;
+        Respawn();
         ammo = GetComponent<PlayerInventory>();
+        health = GetComponent<PlayerHealth>();
     }
 
     void Update()
@@ -33,26 +34,30 @@ public class Shoot : NetworkBehaviour {
         if (!isLocalPlayer)
             return;
 
-        // left click: torpedo
-        if (Input.GetButton("Fire1") && timeSinceTorpedo >= torpedoRateOfFire)
+        if (health.alive)
         {
-            if (ammo.ChangeAmmo(-1, "torpedo"))
+            // left click: torpedo
+            if (Input.GetButton("Fire1") && timeSinceTorpedo >= torpedoRateOfFire)
             {
-                timeSinceTorpedo = 0;
-                Vector2 mousePos = new Vector2(Input.mousePosition.x - Screen.width / 2, Input.mousePosition.y - Screen.height / 2);
-                CmdFireTorp(mousePos, torpedoForce);
-            } else
-            {
-                print("No ammo for torpedo.");
+                if (ammo.ChangeAmmo(-1, "torpedo"))
+                {
+                    timeSinceTorpedo = 0;
+                    Vector2 mousePos = new Vector2(Input.mousePosition.x - Screen.width / 2, Input.mousePosition.y - Screen.height / 2);
+                    CmdFireTorp(mousePos, torpedoForce);
+                }
+                else
+                {
+                    print("No ammo for torpedo.");
+                }
             }
-        }
 
-        // right click: ping
-        if (Input.GetButton("Fire2") && timeSincePing >= pingRateOfFire)
-        {
-            timeSincePing = 0;
-            Vector2 mousePos = new Vector2(Input.mousePosition.x - Screen.width / 2, Input.mousePosition.y - Screen.height / 2);
-            CmdFirePing(mousePos, pingForce);
+            // right click: ping
+            if (Input.GetButton("Fire2") && timeSincePing >= pingRateOfFire)
+            {
+                timeSincePing = 0;
+                Vector2 mousePos = new Vector2(Input.mousePosition.x - Screen.width / 2, Input.mousePosition.y - Screen.height / 2);
+                CmdFirePing(mousePos, pingForce);
+            }
         }
 
         timeSincePing += Time.deltaTime;
@@ -81,5 +86,11 @@ public class Shoot : NetworkBehaviour {
         torpedo.GetComponent<Torpedo>().spawnedBy = netId;
 
         NetworkServer.Spawn(torpedo);
+    }
+
+    void Respawn()
+    {
+        timeSincePing = pingRateOfFire;
+        timeSinceTorpedo = torpedoRateOfFire;
     }
 }

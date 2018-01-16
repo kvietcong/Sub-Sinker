@@ -15,17 +15,21 @@ public class PlayerMovement : NetworkBehaviour {
     public Canvas[] canvases;
     
     Camera cam;
+    PlayerHealth health;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         prevXVel = rb.velocity[0];
+        health = GetComponent<PlayerHealth>();
     }
 
     void FixedUpdate ()
     {
         // network awareness
         if (!isLocalPlayer)
+            return;
+        if (!health.alive)
             return;
 
         float moveHorizontal = Input.GetAxis ("Horizontal");

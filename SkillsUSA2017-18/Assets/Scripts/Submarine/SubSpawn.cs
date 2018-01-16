@@ -21,10 +21,15 @@ public class SubSpawn : NetworkBehaviour
     void Update()
     {
         // wait until map is generated
-        if (MapGenerator.generated && !spawned) { 
-            newPos = mapGen.GetComponent<MapGenerator>().GetSpawnPos();
-            transform.position = newPos;
+        if (MapGenerator.generated && !spawned) {
+            Respawn();
             spawned = true;
         }
+    }
+
+    public void Respawn()
+    {
+        newPos = mapGen.GetComponent<MapGenerator>().GetSpawnPos();
+        transform.position = newPos;
     }
 }

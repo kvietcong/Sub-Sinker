@@ -13,11 +13,8 @@ public class PickupSpawner : NetworkBehaviour {
     public GameObject mapGenPrefab;
     GameObject mapGen;
 
-    Text debugText;
-
     public override void OnStartServer()
     {
-        debugText = GameObject.Find("Debug").GetComponentInChildren<Text>();
         spawned = false;
 
         // create map generator
@@ -37,10 +34,8 @@ public class PickupSpawner : NetworkBehaviour {
             for (int i = 0; i < numberOfPickups; i++)
             {
                 var spawnPosition = mapGen.GetComponent<MapGenerator>().GetSpawnPos();
-
                 var pickup = (GameObject)Instantiate(ammoPrefab, spawnPosition, Quaternion.identity);
                 NetworkServer.Spawn(pickup);
-                debugText.text = "spawning " + pickup;
             }
             spawned = true;
         }

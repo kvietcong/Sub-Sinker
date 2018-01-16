@@ -14,17 +14,7 @@ public class PlayerInventory : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        currentAmmo = new int[startAmmo.Length];
-        // no check for differing lengths
-        for (int i = 0; i < currentAmmo.Length; i++)
-        {
-            currentAmmo[i] = startAmmo[i] > maxAmmo[i] ? maxAmmo[i] : startAmmo[i];
-        }
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+        Respawn();
 	}
 
     // return true if the operation is valid
@@ -58,5 +48,15 @@ public class PlayerInventory : MonoBehaviour {
 
         display.text = "Ammo: " + currentAmmo[index] + "/" + maxAmmo[index];
         return true;
+    }
+
+    public void Respawn()
+    {
+        currentAmmo = new int[startAmmo.Length];
+        // no check for differing lengths
+        for (int i = 0; i < currentAmmo.Length; i++)
+        {
+            currentAmmo[i] = startAmmo[i] > maxAmmo[i] ? maxAmmo[i] : startAmmo[i];
+        }
     }
 }
