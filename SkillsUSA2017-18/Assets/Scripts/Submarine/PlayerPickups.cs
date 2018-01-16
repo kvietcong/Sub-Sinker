@@ -8,21 +8,23 @@ public class PlayerPickups : NetworkBehaviour {
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!isServer)
-        {
+        if (!isLocalPlayer)
             return;
-        }
-
-
         if (collision.gameObject.CompareTag("Pick Up"))
         {
             // todo: read ammo crates names to see how much ammo to add
+            // ammo is a local value
             if (ammo.ChangeAmmo(2, "torpedo"))
             {
-                // delete pickup
-                Destroy(collision.gameObject);
+                CmdRemovePickup(collision.gameObject);
             }
         }
+    }
+    
+    [Command]
+    void CmdRemovePickup(GameObject pickup)
+    {
+        Destroy(pickup);
     }
 
     void Start()

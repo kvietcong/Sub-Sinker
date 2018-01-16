@@ -10,6 +10,7 @@ public class MapGenerator : NetworkBehaviour
     public int width;
     public int height;
 
+    [SyncVar]
     public string seed;
     public bool useRandomSeed;
 
