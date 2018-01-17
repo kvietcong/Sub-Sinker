@@ -23,6 +23,17 @@ public class PlayerMovement : NetworkBehaviour {
         health = GetComponent<PlayerHealth>();
     }
 
+    public override void OnStartLocalPlayer() // local player only
+    {
+        gameObject.name = "LocalPlayer";
+
+        // set ui active for local player only
+        foreach (Canvas ui in canvases)
+        {
+            ui.gameObject.SetActive(true);
+        }
+    }
+
     void FixedUpdate ()
     {
         // network awareness
@@ -61,17 +72,6 @@ public class PlayerMovement : NetworkBehaviour {
 
         prevXVel = rb.velocity[0];
         prevVel = rb.velocity;
-    }
-
-    public override void OnStartLocalPlayer() // local player only
-    {
-        gameObject.name = "LocalPlayer";
-
-        // set ui active for local player only
-        foreach (Canvas ui in canvases)
-        {
-            ui.gameObject.SetActive(true);
-        }
     }
 
     public void OnCollisionEnter2D(Collision2D collision)

@@ -30,7 +30,6 @@ public class EngineLight : NetworkBehaviour {
         engineLight.range = newRad;
         scrollSpeed = 10;
         startIntensity = engineLight.intensity;
-        debugText = GameObject.Find("Debug").GetComponentInChildren<Text>();
         localPlayer = GameObject.Find("LocalPlayer");
 
         if (isLocalPlayer)

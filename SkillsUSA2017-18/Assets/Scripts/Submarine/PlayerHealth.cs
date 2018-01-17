@@ -56,7 +56,7 @@ public class PlayerHealth : NetworkBehaviour
             respawnProgress += Time.deltaTime;
             //if (isServer)
             //{
-                RpcEditTimer("Respawn in " + Mathf.Round((respawnTime - respawnProgress) * 10) / 10f);// round to 1 decimal
+                RpcEditTimer(System.String.Format("Respawn in: {0:F1}", (respawnTime - respawnProgress)));
             //}
 
         }
