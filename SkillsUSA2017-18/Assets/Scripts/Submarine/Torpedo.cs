@@ -26,11 +26,6 @@ public class Torpedo : NetworkBehaviour
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), obj.GetComponents<Collider2D>()[1]);
     }
 
-    // Use this for initialization
-    void Start()
-    {
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -50,7 +45,7 @@ public class Torpedo : NetworkBehaviour
             var health = hit.GetComponent<PlayerHealth>();
             if (health != null)
             {
-                health.TakeDamage(hitDmg); 
+                health.CmdTakeDamage(hitDmg); 
             }
         }
 
@@ -72,13 +67,14 @@ public class Torpedo : NetworkBehaviour
                     if (health != null)
                     {
                         float damage = Mathf.SmoothStep(0, splashDmgMax, (explosionRadius - Vector3.Distance(transform.position, a_player.transform.position)) / explosionRadius);
-                        health.TakeDamage(damage);
+                        health.CmdTakeDamage(damage);
                     }
                 }
 
                 // add explosion force to player hit
                 ExplosionForce expl = a_player.GetComponent<ExplosionForce>();
-                expl.AddExplosionForce(a_player.GetComponent<Rigidbody2D>(), explosionForce, transform.position, explosionRadius);
+                if (isServer)
+                    expl.RpcAddExplosionForce(explosionForce, transform.position, explosionRadius);
             }
         }
 

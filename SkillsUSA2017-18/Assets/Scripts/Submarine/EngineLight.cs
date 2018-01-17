@@ -10,7 +10,7 @@ public class EngineLight : NetworkBehaviour {
     public const float startRad = 10;
 
     [SyncVar(hook = "OnLightRadiusChange")]
-    public float currentRad = startRad;
+    public float currentRad;
     private float newRad;
     private float scrollSpeed;
 
@@ -20,7 +20,6 @@ public class EngineLight : NetworkBehaviour {
 
     public RectTransform circle;
     public GameObject model;
-    MeshRenderer[] rends;
     Text debugText;
 
     GameObject localPlayer;
@@ -32,8 +31,10 @@ public class EngineLight : NetworkBehaviour {
         scrollSpeed = 10;
         startIntensity = engineLight.intensity;
         debugText = GameObject.Find("Debug").GetComponentInChildren<Text>();
-        rends = model.GetComponentsInChildren<MeshRenderer>();
         localPlayer = GameObject.Find("LocalPlayer");
+
+        if (isLocalPlayer)
+            CmdChangeRadius(startRad);
     }
 
     // Update is called once per frame

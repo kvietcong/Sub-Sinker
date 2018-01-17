@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
+// health is managed almost entirely by the server
 public class PlayerHealth : NetworkBehaviour
 {
     public const float maxHealth = 100;
@@ -23,15 +24,11 @@ public class PlayerHealth : NetworkBehaviour
     {
         barWidth = healthBar.sizeDelta.x;
         Respawn();
-        timer.enabled = false;
     }
 
-    public void TakeDamage(float amount)
+    [Command]
+    public void CmdTakeDamage(float amount)
     {
-        if (!isServer)
-        {
-            return;
-        }
         currentHealth -= amount;
         if (currentHealth <= 0 && alive)
         { 
@@ -42,7 +39,7 @@ public class PlayerHealth : NetworkBehaviour
             // note: alive disables PlayerController and Shoot
             alive = false;
             respawnProgress = 0;
-            timer.enabled = true;
+            RpcToggleTimer(true);
         }
     }
 
@@ -52,12 +49,23 @@ public class PlayerHealth : NetworkBehaviour
         {
             if (respawnProgress > respawnTime)
             {
-                GetComponent<SubSpawn>().Respawn();
-                GetComponent<PlayerInventory>().Respawn();
                 Respawn();
+                if (isServer)
+                    RpcReset();
             }
             respawnProgress += Time.deltaTime;
-            timer.text = "Respawn in " + Mathf.Round((respawnTime - respawnProgress) * 10) / 10f;// round to 1 decimal
+            //if (isServer)
+            //{
+                RpcEditTimer("Respawn in " + Mathf.Round((respawnTime - respawnProgress) * 10) / 10f);// round to 1 decimal
+            //}
+
+        }
+
+        // debug death
+        if (Input.GetButton("Jump"))
+        {
+            if (isLocalPlayer)
+                CmdTakeDamage(100);
         }
     }
 
@@ -65,11 +73,33 @@ public class PlayerHealth : NetworkBehaviour
     {
         currentHealth = maxHealth;
         alive = true;
-        timer.enabled = false;
+        if (isServer)
+        {
+            RpcToggleTimer(false);
+        }
     }
 
     void OnChangeHealth(float health)
     {
         healthBar.sizeDelta = new Vector2((health / maxHealth) * barWidth, healthBar.sizeDelta.y);
+    }
+
+    [ClientRpc]
+    void RpcReset()
+    {
+        GetComponent<SubSpawn>().Respawn();
+        GetComponent<PlayerInventory>().Respawn();
+    }
+
+    [ClientRpc]
+    void RpcToggleTimer(bool a)
+    {
+        timer.enabled = a;
+    }
+
+    //[ClientRpc]
+    void RpcEditTimer(string str)
+    {
+        timer.text = str;
     }
 }

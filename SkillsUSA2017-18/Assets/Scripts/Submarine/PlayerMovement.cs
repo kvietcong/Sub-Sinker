@@ -76,13 +76,10 @@ public class PlayerMovement : NetworkBehaviour {
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!isServer)
-            return;
-
         if (collision.gameObject.CompareTag("Map"))
         {
             // damage proportional to vel
-            gameObject.GetComponent<PlayerHealth>().TakeDamage(prevVel.magnitude * 2);
+            gameObject.GetComponent<PlayerHealth>().CmdTakeDamage(prevVel.magnitude * 2);
             CmdAddForce(-1 * prevVel * wallPushbackForce);
         }
     }
@@ -100,7 +97,7 @@ public class PlayerMovement : NetworkBehaviour {
     }
 
     // server does physics 
-    [Command]
+    //[Command]
     public void CmdAddForce(Vector2 force)
     {
         rb.AddForce(force);

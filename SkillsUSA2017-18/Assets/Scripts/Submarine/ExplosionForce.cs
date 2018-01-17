@@ -1,10 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class ExplosionForce : MonoBehaviour {
+public class ExplosionForce : NetworkBehaviour {
+    Rigidbody2D body;
 
-    public void AddExplosionForce(Rigidbody2D body, float explosionForce, Vector3 explosionPosition, float explosionRadius)
+    private void Start()
+    {
+        body = GetComponent<Rigidbody2D>();
+    }
+    // physics must be run on client
+    [ClientRpc]
+    public void RpcAddExplosionForce(float explosionForce, Vector3 explosionPosition, float explosionRadius)
     {
         var dir = (body.transform.position - explosionPosition);
         float wearoff = 1 - (dir.magnitude / explosionRadius);
