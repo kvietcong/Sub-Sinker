@@ -62,7 +62,7 @@ public class PlayerHealth : NetworkBehaviour
         }
 
         // debug death
-        if (Input.GetButton("Jump"))
+        if (Input.GetButton("Explode"))
         {
             if (isLocalPlayer)
                 CmdTakeDamage(100);
