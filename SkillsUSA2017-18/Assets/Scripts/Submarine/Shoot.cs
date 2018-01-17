@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class Shoot : NetworkBehaviour {
 
@@ -9,7 +10,9 @@ public class Shoot : NetworkBehaviour {
     public GameObject TorpedoPrefab;
     public float pingForce = 1000;
     public float torpedoForce = 1500;
-
+    public Image pingIndicator;
+    public Image torpedoIndicator;
+    public Image torpedoShellIndicator;
 
     // seconds per shot
     public float pingRateOfFire = 1f;
@@ -41,6 +44,8 @@ public class Shoot : NetworkBehaviour {
             {
                 if (ammo.ChangeAmmo(-1, "torpedo"))
                 {
+                    torpedoIndicator.enabled = true;
+                    torpedoShellIndicator.enabled = true;
                     timeSinceTorpedo = 0;
                     Vector2 mousePos = new Vector2(Input.mousePosition.x - Screen.width / 2, Input.mousePosition.y - Screen.height / 2);
                     CmdFireTorp(mousePos, torpedoForce);
@@ -54,10 +59,25 @@ public class Shoot : NetworkBehaviour {
             // right click: ping
             if (Input.GetButton("Fire2") && timeSincePing >= pingRateOfFire)
             {
+                pingIndicator.enabled = true;
                 timeSincePing = 0;
                 Vector2 mousePos = new Vector2(Input.mousePosition.x - Screen.width / 2, Input.mousePosition.y - Screen.height / 2);
                 CmdFirePing(mousePos, pingForce);
             }
+        }
+
+        pingIndicator.fillAmount = timeSincePing / pingRateOfFire;
+        torpedoIndicator.fillAmount = timeSinceTorpedo  / torpedoRateOfFire;
+        torpedoShellIndicator.fillAmount = timeSinceTorpedo / torpedoRateOfFire;
+
+        if (timeSincePing > 1.5*pingRateOfFire)
+        {
+            pingIndicator.enabled = false;
+        }
+        if(timeSinceTorpedo > 1.5*torpedoRateOfFire)
+        {
+            torpedoIndicator.enabled = false;
+            torpedoShellIndicator.enabled = false;
         }
 
         timeSincePing += Time.deltaTime;
