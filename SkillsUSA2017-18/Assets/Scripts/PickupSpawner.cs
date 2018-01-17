@@ -6,12 +6,15 @@ using UnityEngine.UI;
 
 public class PickupSpawner : NetworkBehaviour {
     public GameObject ammoPrefab;
-    public int numberOfPickups;
-
     bool spawned;
 
     public GameObject mapGenPrefab;
     GameObject mapGen;
+
+    int pickups;
+    public int ammoPerPlayer = 10;
+
+    float ammoSpawnTimer;
 
     public override void OnStartServer()
     {
@@ -20,6 +23,7 @@ public class PickupSpawner : NetworkBehaviour {
         // create map generator
         mapGen = Instantiate(mapGenPrefab, new Vector3(), Quaternion.identity);
         NetworkServer.Spawn(mapGen);
+        ammoSpawnTimer = Random.Range(2f, 10f);
     }
 
     void Update()
@@ -31,13 +35,31 @@ public class PickupSpawner : NetworkBehaviour {
         // wait until map is generated
         if (MapGenerator.generated && !spawned)
         {
-            for (int i = 0; i < numberOfPickups; i++)
-            {
-                var spawnPosition = mapGen.GetComponent<MapGenerator>().GetSpawnPos();
-                var pickup = (GameObject)Instantiate(ammoPrefab, spawnPosition, Quaternion.identity);
-                NetworkServer.Spawn(pickup);
-            }
+            SpawnAmmo(ammoPerPlayer * 2);
             spawned = true;
+        }
+        pickups = GameObject.FindGameObjectsWithTag("Pick Up").Length;
+        print(pickups + " " + NetworkServer.connections.Count * ammoPerPlayer + " " + ammoSpawnTimer);
+        if (pickups < NetworkServer.connections.Count * ammoPerPlayer)
+        {
+            if (ammoSpawnTimer <= 0)
+            {
+                SpawnAmmo(1);
+                ammoSpawnTimer = Random.Range(2f, 10f);
+            }
+
+            // count down when pickups are lacking
+            ammoSpawnTimer -= Time.deltaTime;
+        }
+    }
+
+    void SpawnAmmo(int num)
+    {
+        for (int i = 0; i < num; i++)
+        {
+            var spawnPosition = mapGen.GetComponent<MapGenerator>().GetSpawnPos();
+            var pickup = (GameObject)Instantiate(ammoPrefab, spawnPosition, Quaternion.identity);
+            NetworkServer.Spawn(pickup);
         }
     }
 }
