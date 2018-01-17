@@ -54,10 +54,10 @@ public class PlayerHealth : NetworkBehaviour
                     RpcReset();
             }
             respawnProgress += Time.deltaTime;
-            //if (isServer)
-            //{
+            if (isServer)
+            {
                 RpcEditTimer(System.String.Format("Respawn in: {0:F1}", (respawnTime - respawnProgress)));
-            //}
+            }
 
         }
 
@@ -97,7 +97,7 @@ public class PlayerHealth : NetworkBehaviour
         timer.enabled = a;
     }
 
-    //[ClientRpc]
+    [ClientRpc]
     void RpcEditTimer(string str)
     {
         timer.text = str;
