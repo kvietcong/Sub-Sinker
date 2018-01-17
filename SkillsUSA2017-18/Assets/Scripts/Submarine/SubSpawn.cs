@@ -24,7 +24,11 @@ public class SubSpawn : NetworkBehaviour
         if (MapGenerator.generated && !spawned) {
             Respawn();
             spawned = true;
-            Camera.main.SendMessage("SetPlayer", gameObject);
+
+            if (isLocalPlayer)
+            {
+                Camera.main.SendMessage("SetPlayer", gameObject);
+            }
         }
     }
 

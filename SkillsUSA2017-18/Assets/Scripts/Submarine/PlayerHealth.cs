@@ -11,6 +11,7 @@ public class PlayerHealth : NetworkBehaviour
     public float currentHealth;
     public RectTransform healthBar;
     float barWidth;
+    [SyncVar]
     public bool alive;
 
     public float respawnTime;
@@ -32,7 +33,7 @@ public class PlayerHealth : NetworkBehaviour
             return;
         }
         currentHealth -= amount;
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && alive)
         { 
             // dead
             currentHealth = 0;

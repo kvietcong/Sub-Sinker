@@ -58,5 +58,8 @@ public class PlayerInventory : MonoBehaviour {
         {
             currentAmmo[i] = startAmmo[i] > maxAmmo[i] ? maxAmmo[i] : startAmmo[i];
         }
+
+        // update ui
+        ChangeAmmo(0, "torpedo");
     }
 }
