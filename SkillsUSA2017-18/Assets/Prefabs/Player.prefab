@@ -182,7 +182,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1573162408264264
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,8 +645,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 1
+  m_Mass: 1.5
+  m_LinearDrag: 3
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -1232,8 +1232,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae71c4d0df02abe46a012e9e30185076, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  wallPushbackForce: 50
+  speed: 25
+  wallPushbackForce: 150
   indicator: {fileID: 224819084420550540}
   canvases:
   - {fileID: 223414123720731256}

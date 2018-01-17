@@ -12,7 +12,7 @@ public class GridExpand : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetButton("Tab"))
+        if (Input.GetButton("Map"))
         {
             rect.localScale = new Vector3(scaleAmount, scaleAmount, 1f);
             rect.anchorMin = new Vector2(0.5f, 0.5f);

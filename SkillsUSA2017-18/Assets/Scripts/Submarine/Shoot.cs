@@ -47,7 +47,8 @@ public class Shoot : NetworkBehaviour {
                     torpedoIndicator.enabled = true;
                     torpedoShellIndicator.enabled = true;
                     timeSinceTorpedo = 0;
-                    Vector2 mousePos = new Vector2(Input.mousePosition.x - Screen.width / 2, Input.mousePosition.y - Screen.height / 2);
+                    Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+                    Vector2 mousePos = new Vector2(Input.mousePosition.x - screenPos.x, Input.mousePosition.y - screenPos.y);
                     CmdFireTorp(mousePos, torpedoForce);
                 }
                 else
@@ -61,7 +62,8 @@ public class Shoot : NetworkBehaviour {
             {
                 pingIndicator.enabled = true;
                 timeSincePing = 0;
-                Vector2 mousePos = new Vector2(Input.mousePosition.x - Screen.width / 2, Input.mousePosition.y - Screen.height / 2);
+                Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+                Vector2 mousePos = new Vector2(Input.mousePosition.x - screenPos.x, Input.mousePosition.y - screenPos.y);
                 CmdFirePing(mousePos, pingForce);
             }
         }
