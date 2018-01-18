@@ -66,7 +66,6 @@ public class PlayerHealth : NetworkBehaviour
                 CmdTakeDamage(100);
             }
         }
-        print("Health: " + currentHealth);
     }
 
     void Respawn()
@@ -79,7 +78,6 @@ public class PlayerHealth : NetworkBehaviour
     {
         currentHealth = health;
         healthBar.sizeDelta = new Vector2((health / maxHealth) * barWidth, healthBar.sizeDelta.y);
-        print("Changed health: " + currentHealth + ", " + health);
     }
 
     [ClientRpc]
