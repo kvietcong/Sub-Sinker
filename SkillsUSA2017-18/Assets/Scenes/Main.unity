@@ -463,9 +463,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ammoPrefab: {fileID: 1674456554491180, guid: 8ce7f1962f484f44ab7bb670dcb5b778, type: 2}
+  healthPrefab: {fileID: 1502628693519090, guid: 83f61c390c267aa44853c03e404d95a3,
+    type: 2}
   mapGenPrefab: {fileID: 1565039067421404, guid: 4f4b410c65667ae488e94695bfc8d1a3,
     type: 2}
   ammoPerPlayer: 10
+  healthPerPlayer: 100
 --- !u!114 &1314142530
 MonoBehaviour:
   m_ObjectHideFlags: 0

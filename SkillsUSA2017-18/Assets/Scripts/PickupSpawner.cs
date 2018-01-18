@@ -6,15 +6,20 @@ using UnityEngine.UI;
 
 public class PickupSpawner : NetworkBehaviour {
     public GameObject ammoPrefab;
+    public GameObject healthPrefab;
     bool spawned;
 
     public GameObject mapGenPrefab;
     GameObject mapGen;
 
-    int pickups;
+    GameObject[] pickups;
     public int ammoPerPlayer = 10;
+    public int healthPerPlayer = 5;
+    int ammos;
+    int healths;
 
     float ammoSpawnTimer;
+    float healthSpawnTimer;
 
     public override void OnStartServer()
     {
@@ -24,6 +29,7 @@ public class PickupSpawner : NetworkBehaviour {
         mapGen = Instantiate(mapGenPrefab, new Vector3(), Quaternion.identity);
         NetworkServer.Spawn(mapGen);
         ammoSpawnTimer = Random.Range(2f, 10f);
+        healthSpawnTimer = Random.Range(2f, 10f);
     }
 
     void Update()
@@ -35,29 +41,54 @@ public class PickupSpawner : NetworkBehaviour {
         // wait until map is generated
         if (MapGenerator.generated && !spawned)
         {
-            SpawnAmmo(ammoPerPlayer * 2);
+            SpawnPickup(ammoPerPlayer * 2, ammoPrefab);
+            SpawnPickup(healthPerPlayer * 2, healthPrefab);
             spawned = true;
         }
-        pickups = GameObject.FindGameObjectsWithTag("Pick Up").Length;
-        if (pickups < NetworkServer.connections.Count * ammoPerPlayer)
+        pickups = GameObject.FindGameObjectsWithTag("Pick Up");
+        ammos = 0;
+        healths = 0;
+        foreach (GameObject pickup in pickups)
+        {
+            if (pickup.name == "AmmoPickup(Clone)")
+            {
+                ammos++;
+            }
+            else if (pickup.name == "HealthPickup(Clone)")
+            {
+                healths++;
+            }
+        }
+        if (ammos < NetworkServer.connections.Count * ammoPerPlayer)
         {
             if (ammoSpawnTimer <= 0)
             {
-                SpawnAmmo(1);
+                SpawnPickup(1, ammoPrefab);
                 ammoSpawnTimer = Random.Range(2f, 10f);
             }
 
             // count down when pickups are lacking
             ammoSpawnTimer -= Time.deltaTime;
         }
+        if (healths < NetworkServer.connections.Count * healthPerPlayer)
+        {
+            if (healthSpawnTimer <= 0)
+            {
+                SpawnPickup(1, healthPrefab);
+                healthSpawnTimer = Random.Range(2f, 10f);
+            }
+
+            // count down when pickups are lacking
+            healthSpawnTimer -= Time.deltaTime;
+        }
     }
 
-    void SpawnAmmo(int num)
+    void SpawnPickup(int num, GameObject prefab)
     {
         for (int i = 0; i < num; i++)
         {
             var spawnPosition = mapGen.GetComponent<MapGenerator>().GetSpawnPos();
-            var pickup = (GameObject)Instantiate(ammoPrefab, spawnPosition, Quaternion.identity);
+            var pickup = (GameObject)Instantiate(prefab, spawnPosition, Quaternion.identity);
             NetworkServer.Spawn(pickup);
         }
     }

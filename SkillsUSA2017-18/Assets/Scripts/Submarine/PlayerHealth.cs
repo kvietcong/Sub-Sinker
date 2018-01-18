@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 
 // health is managed almost entirely by the server
+// note: PlayerPickups directly changes health
 public class PlayerHealth : NetworkBehaviour
 {
     public const float maxHealth = 100;

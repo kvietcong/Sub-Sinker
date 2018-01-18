@@ -5,6 +5,10 @@ using UnityEngine.Networking;
 
 public class PlayerPickups : NetworkBehaviour {
     PlayerInventory ammo;
+    PlayerHealth health;
+
+    public int ammoAmount = 2;
+    public float healthAmount = 20f;
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
@@ -12,11 +16,23 @@ public class PlayerPickups : NetworkBehaviour {
             return;
         if (collision.gameObject.CompareTag("Pick Up"))
         {
+            print(gameObject.name);
             // todo: read ammo crates names to see how much ammo to add
             // ammo is a local value
-            if (ammo.ChangeAmmo(2, "torpedo"))
+            if (gameObject.name == "AmmoPickup(Clone)")
             {
-                CmdRemovePickup(collision.gameObject);
+                if (ammo.ChangeAmmo(ammoAmount, "torpedo"))
+                {
+                    CmdRemovePickup(collision.gameObject);
+                }
+            }
+            else if (gameObject.name == "HealthPickup(Clone)")
+            {
+                if (health.currentHealth <= PlayerHealth.maxHealth)
+                {
+                    CmdRemovePickup(collision.gameObject);
+                    ChangeHealth(healthAmount);
+                }
             }
         }
     }
@@ -27,8 +43,18 @@ public class PlayerPickups : NetworkBehaviour {
         Destroy(pickup);
     }
 
+    [Command]
+    void ChangeHealth(float amt)
+    {
+        health.currentHealth += amt;
+        if (health.currentHealth > PlayerHealth.maxHealth)
+        {
+            health.currentHealth = PlayerHealth.maxHealth;
+        }
+    }
     void Start()
     {
         ammo = GetComponent<PlayerInventory>();
+        health = GetComponent<PlayerHealth>();
     }
 }
