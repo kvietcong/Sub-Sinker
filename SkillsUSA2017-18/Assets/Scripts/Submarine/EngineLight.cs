@@ -39,8 +39,11 @@ public class EngineLight : NetworkBehaviour {
     void Update() {
         if (!health.alive)
         {
+            // vvvv   maybe use this instead   vvvv
+            //engineLight.intensity = 0;
             if (currentRad != 0 && isLocalPlayer)
             {
+                
                 CmdChangeRadius(0); // light off
             }
             return;
