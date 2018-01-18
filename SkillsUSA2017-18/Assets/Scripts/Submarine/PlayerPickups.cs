@@ -16,22 +16,21 @@ public class PlayerPickups : NetworkBehaviour {
             return;
         if (collision.gameObject.CompareTag("Pick Up"))
         {
-            print(gameObject.name);
             // todo: read ammo crates names to see how much ammo to add
             // ammo is a local value
-            if (gameObject.name == "AmmoPickup(Clone)")
+            if (collision.gameObject.name == "AmmoPickup(Clone)")
             {
                 if (ammo.ChangeAmmo(ammoAmount, "torpedo"))
                 {
                     CmdRemovePickup(collision.gameObject);
                 }
             }
-            else if (gameObject.name == "HealthPickup(Clone)")
+            else if (collision.gameObject.name == "HealthPickup(Clone)")
             {
-                if (health.currentHealth <= PlayerHealth.maxHealth)
+                if (health.currentHealth < PlayerHealth.maxHealth)
                 {
                     CmdRemovePickup(collision.gameObject);
-                    ChangeHealth(healthAmount);
+                    CmdChangeHealth(healthAmount);
                 }
             }
         }
@@ -44,7 +43,7 @@ public class PlayerPickups : NetworkBehaviour {
     }
 
     [Command]
-    void ChangeHealth(float amt)
+    void CmdChangeHealth(float amt)
     {
         health.currentHealth += amt;
         if (health.currentHealth > PlayerHealth.maxHealth)
