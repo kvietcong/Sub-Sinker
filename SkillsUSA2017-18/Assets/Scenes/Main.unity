@@ -113,53 +113,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &98628112
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4574566392949548, guid: 523f7a3d0881f3741bfb9039dc973963, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4574566392949548, guid: 523f7a3d0881f3741bfb9039dc973963, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4574566392949548, guid: 523f7a3d0881f3741bfb9039dc973963, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4574566392949548, guid: 523f7a3d0881f3741bfb9039dc973963, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4574566392949548, guid: 523f7a3d0881f3741bfb9039dc973963, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4574566392949548, guid: 523f7a3d0881f3741bfb9039dc973963, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4574566392949548, guid: 523f7a3d0881f3741bfb9039dc973963, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4574566392949548, guid: 523f7a3d0881f3741bfb9039dc973963, type: 2}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 23516689071935570, guid: 523f7a3d0881f3741bfb9039dc973963,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 523f7a3d0881f3741bfb9039dc973963, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &679236334
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,7 +165,7 @@ MonoBehaviour:
   m_ScriptCRCCheck: 1
   m_MaxDelay: 0.01
   m_LogLevel: 2
-  m_PlayerPrefab: {fileID: 1736940544926168, guid: 523f7a3d0881f3741bfb9039dc973963,
+  m_PlayerPrefab: {fileID: 1788335911100524, guid: 33b0a5bc6823814479d2762a28705da5,
     type: 2}
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 0

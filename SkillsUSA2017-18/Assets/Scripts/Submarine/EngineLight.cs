@@ -37,15 +37,17 @@ public class EngineLight : NetworkBehaviour {
 
     // Update is called once per frame
     void Update() {
-        //if (!health.alive)
-        //{
-        //    CmdChangeRadius(0);
-        //    circle.gameObject.SetActive(false);
-        //    return;
-        //}
+        if (!health.alive)
+        {
+            if (currentRad != 0 && isLocalPlayer)
+            {
+                CmdChangeRadius(0); // light off
+            }
+            return;
+        }
 
         // i eyeballed this value....
-        if(Vector3.Distance(transform.position, localPlayer.transform.position) > currentRad * currentRad * 0.08f)
+        if (Vector3.Distance(transform.position, localPlayer.transform.position) > currentRad * currentRad * 0.08f)
         {
             // hide light when not within distance of localplayer
             engineLight.intensity = 0;
@@ -98,10 +100,10 @@ public class EngineLight : NetworkBehaviour {
         return currentRad / maxRad;
     }
 
+    // run on client
     public void Spawn()
     {
         newRad = startRad;
-        //circle.gameObject.SetActive(true);
         if (isLocalPlayer)
             CmdChangeRadius(newRad);
     }

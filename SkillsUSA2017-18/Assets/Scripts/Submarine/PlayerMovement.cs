@@ -91,7 +91,11 @@ public class PlayerMovement : NetworkBehaviour {
         if (collision.gameObject.CompareTag("Map"))
         {
             // damage proportional to vel
-            gameObject.GetComponent<PlayerHealth>().CmdTakeDamage(prevVel.magnitude * 2);
+            if (isLocalPlayer)
+            {
+                gameObject.GetComponent<PlayerHealth>().CmdTakeDamage(prevVel.magnitude * 2);
+            }
+            
             CmdAddForce(-1 * prevVel * wallPushbackForce);
         }
     }

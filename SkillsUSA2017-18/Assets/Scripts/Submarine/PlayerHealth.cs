@@ -16,14 +16,14 @@ public class PlayerHealth : NetworkBehaviour
     public bool alive;
 
     public float respawnTime;
+    [SyncVar]
     float respawnProgress;
-
-    public Text timer;
 
     private void Start()
     {
         barWidth = healthBar.sizeDelta.x;
-        Respawn();
+        if (isServer)
+            Respawn();
     }
 
     [Command]
@@ -36,10 +36,9 @@ public class PlayerHealth : NetworkBehaviour
             currentHealth = 0;
 
             // todo: play some explosion or something and hide the model -- in other scripts
-            // note: alive disables PlayerController and Shoot
+            // note: alive disables aspects of PlayerController, Shoot, EngineLight
             alive = false;
             respawnProgress = 0;
-            RpcToggleTimer(true);
         }
     }
 
@@ -49,39 +48,38 @@ public class PlayerHealth : NetworkBehaviour
         {
             if (respawnProgress > respawnTime)
             {
-                Respawn();
                 if (isServer)
+                {
+                    Respawn();
                     RpcReset();
+                }
+                    
             }
             respawnProgress += Time.deltaTime;
-            if (isServer)
-            {
-                RpcEditTimer(System.String.Format("Respawn in: {0:F1}", (respawnTime - respawnProgress)));
-            }
-
         }
 
         // debug death
         if (Input.GetKeyDown(KeyCode.F1))
         {
             if (isLocalPlayer)
+            {
                 CmdTakeDamage(100);
+            }
         }
+        print("Health: " + currentHealth);
     }
 
     void Respawn()
     {
         currentHealth = maxHealth;
         alive = true;
-        if (isServer)
-        {
-            RpcToggleTimer(false);
-        }
     }
 
     void OnChangeHealth(float health)
     {
+        currentHealth = health;
         healthBar.sizeDelta = new Vector2((health / maxHealth) * barWidth, healthBar.sizeDelta.y);
+        print("Changed health: " + currentHealth + ", " + health);
     }
 
     [ClientRpc]
@@ -92,15 +90,8 @@ public class PlayerHealth : NetworkBehaviour
         GetComponent<EngineLight>().Spawn();
     }
 
-    [ClientRpc]
-    void RpcToggleTimer(bool a)
+    public string GetTimerText()
     {
-        timer.enabled = a;
-    }
-
-    [ClientRpc]
-    void RpcEditTimer(string str)
-    {
-        timer.text = str;
+        return System.String.Format("Respawn in: {0:F1}", (respawnTime - respawnProgress));
     }
 }
