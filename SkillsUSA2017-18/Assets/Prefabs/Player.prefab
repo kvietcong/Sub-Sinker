@@ -1084,7 +1084,7 @@ MonoBehaviour:
   PingPrefab: {fileID: 1287140479821922, guid: bbeb9229da4bbf446ad7cdd21d17f97a, type: 2}
   TorpedoPrefab: {fileID: 1488159262083760, guid: 2e5793c7fbeb0d44699f6e178bcf3311,
     type: 2}
-  pingForce: 1000
+  pingForce: 100
   torpedoForce: 1500
   pingIndicator: {fileID: 114867078917297138}
   torpedoIndicator: {fileID: 114654230029968466}
@@ -1232,12 +1232,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae71c4d0df02abe46a012e9e30185076, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 25
+  maxSpeed: 40
   wallPushbackForce: 150
   indicator: {fileID: 224819084420550540}
   canvases:
   - {fileID: 223414123720731256}
   - {fileID: 223717454838037980}
+  model: {fileID: 1573162408264264}
+  mobileCanvas: {fileID: 223414123720731256}
 --- !u!114 &114867078917297138
 MonoBehaviour:
   m_ObjectHideFlags: 1

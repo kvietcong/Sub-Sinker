@@ -23,21 +23,27 @@ public class EngineLight : NetworkBehaviour {
     Text debugText;
 
     GameObject localPlayer;
+    PlayerHealth health;
+    EngineLight lt;
 
     // Use this for initialization
     void Start () {
-        newRad = startRad;
-        engineLight.range = newRad;
+        localPlayer = GameObject.Find("LocalPlayer");
         scrollSpeed = 10;
         startIntensity = engineLight.intensity;
-        localPlayer = GameObject.Find("LocalPlayer");
-
-        if (isLocalPlayer)
-            CmdChangeRadius(startRad);
+        health = GetComponent<PlayerHealth>();
+        Spawn();
     }
 
     // Update is called once per frame
     void Update() {
+        //if (!health.alive)
+        //{
+        //    CmdChangeRadius(0);
+        //    circle.gameObject.SetActive(false);
+        //    return;
+        //}
+
         // i eyeballed this value....
         if(Vector3.Distance(transform.position, localPlayer.transform.position) > currentRad * currentRad * 0.08f)
         {
@@ -85,5 +91,18 @@ public class EngineLight : NetworkBehaviour {
         engineLight.range = radius;
         engineLight.spotAngle = radius * 7;
         circle.sizeDelta = new Vector2(radius * radius * 2.8f, radius * radius * 2.8f);
+    }
+
+    public float GetLightMultiplier()
+    {
+        return currentRad / maxRad;
+    }
+
+    public void Spawn()
+    {
+        newRad = startRad;
+        //circle.gameObject.SetActive(true);
+        if (isLocalPlayer)
+            CmdChangeRadius(newRad);
     }
 }

@@ -5,22 +5,27 @@ using UnityEngine.Networking;
 
 public class PlayerMovement : NetworkBehaviour {
 
-    public float speed;
+    public float maxSpeed;
     private Rigidbody2D rb;
     private float prevXVel;
     private Vector2 prevVel;
-    public float wallPushbackForce = 300f;
+    public float wallPushbackForce;
     public RectTransform indicator;
 
     public Canvas[] canvases;
     
     PlayerHealth health;
+    EngineLight lt;
+
+    public GameObject model;
+    public Canvas mobileCanvas;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         prevXVel = rb.velocity[0];
         health = GetComponent<PlayerHealth>();
+        lt = GetComponent<EngineLight>();
     }
 
     public override void OnStartLocalPlayer() // local player only
@@ -38,17 +43,20 @@ public class PlayerMovement : NetworkBehaviour {
     {
         // network awareness
         if (!isLocalPlayer)
+        {
             return;
+        }
         if (!health.alive)
+        {
             return;
+        }
 
         float moveHorizontal = Input.GetAxis ("Horizontal");
         float moveVertical = Input.GetAxis ("Vertical");
 
         Vector2 movement = new Vector2 (moveHorizontal, moveVertical);
 
-        CmdAddForce(movement.normalized * speed);
-        BroadcastMessage("AdjustVel", Mathf.Abs(rb.velocity[0]));
+        CmdAddForce(movement.normalized * maxSpeed * lt.GetLightMultiplier());
 
         // todo: send to ui
         indicator.anchoredPosition = transform.position / 2;
@@ -57,6 +65,10 @@ public class PlayerMovement : NetworkBehaviour {
     // visual effects
     private void Update()
     {
+        if (!health.alive)
+        {
+            return;
+        }
         // NOT local only
         BroadcastMessage("AdjustVel", Mathf.Abs(rb.velocity[0]));
 
@@ -102,5 +114,4 @@ public class PlayerMovement : NetworkBehaviour {
     {
         rb.AddForce(force);
     }
-
 }

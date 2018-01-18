@@ -39,7 +39,6 @@ public class PickupSpawner : NetworkBehaviour {
             spawned = true;
         }
         pickups = GameObject.FindGameObjectsWithTag("Pick Up").Length;
-        print(pickups + " " + NetworkServer.connections.Count * ammoPerPlayer + " " + ammoSpawnTimer);
         if (pickups < NetworkServer.connections.Count * ammoPerPlayer)
         {
             if (ammoSpawnTimer <= 0)

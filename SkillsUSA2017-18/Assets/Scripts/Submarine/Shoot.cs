@@ -40,7 +40,7 @@ public class Shoot : NetworkBehaviour {
         if (health.alive)
         {
             // left click: torpedo
-            if (Input.GetButton("Fire1") && timeSinceTorpedo >= torpedoRateOfFire)
+            if (Input.GetButton("Torpedo") && timeSinceTorpedo >= torpedoRateOfFire)
             {
                 if (ammo.ChangeAmmo(-1, "torpedo"))
                 {
@@ -58,7 +58,7 @@ public class Shoot : NetworkBehaviour {
             }
 
             // right click: ping
-            if (Input.GetButton("Fire2") && timeSincePing >= pingRateOfFire)
+            if (Input.GetButton("Ping") && timeSincePing >= pingRateOfFire)
             {
                 pingIndicator.enabled = true;
                 timeSincePing = 0;

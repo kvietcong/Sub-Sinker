@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DisplacementBehaviour : MonoBehaviour 
 {
-    public bool enabled;
+    public bool isEnabled;
     private Material _mat;
     private RenderTexture _screenTex;
     private RenderTexture _waterMaskTex;
@@ -20,7 +20,7 @@ public class DisplacementBehaviour : MonoBehaviour
 
     void Awake() 
     {
-        if (!enabled)
+        if (!isEnabled)
             return;
         _screenTex = new RenderTexture(Screen.width, Screen.height, 24, RenderTextureFormat.Default);
         _screenTex.wrapMode = TextureWrapMode.Repeat;
@@ -37,7 +37,7 @@ public class DisplacementBehaviour : MonoBehaviour
 
     void OnPostRender()
 	{
-        if (!enabled)
+        if (!isEnabled)
             return;
         _postRenderCam.CopyFrom(_screenCam);
         _postRenderCam.clearFlags = CameraClearFlags.SolidColor;
@@ -56,7 +56,7 @@ public class DisplacementBehaviour : MonoBehaviour
 
     private void CreatePostRenderCam() 
     {
-        if (!enabled)
+        if (!isEnabled)
             return;
         _postRenderCamObj = new GameObject("PostRenderCam");
         _postRenderCamObj.transform.position = transform.position;

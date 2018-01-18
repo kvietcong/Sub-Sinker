@@ -35,7 +35,7 @@ public class PlayerHealth : NetworkBehaviour
             // dead
             currentHealth = 0;
 
-            // todo: play some explosion or something and hide the model
+            // todo: play some explosion or something and hide the model -- in other scripts
             // note: alive disables PlayerController and Shoot
             alive = false;
             respawnProgress = 0;
@@ -62,7 +62,7 @@ public class PlayerHealth : NetworkBehaviour
         }
 
         // debug death
-        if (Input.GetButton("Explode"))
+        if (Input.GetKeyDown(KeyCode.F1))
         {
             if (isLocalPlayer)
                 CmdTakeDamage(100);
@@ -89,6 +89,7 @@ public class PlayerHealth : NetworkBehaviour
     {
         GetComponent<SubSpawn>().Respawn();
         GetComponent<PlayerInventory>().Respawn();
+        GetComponent<EngineLight>().Spawn();
     }
 
     [ClientRpc]
