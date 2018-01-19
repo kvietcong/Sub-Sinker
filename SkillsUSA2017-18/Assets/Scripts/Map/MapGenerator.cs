@@ -392,11 +392,11 @@ public class MapGenerator : NetworkBehaviour
             {
                 if (x == 0 || x == width - 1 || y == 0 || y == height - 1)
                 {
-                    map[x, y] = 1;
+                    map[x, y] = 1; // Makes sure it doesn't have a blank spot at the edge
                 }
                 else
                 {
-                    map[x, y] = (pseudoRandom.Next(0, 100) < randomFillPercent) ? 1 : 0;
+                    map[x, y] = (pseudoRandom.Next(0, 100) < randomFillPercent) ? 1 : 0; // Random fill using a random number generator
                 }
             }
         }
