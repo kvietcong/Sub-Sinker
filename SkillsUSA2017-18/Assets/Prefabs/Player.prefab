@@ -921,6 +921,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 1425146229112758}
+  health: {fileID: 0}
 --- !u!114 &114231637339298694
 MonoBehaviour:
   m_ObjectHideFlags: 1
