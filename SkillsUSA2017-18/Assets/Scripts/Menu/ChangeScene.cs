@@ -9,4 +9,12 @@ public class ChangeScene : MonoBehaviour
     {
         SceneManager.LoadScene(scene);
     }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.BackQuote))
+        {
+            SceneManager.LoadScene(0);
+        }
+    }
 }
