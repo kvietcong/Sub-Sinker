@@ -1346,6 +1346,7 @@ MonoBehaviour:
   maxSpeed: 40
   wallPushbackForce: 150
   indicator: {fileID: 224702368090035922}
+  Canvas: {fileID: 0}
   canvases:
   - {fileID: 223502823725154470}
   - {fileID: 223614190693968160}

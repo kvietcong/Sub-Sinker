@@ -13,7 +13,6 @@ public class SubSpawn : NetworkBehaviour
     // Use this for initialization
     void Start () {
         spawned = false;
-
         //not fool proof
         mapGen = GameObject.FindGameObjectsWithTag("Map")[0];
     }

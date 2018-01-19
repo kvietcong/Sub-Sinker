@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class PickupSpawner : NetworkBehaviour {
     public GameObject ammoPrefab;
     public GameObject healthPrefab;
+    public Canvas canvas;
     bool spawned;
 
     public GameObject mapGenPrefab;
@@ -36,11 +37,13 @@ public class PickupSpawner : NetworkBehaviour {
     {
         if (!isServer)
         {
+            canvas.enabled = true;
             return;
         }
         // wait until map is generated
         if (MapGenerator.generated && !spawned)
         {
+            canvas.enabled = false;
             SpawnPickup(ammoPerPlayer * 2, ammoPrefab);
             SpawnPickup(healthPerPlayer * 2, healthPrefab);
             spawned = true;
