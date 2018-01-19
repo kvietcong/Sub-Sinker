@@ -102,13 +102,15 @@ public class PlayerMovement : NetworkBehaviour {
 
     public void FlipCollider(string dir)
     {
+        BoxCollider2D box = gameObject.GetComponent<BoxCollider2D>();
         if (dir == "left")
         {
-            gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(-0.14f, 0.62f);
+            // retain y position
+            box.offset = new Vector2(-0.14f, box.offset.y);
         }
         else if (dir == "right")
         {
-            gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(0.155f, 0.62f);
+            box.offset = new Vector2(0.155f, box.offset.y);
         }
     }
 
