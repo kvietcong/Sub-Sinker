@@ -1,8 +1,5 @@
 ﻿public static class GlobalData {
-    private static bool scrollInverse;
-
-    // example
-    //private static int kills, deaths, assists, points;
+    private static bool scrollInverse, controllerEnabled;
 
     public static bool ScrollInverse
     {
@@ -10,16 +7,10 @@
         set { scrollInverse = value; }
     }
 
-    //// example
-    //public static int Points
-    //{
-    //    get
-    //    {
-    //        return points;
-    //    }
-    //    set
-    //    {
-    //        points = value;
-    //    }
-    //}
+    public static bool ControllerEnabled
+    {
+        get { return controllerEnabled; }
+        set { controllerEnabled = value; }
+    }
+
 }
