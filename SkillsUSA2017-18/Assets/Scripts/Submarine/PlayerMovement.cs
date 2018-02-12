@@ -21,12 +21,17 @@ public class PlayerMovement : NetworkBehaviour {
     public GameObject model;
     public Canvas mobileCanvas;
 
+    public bool controllerEnabled;
+
+    public string currentDir;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         prevXVel = rb.velocity[0];
         health = GetComponent<PlayerHealth>();
         lt = GetComponent<EngineLight>();
+        currentDir = "left";
     }
 
     public override void OnStartLocalPlayer() // local player only
@@ -52,8 +57,18 @@ public class PlayerMovement : NetworkBehaviour {
             return;
         }
 
-        float moveHorizontal = Input.GetAxis ("Horizontal");
-        float moveVertical = Input.GetAxis ("Vertical");
+        float moveHorizontal, moveVertical;
+
+        if (controllerEnabled)
+        {
+            moveHorizontal = Input.GetAxis("C Horizontal");
+            moveVertical = Input.GetAxis("C Vertical");
+        }
+        else
+        {
+            moveHorizontal = Input.GetAxis("Horizontal");
+            moveVertical = Input.GetAxis("Vertical");
+        }
 
         Vector2 movement = new Vector2 (moveHorizontal, moveVertical);
 
@@ -73,12 +88,12 @@ public class PlayerMovement : NetworkBehaviour {
         // NOT local only
         BroadcastMessage("AdjustVel", Mathf.Abs(rb.velocity[0]));
 
-        if (prevXVel <= 0 && rb.velocity[0] > 0)
+        if (prevXVel <= 0 && rb.velocity[0] > 0 /*&& currentDir == "left"*/)
         {
             // check if sub is already in this dir
             BroadcastMessage("Flip", "right");
         }
-        else if (prevXVel >= 0 && rb.velocity[0] < 0)
+        else if (prevXVel >= 0 && rb.velocity[0] < 0 /*&& currentDir == "right"*/)
         {
             BroadcastMessage("Flip", "left");
         }
@@ -103,6 +118,7 @@ public class PlayerMovement : NetworkBehaviour {
 
     public void FlipCollider(string dir)
     {
+        currentDir = dir;
         BoxCollider2D box = gameObject.GetComponent<BoxCollider2D>();
         if (dir == "left")
         {

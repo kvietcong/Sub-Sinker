@@ -26,6 +26,8 @@ public class EngineLight : NetworkBehaviour {
     PlayerHealth health;
     EngineLight lt;
 
+    public bool controllerEnabled;
+
     // Use this for initialization
     void Start () {
         localPlayer = GameObject.Find("LocalPlayer");
@@ -64,11 +66,24 @@ public class EngineLight : NetworkBehaviour {
         if (!isLocalPlayer)
             return;
 
-        if (Input.GetAxis("Mouse ScrollWheel") < 1 && newRad >= minRad) {
-            newRad -= Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
+        if (controllerEnabled)
+        {
+            newRad += (Input.GetAxisRaw("C EngineUp") - Input.GetAxisRaw("C EngineDown")) * 0.2f; // slow it
+            if (newRad == currentRad)
+            {
+                newRad = Mathf.Round(currentRad);
+            }
         }
-        else if (Input.GetAxis("Mouse ScrollWheel") > 1 && newRad <= maxRad) {
-            newRad += Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
+        else
+        {
+            if (Input.GetAxis("EngineLight") < 1 && newRad >= minRad)
+            {
+                newRad -= Input.GetAxis("EngineLight") * scrollSpeed;
+            }
+            else if (Input.GetAxis("EngineLight") > 1 && newRad <= maxRad)
+            {
+                newRad += Input.GetAxis("EngineLight") * scrollSpeed;
+            }
         }
 
         if (newRad < minRad) {

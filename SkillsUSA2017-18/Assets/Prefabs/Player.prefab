@@ -1305,6 +1305,7 @@ MonoBehaviour:
   minRad: 7
   circle: {fileID: 224230333266716540}
   model: {fileID: 1425146229112758}
+  controllerEnabled: 0
 --- !u!114 &114930786473951638
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1346,12 +1347,12 @@ MonoBehaviour:
   maxSpeed: 40
   wallPushbackForce: 150
   indicator: {fileID: 224702368090035922}
-  Canvas: {fileID: 0}
   canvases:
   - {fileID: 223502823725154470}
   - {fileID: 223614190693968160}
   model: {fileID: 1425146229112758}
   mobileCanvas: {fileID: 223502823725154470}
+  controllerEnabled: 0
 --- !u!222 &222014873320439450
 CanvasRenderer:
   m_ObjectHideFlags: 1
