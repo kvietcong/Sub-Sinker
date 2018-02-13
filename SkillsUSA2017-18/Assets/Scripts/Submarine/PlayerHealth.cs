@@ -20,15 +20,21 @@ public class PlayerHealth : NetworkBehaviour
     [SyncVar]
     float respawnProgress;
 
+    public string playerName = "Player";
+    public Text killfeed;
+
     private void Start()
     {
         barWidth = healthBar.sizeDelta.x;
         if (isServer)
+        {
             Respawn();
+        }
+            
     }
 
     [Command]
-    public void CmdTakeDamage(float amount)
+    public void CmdTakeDamage(float amount, string enemyName)
     {
         currentHealth -= amount;
         if (currentHealth <= 0 && alive)
@@ -36,10 +42,14 @@ public class PlayerHealth : NetworkBehaviour
             // dead
             currentHealth = 0;
 
-            // todo: play some explosion or something and hide the model -- in other scripts
+            // todo: play some explosion or something, disable collider
             // note: alive disables aspects of PlayerController, Shoot, EngineLight
             alive = false;
             respawnProgress = 0;
+            
+            gameObject.GetComponent<Killfeed>().killfeedText = 
+                "<color=#0000ff>" + enemyName + "</color> destroyed <color=#0000ff>" + playerName + "</color>" + 
+                gameObject.GetComponent<Killfeed>().killfeedText;
         }
     }
 
@@ -64,7 +74,7 @@ public class PlayerHealth : NetworkBehaviour
         {
             if (isLocalPlayer)
             {
-                CmdTakeDamage(100);
+                CmdTakeDamage(100, playerName);
             }
         }
     }

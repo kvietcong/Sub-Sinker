@@ -109,7 +109,7 @@ public class PlayerMovement : NetworkBehaviour {
             // damage proportional to vel
             if (isLocalPlayer)
             {
-                gameObject.GetComponent<PlayerHealth>().CmdTakeDamage(prevVel.magnitude * 2);
+                gameObject.GetComponent<PlayerHealth>().CmdTakeDamage(prevVel.magnitude * 2, "walls");
             }
             
             CmdAddForce(-1 * prevVel * wallPushbackForce);
