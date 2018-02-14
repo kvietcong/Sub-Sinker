@@ -46,10 +46,25 @@ public class PlayerHealth : NetworkBehaviour
             // note: alive disables aspects of PlayerController, Shoot, EngineLight
             alive = false;
             respawnProgress = 0;
-            
-            gameObject.GetComponent<Killfeed>().killfeedText = 
-                "<color=#0000ff>" + enemyName + "</color> destroyed <color=#0000ff>" + playerName + "</color>" + 
-                gameObject.GetComponent<Killfeed>().killfeedText;
+
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+            // set killfeed for all players
+            foreach (GameObject player in players)
+            {
+                // if empty, simply set text
+                if (player.GetComponent<Killfeed>().killfeedText == "")
+                {
+                    player.GetComponent<Killfeed>().killfeedText =
+                    "<color=#0000ff>" + enemyName + "</color> destroyed <color=#0000ff>" + playerName + "</color>";
+                }
+                else
+                {
+                    player.GetComponent<Killfeed>().killfeedText =
+                        "<color=#0000ff>" + enemyName + "</color> destroyed <color=#0000ff>" + playerName + "</color>\n" +
+                        player.GetComponent<Killfeed>().killfeedText;
+                }
+            }
         }
     }
 

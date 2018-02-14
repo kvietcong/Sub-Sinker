@@ -51,12 +51,6 @@ public class Killfeed : NetworkBehaviour
         timer += Time.deltaTime;
     }
 
-    [Command]
-    public void CmdSetText(string newText)
-    {
-        killfeedText = newText;
-    }
-
     void OnChangeText(string text)
     {
         killfeedText = text;
