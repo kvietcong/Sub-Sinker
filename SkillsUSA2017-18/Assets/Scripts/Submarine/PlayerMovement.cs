@@ -57,6 +57,11 @@ public class PlayerMovement : NetworkBehaviour {
             return;
         }
 
+        if (Input.GetKeyDown(KeyCode.F3))
+        {
+            controllerEnabled = !controllerEnabled;
+        }
+
         float moveHorizontal, moveVertical;
 
         if (controllerEnabled)

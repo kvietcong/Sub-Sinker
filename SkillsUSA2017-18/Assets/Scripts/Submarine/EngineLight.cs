@@ -66,6 +66,11 @@ public class EngineLight : NetworkBehaviour {
         if (!isLocalPlayer)
             return;
 
+        if (Input.GetKeyDown(KeyCode.F3))
+        {
+            controllerEnabled = !controllerEnabled;
+        }
+
         if (controllerEnabled)
         {
             newRad += (Input.GetAxisRaw("C EngineUp") - Input.GetAxisRaw("C EngineDown")) * 0.2f; // slow it

@@ -39,7 +39,12 @@ public class Shoot : NetworkBehaviour {
         if (!isLocalPlayer)
             return;
 
-        if (health.alive)
+        if (Input.GetKeyDown(KeyCode.F3))
+        {
+            controllerEnabled = !controllerEnabled;
+        }
+
+            if (health.alive)
         {
             bool shooting, pinging;
             if (controllerEnabled)
