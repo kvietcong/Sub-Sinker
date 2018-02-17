@@ -79,8 +79,9 @@ public class PlayerMovement : NetworkBehaviour {
 
         CmdAddForce(movement.normalized * maxSpeed * lt.GetLightMultiplier());
 
-        // todo: send to ui
-        indicator.anchoredPosition = transform.position / 2;
+        // FIX FOR SCALE, and add buffer for edges
+        indicator.anchoredPosition = new Vector2((transform.position.x / (GameManager.instance.matchSettings.mapWidth * 1.5f)) * 50f,
+            (transform.position.y / (GameManager.instance.matchSettings.mapHeight * 1.5f)) * 50f);
     }
 
     // visual effects

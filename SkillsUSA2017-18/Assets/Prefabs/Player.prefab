@@ -953,7 +953,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 1425146229112758}
-  health: {fileID: 0}
 --- !u!114 &114231637339298694
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1211,7 +1210,6 @@ MonoBehaviour:
   currentHealth: 100
   healthBar: {fileID: 224387033152318346}
   alive: 0
-  respawnTime: 3
   playerName: Player
   killfeed: {fileID: 114674841484995412}
 --- !u!114 &114639180732339114
@@ -1571,15 +1569,15 @@ RectTransform:
   m_GameObject: {fileID: 1987125386223126}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.9993024, y: 1.1625503, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224698604752470044}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 128, y: 128}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224195619686394538
 RectTransform:
@@ -1733,7 +1731,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -10, y: 10}
-  m_SizeDelta: {x: 202, y: 118}
+  m_SizeDelta: {x: 128, y: 128}
   m_Pivot: {x: 1, y: 0}
 --- !u!224 &224702368090035922
 RectTransform:
@@ -1750,7 +1748,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 54.06}
+  m_AnchoredPosition: {x: 0, y: 50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224811717182497394

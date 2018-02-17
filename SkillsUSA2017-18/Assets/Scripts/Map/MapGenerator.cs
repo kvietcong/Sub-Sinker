@@ -5,13 +5,12 @@ using System;
 using UnityEngine.Networking;
 
 public class MapGenerator : NetworkBehaviour
-{
-
+{ 
     int width;
     int height;
 
     [SyncVar]
-    public string seed;
+    string seed;
 
     [Range(0, 100)]
     public int randomFillPercent;
@@ -46,12 +45,17 @@ public class MapGenerator : NetworkBehaviour
             {
                 seed = GameManager.instance.matchSettings.mapSeed;
             }
-            
         }
 
         spawnableCoords = new List<Coord>();
         GenerateMap();
         generated = true;
+
+        // lazy
+        GameObject waterBG = GameObject.Find("WaterBackground");
+        GameObject darkBG = GameObject.Find("DarkBackground"); ;
+        waterBG.transform.localScale = new Vector3(width * 3f / 10f, 1, height * 3f / 10f);
+        darkBG.transform.localScale = new Vector3(width * 3f / 10f + 15, 1, height * 3f / 10f + 15);
     }
 
     void Update()
