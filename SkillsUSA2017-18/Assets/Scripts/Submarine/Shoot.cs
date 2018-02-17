@@ -44,7 +44,7 @@ public class Shoot : NetworkBehaviour {
             controllerEnabled = !controllerEnabled;
         }
 
-            if (health.alive)
+        if (health.alive)
         {
             bool shooting, pinging;
             if (controllerEnabled)

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ModelDisable : MonoBehaviour {
     public GameObject model;
-    public PlayerHealth health;
+    PlayerHealth health;
+
 	// Use this for initialization
 	void Start () {
         model.SetActive(true);
@@ -18,6 +19,11 @@ public class ModelDisable : MonoBehaviour {
             if (!model.activeSelf)
             {
                 model.SetActive(true);
+                // enable colliders
+                foreach (Collider2D c in GetComponents<Collider2D>())
+                {
+                    c.isTrigger = false;
+                }
             }
         }
         else
@@ -25,6 +31,11 @@ public class ModelDisable : MonoBehaviour {
             if (model.activeSelf)
             {
                 model.SetActive(false);
+                // disable colliders
+                foreach (Collider2D c in GetComponents<Collider2D>())
+                {
+                    c.isTrigger = true;
+                }
             }
         }
     }

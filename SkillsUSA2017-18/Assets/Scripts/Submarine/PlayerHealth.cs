@@ -43,7 +43,7 @@ public class PlayerHealth : NetworkBehaviour
             currentHealth = 0;
 
             // todo: play some explosion or something, disable collider
-            // note: alive disables aspects of PlayerController, Shoot, EngineLight
+            // note: alive disables aspects of PlayerMovement, Shoot, EngineLight, and ModelDisable
             alive = false;
             respawnProgress = 0;
 
