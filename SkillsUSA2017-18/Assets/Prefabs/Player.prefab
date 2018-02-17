@@ -1421,7 +1421,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae71c4d0df02abe46a012e9e30185076, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 40
+  maxSpeed: 30
+  minSpeed: 20
   wallPushbackForce: 150
   indicator: {fileID: 224702368090035922}
   canvases:

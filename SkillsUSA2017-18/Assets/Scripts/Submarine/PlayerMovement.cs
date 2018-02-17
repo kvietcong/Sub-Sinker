@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class PlayerMovement : NetworkBehaviour {
 
     public float maxSpeed;
+    public float minSpeed;
     private Rigidbody2D rb;
     private float prevXVel;
     private Vector2 prevVel;
@@ -76,10 +77,10 @@ public class PlayerMovement : NetworkBehaviour {
         }
 
         Vector2 movement = new Vector2 (moveHorizontal, moveVertical);
+        float speed = (maxSpeed - minSpeed) * lt.GetLightMultiplier() + minSpeed;
+        CmdAddForce(movement.normalized * speed);
 
-        CmdAddForce(movement.normalized * maxSpeed * lt.GetLightMultiplier());
-
-        // FIX FOR SCALE, and add buffer for edges
+        // grid ui
         indicator.anchoredPosition = new Vector2((transform.position.x / (GameManager.instance.matchSettings.mapWidth * 1.5f)) * 50f,
             (transform.position.y / (GameManager.instance.matchSettings.mapHeight * 1.5f)) * 50f);
     }
