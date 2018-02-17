@@ -7,12 +7,11 @@ using UnityEngine.Networking;
 public class MapGenerator : NetworkBehaviour
 {
 
-    public int width;
-    public int height;
+    int width;
+    int height;
 
     [SyncVar]
     public string seed;
-    public bool useRandomSeed;
 
     [Range(0, 100)]
     public int randomFillPercent;
@@ -33,10 +32,23 @@ public class MapGenerator : NetworkBehaviour
 
     void Start()
     {
-        if (isServer && useRandomSeed)
+        // set variable
+        width = GameManager.instance.matchSettings.mapWidth;
+        height = GameManager.instance.matchSettings.mapHeight;
+
+        if (isServer)
         {
-            seed = UnityEngine.Random.value.ToString();
+            if (GameManager.instance.matchSettings.randomMapSeed)
+            {
+                seed = UnityEngine.Random.value.ToString();
+            }
+            else
+            {
+                seed = GameManager.instance.matchSettings.mapSeed;
+            }
+            
         }
+
         spawnableCoords = new List<Coord>();
         GenerateMap();
         generated = true;

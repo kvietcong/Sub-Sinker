@@ -16,7 +16,7 @@ public class PlayerHealth : NetworkBehaviour
     [SyncVar]
     public bool alive;
 
-    public float respawnTime;
+    float respawnTime;
     [SyncVar]
     float respawnProgress;
 
@@ -25,6 +25,7 @@ public class PlayerHealth : NetworkBehaviour
 
     private void Start()
     {
+        respawnTime = GameManager.instance.matchSettings.respawnTime;
         barWidth = healthBar.sizeDelta.x;
         if (isServer)
         {
@@ -37,35 +38,36 @@ public class PlayerHealth : NetworkBehaviour
     public void CmdTakeDamage(float amount, string enemyName)
     {
         currentHealth -= amount;
+
+        #region Death
         if (currentHealth <= 0 && alive)
         { 
-            // dead
             currentHealth = 0;
 
-            // todo: play some explosion or something, disable collider
+            // todo: play some explosion or something
             // note: alive disables aspects of PlayerMovement, Shoot, EngineLight, and ModelDisable
             alive = false;
             respawnProgress = 0;
 
             GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
-            // set killfeed for all players
+            // todo: get colors of subs
+            string text = "<color=#0000ff>" + enemyName + "</color> destroyed <color=#0000ff>" + playerName + "</color>";
+
+            // set killfeed for all players - fix this
             foreach (GameObject player in players)
             {
-                // if empty, simply set text
                 if (player.GetComponent<Killfeed>().killfeedText == "")
                 {
-                    player.GetComponent<Killfeed>().killfeedText =
-                    "<color=#0000ff>" + enemyName + "</color> destroyed <color=#0000ff>" + playerName + "</color>";
+                    player.GetComponent<Killfeed>().killfeedText = text;
                 }
                 else
                 {
-                    player.GetComponent<Killfeed>().killfeedText =
-                        "<color=#0000ff>" + enemyName + "</color> destroyed <color=#0000ff>" + playerName + "</color>\n" +
-                        player.GetComponent<Killfeed>().killfeedText;
+                    player.GetComponent<Killfeed>().killfeedText = text + "\n" + player.GetComponent<Killfeed>().killfeedText;
                 }
             }
         }
+        #endregion
     }
 
     private void Update()
