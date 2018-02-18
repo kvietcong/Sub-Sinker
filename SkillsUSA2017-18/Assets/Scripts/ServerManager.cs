@@ -25,9 +25,8 @@ public class ServerManager : NetworkBehaviour {
     public string mapSeed;
 
     // tempSeed: changes depending on whether random is checked or not
-    // doesn't need hook because it will only be changed when randomseed is checked
     [HideInInspector]
-    [SyncVar]
+    [SyncVar(hook = "OnChangeTemp")]
     public string tempSeed;
 
     public GameObject mapGenPrefab;
@@ -42,34 +41,53 @@ public class ServerManager : NetworkBehaviour {
         {
             instance = this;
         }
-
-        // create map generator
-        if (isServer)
-        {
-            if (randomMapSeed)
-            {
-                tempSeed = UnityEngine.Random.value.ToString();
-            }
-        }
     }
 
     private void Start()
     {
         if (isServer)
         {
+            if (randomMapSeed)
+            {
+                tempSeed = UnityEngine.Random.value.ToString();
+            }
+            else
+            {
+                tempSeed = mapSeed;
+            }
             GameObject mapGen = Instantiate(mapGenPrefab, new Vector3(), Quaternion.identity);
             NetworkServer.Spawn(mapGen);
+        }
+    }
+
+    private void Update()
+    {
+        // debug map
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
+            randomMapSeed = !randomMapSeed;
         }
     }
 
     // run on server and clients
     void RegenerateMap()
     {
-        if (isServer)
+        if (MapGenerator.instance)
         {
-            PickupSpawner.instance.DestroyPickups();
+            MapGenerator.instance.GetComponent<MapGenerator>().GenerateMap(tempSeed);
+            if (isServer)
+            {
+                PickupSpawner.instance.DestroyPickups();
+                PickupSpawner.instance.InitSpawnPickups();
+            }
+            // respawn local player
+            GameObject.Find("LocalPlayer").GetComponent<SubSpawn>().Respawn();
         }
-        MapGenerator.instance.GetComponent<MapGenerator>().GenerateMap(tempSeed);
+        else
+        {
+            // expected at start
+            Debug.LogWarning("MapGenerator not instantiated");
+        }
     }
 
     #region SyncVar hooks
@@ -91,15 +109,18 @@ public class ServerManager : NetworkBehaviour {
         if (isServer)
         {
             if (randomMapSeed)
-            {// change seed if it is now random
+            {
+                // change seed if it is now random
                 tempSeed = UnityEngine.Random.value.ToString();
             }
             else
             {
                 tempSeed = mapSeed;
             }
+
+            // i had to do this because it doesn't call it on the server... maybe because it can't call a new hook within this hook?
+            OnChangeTemp(tempSeed);
         }
-        RegenerateMap();
     }
 
     void OnChangeSeed(string seed)
@@ -109,6 +130,12 @@ public class ServerManager : NetworkBehaviour {
             mapSeed = seed;
         }
         tempSeed = mapSeed;
+        RegenerateMap();
+    }
+
+    void OnChangeTemp(string seed)
+    {
+        tempSeed = seed;
         RegenerateMap();
     }
     #endregion

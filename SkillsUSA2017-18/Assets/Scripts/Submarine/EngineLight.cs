@@ -100,10 +100,7 @@ public class EngineLight : NetworkBehaviour {
 
         if (newRad != currentRad) {
             // change the light instantaneously, so you dont have to wait for the server
-            engineLight.range = newRad;
-            engineLight.spotAngle = newRad * 7;
-            circle.sizeDelta = new Vector2(newRad * newRad * 2.8f, newRad * newRad * 2.8f);
-            // currentrad = newrad
+            AdjustEngineLight(newRad);
             CmdChangeRadius(newRad);
         }
     }
@@ -117,9 +114,10 @@ public class EngineLight : NetworkBehaviour {
     void OnLightRadiusChange(float radius)
     {
         currentRad = radius;
-        engineLight.range = radius;
-        engineLight.spotAngle = radius * 7;
-        circle.sizeDelta = new Vector2(radius * radius * 2.8f, radius * radius * 2.8f);
+        if (!isLocalPlayer)
+        {
+            AdjustEngineLight(radius);
+        }
     }
 
     public float GetLightMultiplier()
@@ -127,11 +125,21 @@ public class EngineLight : NetworkBehaviour {
         return currentRad / maxRad;
     }
 
+    void AdjustEngineLight(float r)
+    {
+        engineLight.range = r;
+        engineLight.spotAngle = r * 7;
+        circle.sizeDelta = new Vector2(r * r * 2.8f, r * r * 2.8f);
+    }
+
     // run on client
     public void Spawn()
     {
         newRad = startRad;
         if (isLocalPlayer)
+        {
             CmdChangeRadius(newRad);
+            AdjustEngineLight(newRad);
+        }
     }
 }

@@ -49,8 +49,7 @@ public class PickupSpawner : NetworkBehaviour {
         // wait until map is generated
         if (MapGenerator.generated && !spawned)
         {
-            SpawnPickup(ammoPerPlayer * 2, ammoPrefab);
-            SpawnPickup(healthPerPlayer * 2, healthPrefab);
+            InitSpawnPickups();
             spawned = true;
         }
 
@@ -95,6 +94,12 @@ public class PickupSpawner : NetworkBehaviour {
                     healthSpawnTimer -= Time.deltaTime;
                 }
         #endregion
+    }
+
+    public void InitSpawnPickups()
+    {
+        SpawnPickup(ammoPerPlayer * 2, ammoPrefab);
+        SpawnPickup(healthPerPlayer * 2, healthPrefab);
     }
 
     void SpawnPickup(int num, GameObject prefab)
