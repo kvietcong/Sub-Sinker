@@ -86,8 +86,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   respawnTime: 3
   serverSize: 12
-  mapWidth: 50
-  mapHeight: 50
+  mapWidth: 40
+  mapHeight: 40
   randomMapSeed: 0
   mapSeed: SEED
   tempSeed: 

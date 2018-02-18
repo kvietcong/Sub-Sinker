@@ -111,7 +111,7 @@ public class PlayerMovement : NetworkBehaviour {
         prevVel = rb.velocity;
 
         var em = bubbles.GetComponent<ParticleSystem>().emission;
-        em.rateOverTime = Mathf.Abs(rb.velocity[0]);
+        em.rateOverTime = Mathf.Abs(rb.velocity[0] * 10);
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
