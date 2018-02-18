@@ -10,8 +10,8 @@ public class GridExpand : MonoBehaviour {
     // Use this for initialization
     void Start () {
         rect = GetComponent<RectTransform>();
-        mapWidth = GameManager.instance.matchSettings.mapWidth;
-        mapHeight = GameManager.instance.matchSettings.mapHeight;
+        mapWidth = ServerManager.instance.mapWidth;
+        mapHeight = ServerManager.instance.mapHeight;
     }
 	
 	// Update is called once per frame

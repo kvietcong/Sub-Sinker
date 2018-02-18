@@ -6,10 +6,9 @@ using System.Linq;
 public class GameManager : MonoBehaviour {
     // todo: add camera behavior (low priority)
     // todo: player behavior
-
     public static GameManager instance;
 
-    public MatchSettings matchSettings;
+    public PlayerSettings playerSettings;
 
     public delegate void OnPlayerKilledCallback(string player, string source);
     public OnPlayerKilledCallback onPlayerKilledCallback;

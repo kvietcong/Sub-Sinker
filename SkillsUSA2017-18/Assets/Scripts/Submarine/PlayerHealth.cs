@@ -16,7 +16,6 @@ public class PlayerHealth : NetworkBehaviour
     [SyncVar]
     public bool alive;
 
-    float respawnTime;
     [SyncVar]
     float respawnProgress;
 
@@ -25,7 +24,6 @@ public class PlayerHealth : NetworkBehaviour
 
     private void Start()
     {
-        respawnTime = GameManager.instance.matchSettings.respawnTime;
         barWidth = healthBar.sizeDelta.x;
         if (isServer)
         {
@@ -74,7 +72,7 @@ public class PlayerHealth : NetworkBehaviour
     {
         if (!alive)
         {
-            if (respawnProgress > respawnTime)
+            if (respawnProgress > ServerManager.instance.respawnTime)
             {
                 if (isServer)
                 {
@@ -118,6 +116,6 @@ public class PlayerHealth : NetworkBehaviour
 
     public string GetTimerText()
     {
-        return System.String.Format("Respawn in: {0:F1}", (respawnTime - respawnProgress));
+        return System.String.Format("Respawn in: {0:F1}", (ServerManager.instance.respawnTime - respawnProgress));
     }
 }

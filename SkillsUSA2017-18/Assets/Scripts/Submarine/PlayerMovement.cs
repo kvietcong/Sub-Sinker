@@ -81,8 +81,8 @@ public class PlayerMovement : NetworkBehaviour {
         CmdAddForce(movement.normalized * speed);
 
         // grid ui
-        indicator.anchoredPosition = new Vector2((transform.position.x / (GameManager.instance.matchSettings.mapWidth * 1.5f)) * 50f,
-            (transform.position.y / (GameManager.instance.matchSettings.mapHeight * 1.5f)) * 50f);
+        indicator.anchoredPosition = new Vector2((transform.position.x / (ServerManager.instance.mapWidth * 1.5f)) * 50f,
+            (transform.position.y / (ServerManager.instance.mapHeight * 1.5f)) * 50f);
     }
 
     // visual effects

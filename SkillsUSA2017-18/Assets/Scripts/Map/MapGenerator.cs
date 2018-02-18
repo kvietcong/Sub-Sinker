@@ -5,12 +5,8 @@ using System;
 using UnityEngine.Networking;
 
 public class MapGenerator : NetworkBehaviour
-{ 
-    int width;
-    int height;
-
-    [SyncVar]
-    string seed;
+{
+    public static MapGenerator instance;
 
     [Range(0, 100)]
     public int randomFillPercent;
@@ -31,45 +27,32 @@ public class MapGenerator : NetworkBehaviour
 
     void Start()
     {
-        // set variable
-        width = GameManager.instance.matchSettings.mapWidth;
-        height = GameManager.instance.matchSettings.mapHeight;
-
-        if (isServer)
+        if (instance != null)
         {
-            if (GameManager.instance.matchSettings.randomMapSeed)
-            {
-                seed = UnityEngine.Random.value.ToString();
-            }
-            else
-            {
-                seed = GameManager.instance.matchSettings.mapSeed;
-            }
+            Debug.LogError("More than one MapGenerator in scene.");
+        }
+        else
+        {
+            instance = this;
         }
 
         spawnableCoords = new List<Coord>();
-        GenerateMap();
-        generated = true;
+        GenerateMap(ServerManager.instance.tempSeed);
 
         // lazy
         GameObject waterBG = GameObject.Find("WaterBackground");
-        GameObject darkBG = GameObject.Find("DarkBackground"); ;
-        waterBG.transform.localScale = new Vector3(width * 3f / 10f, 1, height * 3f / 10f);
-        darkBG.transform.localScale = new Vector3(width * 3f / 10f + 15, 1, height * 3f / 10f + 15);
+        GameObject darkBG = GameObject.Find("DarkBackground");
+        // set size to cover map
+        waterBG.transform.localScale = new Vector3(ServerManager.instance.mapWidth * 3f / 10f, 1, ServerManager.instance.mapHeight * 3f / 10f);
+        darkBG.transform.localScale = new Vector3(ServerManager.instance.mapWidth * 3f / 10f + 15, 1, ServerManager.instance.mapHeight * 3f / 10f + 15);
     }
 
-    void Update()
+    public void GenerateMap(string seed)
     {
-        //if (Input.GetKeyDown(KeyCode.F5))
-        //{
-        //    GenerateMap();
-        //}
-    }
+        generated = false;
 
-    void GenerateMap()
-    {
-        map = new int[width, height];
-        RandomFillMap();
+        map = new int[ServerManager.instance.mapWidth, ServerManager.instance.mapHeight];
+        RandomFillMap(seed);
 
         for (int i = 0; i < 5; i++)
         {
@@ -79,13 +62,13 @@ public class MapGenerator : NetworkBehaviour
         ProcessMap();
 
         int borderSize = 1;
-        int[,] borderedMap = new int[width + borderSize * 2, height + borderSize * 2];
+        int[,] borderedMap = new int[ServerManager.instance.mapWidth + borderSize * 2, ServerManager.instance.mapHeight + borderSize * 2];
 
         for (int x = 0; x < borderedMap.GetLength(0); x++)
         {
             for (int y = 0; y < borderedMap.GetLength(1); y++)
             {
-                if (x >= borderSize && x < width + borderSize && y >= borderSize && y < height + borderSize)
+                if (x >= borderSize && x < ServerManager.instance.mapWidth + borderSize && y >= borderSize && y < ServerManager.instance.mapHeight + borderSize)
                 {
                     borderedMap[x, y] = map[x - borderSize, y - borderSize];
                 }
@@ -107,6 +90,9 @@ public class MapGenerator : NetworkBehaviour
                 spawnableCoords.Add(tile);
 	        }
         }
+
+        // generating is done
+        generated = true;
     }
 
     void ProcessMap()
@@ -329,18 +315,18 @@ public class MapGenerator : NetworkBehaviour
 
     Vector3 CoordToWorldPoint(Coord tile)
     {
-        Vector3 vector = new Vector3(-width / 2 + .5f + tile.tileX, 2, -height / 2 + .5f + tile.tileY);
+        Vector3 vector = new Vector3(-ServerManager.instance.mapWidth / 2 + .5f + tile.tileX, 2, -ServerManager.instance.mapHeight / 2 + .5f + tile.tileY);
         return Quaternion.Euler(270, 0, 0) * vector;
     }
 
     List<List<Coord>> GetRegions(int tileType)
     {
         List<List<Coord>> regions = new List<List<Coord>>();
-        int[,] mapFlags = new int[width, height];
+        int[,] mapFlags = new int[ServerManager.instance.mapWidth, ServerManager.instance.mapHeight];
 
-        for (int x = 0; x < width; x++)
+        for (int x = 0; x < ServerManager.instance.mapWidth; x++)
         {
-            for (int y = 0; y < height; y++)
+            for (int y = 0; y < ServerManager.instance.mapHeight; y++)
             {
                 if (mapFlags[x, y] == 0 && map[x, y] == tileType)
                 {
@@ -361,7 +347,7 @@ public class MapGenerator : NetworkBehaviour
     List<Coord> GetRegionTiles(int startX, int startY)
     {
         List<Coord> tiles = new List<Coord>();
-        int[,] mapFlags = new int[width, height];
+        int[,] mapFlags = new int[ServerManager.instance.mapWidth, ServerManager.instance.mapHeight];
         int tileType = map[startX, startY];
 
         Queue<Coord> queue = new Queue<Coord>();
@@ -394,19 +380,19 @@ public class MapGenerator : NetworkBehaviour
 
     bool IsInMapRange(int x, int y)
     {
-        return x >= 0 && x < width && y >= 0 && y < height;
+        return x >= 0 && x < ServerManager.instance.mapWidth && y >= 0 && y < ServerManager.instance.mapHeight;
     }
 
 
-    void RandomFillMap()
+    void RandomFillMap(string seed)
     {
         System.Random pseudoRandom = new System.Random(seed.GetHashCode());
 
-        for (int x = 0; x < width; x++)
+        for (int x = 0; x < ServerManager.instance.mapWidth; x++)
         {
-            for (int y = 0; y < height; y++)
+            for (int y = 0; y < ServerManager.instance.mapHeight; y++)
             {
-                if (x == 0 || x == width - 1 || y == 0 || y == height - 1)
+                if (x == 0 || x == ServerManager.instance.mapWidth - 1 || y == 0 || y == ServerManager.instance.mapHeight - 1)
                 {
                     map[x, y] = 1; // Makes sure it doesn't have a blank spot at the edge
                 }
@@ -420,9 +406,9 @@ public class MapGenerator : NetworkBehaviour
 
     void SmoothMap()
     {
-        for (int x = 0; x < width; x++)
+        for (int x = 0; x < ServerManager.instance.mapWidth; x++)
         {
-            for (int y = 0; y < height; y++)
+            for (int y = 0; y < ServerManager.instance.mapHeight; y++)
             {
                 int neighbourWallTiles = GetSurroundingWallCount(x, y);
 
@@ -564,8 +550,8 @@ public class MapGenerator : NetworkBehaviour
             map_x = UnityEngine.Random.Range(1, tileset_width - 1);
             map_y = UnityEngine.Random.Range(1, tileset_height - 1);
         }
-        float x = 3*(map_x - width / 2); // 3x scale
-        float y = 3*(map_y - height / 2);
+        float x = 3*(map_x - ServerManager.instance.mapWidth / 2); // 3x scale
+        float y = 3*(map_y - ServerManager.instance.mapHeight / 2);
 
         return new Vector2(x, y);
     }

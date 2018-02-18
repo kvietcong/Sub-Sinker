@@ -6,7 +6,6 @@ using UnityEngine.Networking;
 public class SubSpawn : NetworkBehaviour
 {
     private Vector2 newPos;
-    GameObject mapGen;
 
     bool spawned;
 
@@ -14,7 +13,6 @@ public class SubSpawn : NetworkBehaviour
     void Start () {
         spawned = false;
         //not fool proof
-        mapGen = GameObject.FindGameObjectsWithTag("Map")[0];
     }
 
     void Update()
@@ -33,7 +31,7 @@ public class SubSpawn : NetworkBehaviour
 
     public void Respawn()
     {
-        newPos = mapGen.GetComponent<MapGenerator>().GetSpawnPos();
+        newPos = MapGenerator.instance.GetComponent<MapGenerator>().GetSpawnPos();
         transform.position = newPos;
     }
 }

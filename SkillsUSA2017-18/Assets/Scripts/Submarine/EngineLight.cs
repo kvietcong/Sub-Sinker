@@ -99,6 +99,10 @@ public class EngineLight : NetworkBehaviour {
         }
 
         if (newRad != currentRad) {
+            // change the light instantaneously, so you dont have to wait for the server
+            engineLight.range = newRad;
+            engineLight.spotAngle = newRad * 7;
+            circle.sizeDelta = new Vector2(newRad * newRad * 2.8f, newRad * newRad * 2.8f);
             // currentrad = newrad
             CmdChangeRadius(newRad);
         }
