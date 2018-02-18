@@ -33,12 +33,12 @@ public class Torpedo : NetworkBehaviour
 
     private void Start()
     {
-        bubbles = Instantiate(bubblesPrefab, transform.position, transform.rotation * Quaternion.Euler(Vector3.right * -90));
+        bubbles = Instantiate(bubblesPrefab, transform.position + transform.up * 0.9f, transform.rotation * Quaternion.Euler(Vector3.right * -90));
     }
 
     private void Update()
     {
-        bubbles.transform.position = transform.position;
+        bubbles.transform.position = transform.position + transform.up * 0.9f;
     }
 
     void OnCollisionEnter2D(Collision2D coll)
