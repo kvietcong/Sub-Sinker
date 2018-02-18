@@ -6,14 +6,11 @@ using UnityEngine.Networking;
 public class SubSpawn : NetworkBehaviour
 {
     private Vector2 newPos;
-    public GameObject body;
     bool spawned;
 
     // Use this for initialization
     void Start () {
         spawned = false;
-        body.GetComponent<MeshRenderer>().materials[0].color = GameManager.instance.playerSettings.PlayerPrimaryColor;
-        body.GetComponent<MeshRenderer>().materials[1].color = GameManager.instance.playerSettings.PlayerSecondaryColor;
         //not fool proof :/
     }
 

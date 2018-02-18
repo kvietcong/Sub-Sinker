@@ -18,17 +18,42 @@ public class Torpedo : NetworkBehaviour
     public float hitDmg = 35f;
     public float splashDmgMax = 30f;
 
+    public float destroyTime = 1f;
+    float timer;
+
+    public GameObject body;
+    public GameObject particles;
+
+    GameObject source;
+
+    bool dead;
+
     // ignore collisions on the server
     public override void OnStartClient()
     {
-        GameObject obj = ClientScene.FindLocalObject(spawnedBy);
-        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), obj.GetComponents<Collider2D>()[0]);
-        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), obj.GetComponents<Collider2D>()[1]);
+        source = ClientScene.FindLocalObject(spawnedBy);
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), source.GetComponents<Collider2D>()[0]);
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), source.GetComponents<Collider2D>()[1]);
+    }
+
+    private void Start()
+    {
+        timer = 0;
+        dead = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // this gives the particle system time to wear off
+        if (dead)
+        {
+            timer += Time.deltaTime;
+            if (timer >= destroyTime)
+            {
+                Destroy(this.gameObject);
+            }
+        }
     }
 
     void OnCollisionEnter2D(Collision2D coll)
@@ -45,7 +70,7 @@ public class Torpedo : NetworkBehaviour
             var health = hit.GetComponent<PlayerHealth>();
             if (health != null)
             {
-                health.CmdTakeDamage(hitDmg, GameManager.instance.playerSettings.PlayerName); 
+                health.CmdTakeDamage(hitDmg, source.GetComponent<PlayerInfo>().playerName, source.GetComponent<PlayerInfo>().primaryColor); 
             }
         }
 
@@ -67,7 +92,7 @@ public class Torpedo : NetworkBehaviour
                     if (health != null)
                     {
                         float damage = Mathf.SmoothStep(0, splashDmgMax, (explosionRadius - Vector3.Distance(transform.position, a_player.transform.position)) / explosionRadius);
-                        health.CmdTakeDamage(damage, GameManager.instance.playerSettings.PlayerName);
+                        health.CmdTakeDamage(damage, source.GetComponent<PlayerInfo>().playerName, source.GetComponent<PlayerInfo>().primaryColor);
                     }
                 }
 
@@ -79,7 +104,13 @@ public class Torpedo : NetworkBehaviour
         }
 
         SpawnExplosion();
-        Destroy(this.gameObject);
+        body.GetComponent<MeshRenderer>().enabled = false;
+        GetComponent<Collider2D>().enabled = false;
+
+        dead = true;
+
+        var em = particles.GetComponent<ParticleSystem>().emission;
+        em.rateOverTime = 0;
     }
 
     void SpawnExplosion()

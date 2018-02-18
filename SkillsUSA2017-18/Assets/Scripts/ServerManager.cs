@@ -9,6 +9,18 @@ using UnityEngine.Networking;
 public class ServerManager : NetworkBehaviour {
     public static ServerManager instance;
 
+    void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogError("More than one ServerManager in scene.");
+        }
+        else
+        {
+            instance = this;
+        }
+    }
+
     [SyncVar]
     public float respawnTime;
     //public GameMode gameMode;
@@ -30,18 +42,6 @@ public class ServerManager : NetworkBehaviour {
     public string tempSeed;
 
     public GameObject mapGenPrefab;
-
-    void Awake()
-    {
-        if (instance != null)
-        {
-            Debug.LogError("More than one ServerManager in scene.");
-        }
-        else
-        {
-            instance = this;
-        }
-    }
 
     private void Start()
     {

@@ -32,7 +32,7 @@ public class PlayerHealth : NetworkBehaviour
     }
 
     [Command]
-    public void CmdTakeDamage(float amount, string enemyName)
+    public void CmdTakeDamage(float amount, string enemyName, Color enemyColor)
     {
         currentHealth -= amount;
 
@@ -49,7 +49,8 @@ public class PlayerHealth : NetworkBehaviour
             GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
             // todo: get colors of subs
-            string text = "<color=#0000ff>" + enemyName + "</color> destroyed <color=#0000ff>" + GameManager.instance.playerSettings.PlayerName + "</color>";
+            string text = "<color=#" + ColorUtility.ToHtmlStringRGB(enemyColor) + ">" + enemyName + "</color> destroyed <color=#" + ColorUtility.ToHtmlStringRGB(gameObject.GetComponent<PlayerInfo>().primaryColor)
+                + ">" + gameObject.GetComponent<PlayerInfo>().playerName + "</color>";
 
             // set killfeed for all players - fix this
             foreach (GameObject player in players)
@@ -88,7 +89,8 @@ public class PlayerHealth : NetworkBehaviour
         {
             if (isLocalPlayer)
             {
-                CmdTakeDamage(100, GameManager.instance.playerSettings.PlayerName);
+                CmdTakeDamage(100, gameObject.GetComponent<PlayerInfo>().playerName,
+                    gameObject.GetComponent<PlayerInfo>().primaryColor);
             }
         }
     }

@@ -80,7 +80,7 @@ public class PlayerMovement : NetworkBehaviour {
 
         Vector2 movement = new Vector2 (moveHorizontal, moveVertical);
         float speed = (maxSpeed - minSpeed) * lt.GetLightMultiplier() + minSpeed;
-        CmdAddForce(movement.normalized * speed);
+        AddForce(movement.normalized * speed);
 
         // grid ui
         indicator.anchoredPosition = new Vector2((transform.position.x / (ServerManager.instance.mapWidth * 1.5f)) * 50f,
@@ -121,10 +121,10 @@ public class PlayerMovement : NetworkBehaviour {
             // damage proportional to vel
             if (isLocalPlayer)
             {
-                gameObject.GetComponent<PlayerHealth>().CmdTakeDamage(prevVel.magnitude * 2, "walls");
+                gameObject.GetComponent<PlayerHealth>().CmdTakeDamage(prevVel.magnitude * 2, "the map", Color.gray);
             }
             
-            CmdAddForce(-1 * prevVel * wallPushbackForce);
+            AddForce(-1 * prevVel * wallPushbackForce);
         }
     }
 
@@ -143,9 +143,7 @@ public class PlayerMovement : NetworkBehaviour {
         }
     }
 
-    // server does physics 
-    //[Command]
-    public void CmdAddForce(Vector2 force)
+    public void AddForce(Vector2 force)
     {
         rb.AddForce(force);
     }

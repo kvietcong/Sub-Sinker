@@ -273,6 +273,9 @@ MonoBehaviour:
   explosionRadius: 10
   hitDmg: 35
   splashDmgMax: 20
+  destroyTime: 1
+  body: {fileID: 1670355801986366}
+  particles: {fileID: 1597930857443466}
 --- !u!114 &114863585375496618
 MonoBehaviour:
   m_ObjectHideFlags: 1
