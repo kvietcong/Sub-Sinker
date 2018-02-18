@@ -28,7 +28,11 @@ public class EngineLight : NetworkBehaviour {
 
     public bool controllerEnabled;
 
-    // Use this for initialization
+    public override void OnStartClient()
+    {
+        AdjustEngineLight(currentRad);
+    }
+
     void Start () {
         localPlayer = GameObject.Find("LocalPlayer");
         scrollSpeed = 10;
@@ -37,7 +41,6 @@ public class EngineLight : NetworkBehaviour {
         Spawn();
     }
 
-    // Update is called once per frame
     void Update() {
         if (!health.alive)
         {
