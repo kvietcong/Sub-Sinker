@@ -91,6 +91,12 @@ public class EngineLight : NetworkBehaviour {
             }
         }
 
+        if (GameManager.instance.playerSettings.ScrollInvert)
+        {
+            // do the math. it inverts it
+            newRad = 2 * currentRad - newRad;
+        }
+
         if (newRad < minRad) {
             newRad = minRad;
         }

@@ -725,7 +725,7 @@ Light:
   serializedVersion: 8
   m_Type: 0
   m_Color: {r: 0.5514706, g: 0.87008125, b: 1, a: 1}
-  m_Intensity: 12
+  m_Intensity: 6
   m_Range: 20
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -789,6 +789,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc3e96758060c1b4ab92cab5033ccc01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  body: {fileID: 1623921195394538}
 --- !u!114 &114036714227557748
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1210,7 +1211,6 @@ MonoBehaviour:
   currentHealth: 100
   healthBar: {fileID: 224387033152318346}
   alive: 0
-  playerName: Player
   killfeed: {fileID: 114674841484995412}
 --- !u!114 &114639180732339114
 MonoBehaviour:

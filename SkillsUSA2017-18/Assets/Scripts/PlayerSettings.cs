@@ -3,5 +3,7 @@
 [System.Serializable]
 public class PlayerSettings {
     public string PlayerName;
-    public Color PlayerColor;
+    public Color PlayerPrimaryColor;
+    public Color PlayerSecondaryColor;
+    public bool ScrollInvert;
 }
