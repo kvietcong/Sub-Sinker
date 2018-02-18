@@ -874,6 +874,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33d344b7f4e70024bb782dff8eb5b2da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSettings:
+    PlayerName: 420noscope
+    PlayerColor: {r: 0.9852941, g: 0.15214103, b: 0.15214103, a: 0}
 --- !u!4 &1291635222
 Transform:
   m_ObjectHideFlags: 0

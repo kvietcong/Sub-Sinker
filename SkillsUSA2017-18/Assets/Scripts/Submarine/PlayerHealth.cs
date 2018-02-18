@@ -19,7 +19,6 @@ public class PlayerHealth : NetworkBehaviour
     [SyncVar]
     float respawnProgress;
 
-    public string playerName = "Player";
     public Text killfeed;
 
     private void Start()
@@ -50,7 +49,7 @@ public class PlayerHealth : NetworkBehaviour
             GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
             // todo: get colors of subs
-            string text = "<color=#0000ff>" + enemyName + "</color> destroyed <color=#0000ff>" + playerName + "</color>";
+            string text = "<color=#0000ff>" + enemyName + "</color> destroyed <color=#0000ff>" + GameManager.instance.playerSettings.PlayerName + "</color>";
 
             // set killfeed for all players - fix this
             foreach (GameObject player in players)
@@ -89,7 +88,7 @@ public class PlayerHealth : NetworkBehaviour
         {
             if (isLocalPlayer)
             {
-                CmdTakeDamage(100, playerName);
+                CmdTakeDamage(100, GameManager.instance.playerSettings.PlayerName);
             }
         }
     }

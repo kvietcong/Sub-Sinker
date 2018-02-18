@@ -18,8 +18,6 @@ public class Torpedo : NetworkBehaviour
     public float hitDmg = 35f;
     public float splashDmgMax = 30f;
 
-    public string playerName;
-
     // ignore collisions on the server
     public override void OnStartClient()
     {
@@ -47,7 +45,7 @@ public class Torpedo : NetworkBehaviour
             var health = hit.GetComponent<PlayerHealth>();
             if (health != null)
             {
-                health.CmdTakeDamage(hitDmg, playerName); 
+                health.CmdTakeDamage(hitDmg, GameManager.instance.playerSettings.PlayerName); 
             }
         }
 
@@ -69,7 +67,7 @@ public class Torpedo : NetworkBehaviour
                     if (health != null)
                     {
                         float damage = Mathf.SmoothStep(0, splashDmgMax, (explosionRadius - Vector3.Distance(transform.position, a_player.transform.position)) / explosionRadius);
-                        health.CmdTakeDamage(damage, playerName);
+                        health.CmdTakeDamage(damage, GameManager.instance.playerSettings.PlayerName);
                     }
                 }
 

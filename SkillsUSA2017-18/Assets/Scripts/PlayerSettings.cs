@@ -1,6 +1,7 @@
-﻿using UnityEngine.Networking;
+﻿using UnityEngine;
 
 [System.Serializable]
 public class PlayerSettings {
-    string PlayerName;
+    public string PlayerName;
+    public Color PlayerColor;
 }

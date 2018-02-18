@@ -121,7 +121,6 @@ public class Shoot : NetworkBehaviour {
 
         torpedo.GetComponent<Rigidbody2D>().AddForce(direction.normalized * firingForce);
         torpedo.GetComponent<Torpedo>().spawnedBy = netId;
-        torpedo.GetComponent<Torpedo>().playerName = gameObject.GetComponent<PlayerHealth>().playerName;
 
         NetworkServer.Spawn(torpedo);
     }
