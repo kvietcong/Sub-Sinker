@@ -18,15 +18,10 @@ public class Torpedo : NetworkBehaviour
     public float hitDmg = 35f;
     public float splashDmgMax = 30f;
 
-    public float destroyTime = 1f;
-    float timer;
-
-    public GameObject body;
-    public GameObject particles;
-
     GameObject source;
 
-    bool dead;
+    public GameObject bubblesPrefab;
+    GameObject bubbles;
 
     // ignore collisions on the server
     public override void OnStartClient()
@@ -38,22 +33,12 @@ public class Torpedo : NetworkBehaviour
 
     private void Start()
     {
-        timer = 0;
-        dead = false;
+        bubbles = Instantiate(bubblesPrefab, transform.position, transform.rotation * Quaternion.Euler(Vector3.right * -90));
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        // this gives the particle system time to wear off
-        if (dead)
-        {
-            timer += Time.deltaTime;
-            if (timer >= destroyTime)
-            {
-                Destroy(this.gameObject);
-            }
-        }
+        bubbles.transform.position = transform.position;
     }
 
     void OnCollisionEnter2D(Collision2D coll)
@@ -104,13 +89,12 @@ public class Torpedo : NetworkBehaviour
         }
 
         SpawnExplosion();
-        body.GetComponent<MeshRenderer>().enabled = false;
-        GetComponent<Collider2D>().enabled = false;
 
-        dead = true;
+        var em = bubbles.GetComponent<ParticleSystem>().emission;
+        em.enabled = false;
+        
 
-        var em = particles.GetComponent<ParticleSystem>().emission;
-        em.rateOverTime = 0;
+        NetworkServer.Destroy(this.gameObject);
     }
 
     void SpawnExplosion()

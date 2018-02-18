@@ -962,9 +962,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSettings:
-    PlayerName: kiki
-    PlayerPrimaryColor: {r: 0.9117647, g: 0.888277, b: 0.060337372, a: 0}
-    PlayerSecondaryColor: {r: 0.4801038, g: 0.5519538, b: 0.8161765, a: 0}
+    PlayerName: hahah
+    PlayerPrimaryColor: {r: 0.40873703, g: 0.61764705, b: 0.52255696, a: 0}
+    PlayerSecondaryColor: {r: 0.4857863, g: 0.5661765, b: 0.33304498, a: 0}
     ScrollInvert: 0
 --- !u!4 &1291635222
 Transform:
