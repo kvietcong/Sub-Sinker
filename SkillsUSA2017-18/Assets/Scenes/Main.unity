@@ -878,6 +878,7 @@ MonoBehaviour:
     PlayerName: 420noscope
     PlayerPrimaryColor: {r: 0.07947663, g: 0.77205884, b: 0.1415702, a: 0}
     PlayerSecondaryColor: {r: 0.90002084, g: 0.9117647, b: 0.060337372, a: 0}
+    ScrollInvert: 0
 --- !u!4 &1291635222
 Transform:
   m_ObjectHideFlags: 0

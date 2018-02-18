@@ -26,6 +26,8 @@ public class PlayerMovement : NetworkBehaviour {
 
     public string currentDir;
 
+    public GameObject bubbles;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -107,6 +109,9 @@ public class PlayerMovement : NetworkBehaviour {
 
         prevXVel = rb.velocity[0];
         prevVel = rb.velocity;
+
+        var em = bubbles.GetComponent<ParticleSystem>().emission;
+        em.rateOverTime = Mathf.Abs(rb.velocity[0]);
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
