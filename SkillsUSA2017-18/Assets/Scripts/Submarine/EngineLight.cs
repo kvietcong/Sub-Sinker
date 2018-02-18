@@ -45,7 +45,7 @@ public class EngineLight : NetworkBehaviour {
             //engineLight.intensity = 0;
             if (currentRad != 0 && isLocalPlayer)
             {
-                
+                AdjustEngineLight(0);
                 CmdChangeRadius(0); // light off
             }
             return;

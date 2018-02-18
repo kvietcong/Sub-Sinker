@@ -962,9 +962,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSettings:
-    PlayerName: hahah
-    PlayerPrimaryColor: {r: 0.40873703, g: 0.61764705, b: 0.52255696, a: 0}
-    PlayerSecondaryColor: {r: 0.4857863, g: 0.5661765, b: 0.33304498, a: 0}
+    PlayerName: Pikachu
+    PlayerPrimaryColor: {r: 0.986207, g: 1, b: 0, a: 0}
+    PlayerSecondaryColor: {r: 0, g: 0, b: 0, a: 0}
     ScrollInvert: 0
 --- !u!4 &1291635222
 Transform:
@@ -1475,7 +1475,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &1972140199
 Light:
   m_ObjectHideFlags: 0

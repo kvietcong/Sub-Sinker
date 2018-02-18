@@ -244,6 +244,7 @@ MonoBehaviour:
   splashDmgMax: 20
   bubblesPrefab: {fileID: 1525932551599544, guid: 750fd9f39ee87fa428c154a42d7a223f,
     type: 2}
+  explPrefab: {fileID: 1701261212673260, guid: 08234adc8939ecf4d8a46fdf5303a23f, type: 2}
 --- !u!114 &114863585375496618
 MonoBehaviour:
   m_ObjectHideFlags: 1

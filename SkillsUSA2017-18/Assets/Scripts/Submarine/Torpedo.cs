@@ -22,6 +22,7 @@ public class Torpedo : NetworkBehaviour
 
     public GameObject bubblesPrefab;
     GameObject bubbles;
+    public GameObject explPrefab;
 
     // ignore collisions on the server
     public override void OnStartClient()
@@ -99,11 +100,6 @@ public class Torpedo : NetworkBehaviour
 
     void SpawnExplosion()
     {
-        //Vector3 pos = transform.position;
-        //pos.z = lightZOffset;
-
-        //GameObject exp = Instantiate(Explosion, pos, transform.rotation);
-
-        //NetworkServer.Spawn(exp);
+        Instantiate(explPrefab, transform.position, transform.rotation * Quaternion.Euler(Vector3.right * -90));
     }
 }
