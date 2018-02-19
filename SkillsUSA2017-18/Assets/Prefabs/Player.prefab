@@ -1232,7 +1232,10 @@ MonoBehaviour:
   playerName: 
   primaryColor: {r: 0, g: 0, b: 0, a: 0}
   secondaryColor: {r: 0, g: 0, b: 0, a: 0}
+  decorColor: {r: 0, g: 0, b: 0, a: 0}
   body: {fileID: 1623921195394538}
+  periscope: {fileID: 1604905605573166}
+  propeller: {fileID: 1451683224887752}
   nametag: {fileID: 1734684235844860}
 --- !u!114 &114573572730455386
 MonoBehaviour:

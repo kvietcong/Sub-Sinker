@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour {
 
     public delegate void OnPlayerKilledCallback(string player, string source);
     public OnPlayerKilledCallback onPlayerKilledCallback;
-
+    [HideInInspector]
     public float t;
 
 	void Awake () {
