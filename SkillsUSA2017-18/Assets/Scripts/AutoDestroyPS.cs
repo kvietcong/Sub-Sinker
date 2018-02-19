@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class AutoDestroyPS : MonoBehaviour {
     ParticleSystem ps;
-    ParticleSystem.EmissionModule em;
-    void Start()
-    {
-        ps = GetComponent<ParticleSystem>();
-        em = ps.emission;
-    }
 
     void Update()
     {

@@ -21,6 +21,9 @@ public class PickupSpawner : NetworkBehaviour {
     float ammoSpawnTimer;
     float healthSpawnTimer;
 
+    // universal value for pickup animations
+    public float t;
+
     public override void OnStartServer()
     {
         if (instance != null)
@@ -38,6 +41,8 @@ public class PickupSpawner : NetworkBehaviour {
 
         ammoSpawnTimer = Random.Range(2f, 10f);
         healthSpawnTimer = Random.Range(2f, 10f);
+
+        t = 0;
     }
 
     void Update()
@@ -71,35 +76,37 @@ public class PickupSpawner : NetworkBehaviour {
         #endregion
 
         #region Spawn pickups when lacking
-                if (ammos < NetworkServer.connections.Count * ammoPerPlayer)
-                {
-                    if (ammoSpawnTimer <= 0)
-                    {
-                        SpawnPickup(1, ammoPrefab);
-                        ammoSpawnTimer = Random.Range(2f, 10f);
-                    }
+        if (ammos < NetworkServer.connections.Count * ammoPerPlayer)
+        {
+            if (ammoSpawnTimer <= 0)
+            {
+                SpawnPickup(1, ammoPrefab);
+                ammoSpawnTimer = Random.Range(2f, 10f);
+            }
 
-                    // count down when pickups are lacking
-                    ammoSpawnTimer -= Time.deltaTime;
-                }
-                if (healths < NetworkServer.connections.Count * healthPerPlayer)
-                {
-                    if (healthSpawnTimer <= 0)
-                    {
-                        SpawnPickup(1, healthPrefab);
-                        healthSpawnTimer = Random.Range(2f, 10f);
-                    }
+            // count down when pickups are lacking
+            ammoSpawnTimer -= Time.deltaTime;
+        }
+        if (healths < NetworkServer.connections.Count * healthPerPlayer)
+        {
+            if (healthSpawnTimer <= 0)
+            {
+                SpawnPickup(1, healthPrefab);
+                healthSpawnTimer = Random.Range(2f, 10f);
+            }
 
-                    // count down when pickups are lacking
-                    healthSpawnTimer -= Time.deltaTime;
-                }
+            // count down when pickups are lacking
+            healthSpawnTimer -= Time.deltaTime;
+        }
         #endregion
+
+        t += Time.deltaTime;
     }
 
     public void InitSpawnPickups()
     {
-        SpawnPickup(ammoPerPlayer * 2, ammoPrefab);
-        SpawnPickup(healthPerPlayer * 2, healthPrefab);
+        SpawnPickup(ammoPerPlayer, ammoPrefab);
+        SpawnPickup(healthPerPlayer, healthPrefab);
     }
 
     void SpawnPickup(int num, GameObject prefab)

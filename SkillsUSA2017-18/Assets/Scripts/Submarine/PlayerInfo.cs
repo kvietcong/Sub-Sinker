@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 // this is info specific to each player; it is derived from GameManager
 public class PlayerInfo : NetworkBehaviour
@@ -17,6 +18,7 @@ public class PlayerInfo : NetworkBehaviour
     public Color secondaryColor;
 
     public GameObject body;
+    public GameObject nametag;
 
     void Start () {
         SetColors();
@@ -51,5 +53,6 @@ public class PlayerInfo : NetworkBehaviour
     {
         body.GetComponent<MeshRenderer>().materials[0].color = primaryColor;
         body.GetComponent<MeshRenderer>().materials[1].color = secondaryColor;
+        nametag.GetComponent<Text>().text = "<b><color=#" + ColorUtility.ToHtmlStringRGB(primaryColor) + ">" + playerName + "</color></b>";
     }
 }

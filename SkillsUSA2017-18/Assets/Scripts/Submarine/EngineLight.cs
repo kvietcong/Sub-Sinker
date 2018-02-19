@@ -28,6 +28,8 @@ public class EngineLight : NetworkBehaviour {
 
     public bool controllerEnabled;
 
+    public GameObject nametag;
+
     public override void OnStartClient()
     {
         AdjustEngineLight(currentRad);
@@ -44,7 +46,7 @@ public class EngineLight : NetworkBehaviour {
     void Update() {
         if (!health.alive)
         {
-            // vvvv   maybe use this instead   vvvv
+            // vvvv   maybe use this instead   vvvv (but does it matter)
             //engineLight.intensity = 0;
             if (currentRad != 0 && isLocalPlayer)
             {
@@ -57,12 +59,14 @@ public class EngineLight : NetworkBehaviour {
         // i eyeballed this value....
         if (Vector3.Distance(transform.position, localPlayer.transform.position) > currentRad * currentRad * 0.08f)
         {
-            // hide light when not within distance of localplayer
+            // hide light/nametag when not within distance of localplayer
             engineLight.intensity = 0;
+            nametag.SetActive(false);
         }
         else
         {
             engineLight.intensity = startIntensity;
+            nametag.SetActive(true);
         }
 
         // network awareness

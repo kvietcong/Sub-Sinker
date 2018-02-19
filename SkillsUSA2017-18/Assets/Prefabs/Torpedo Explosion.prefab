@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 198766833090837478}
   - component: {fileID: 199748008168386322}
   - component: {fileID: 114533136481950824}
+  - component: {fileID: 114093831922339158}
   m_Layer: 10
   m_Name: Torpedo Explosion
   m_TagString: Untagged
@@ -108,6 +109,38 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114093831922339158
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1701261212673260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 8
+    i1: 35
+    i2: 74
+    i3: 220
+    i4: 137
+    i5: 57
+    i6: 236
+    i7: 244
+    i8: 216
+    i9: 164
+    i10: 111
+    i11: 223
+    i12: 83
+    i13: 3
+    i14: 162
+    i15: 63
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114533136481950824
 MonoBehaviour:
   m_ObjectHideFlags: 1

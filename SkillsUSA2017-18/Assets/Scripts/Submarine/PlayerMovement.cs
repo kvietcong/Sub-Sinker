@@ -15,18 +15,16 @@ public class PlayerMovement : NetworkBehaviour {
     public RectTransform indicator;
 
     public Canvas[] canvases;
+    public GameObject hearableRange;
     
     PlayerHealth health;
     EngineLight lt;
 
     public GameObject model;
-    public Canvas mobileCanvas;
+    public GameObject bubbles;
 
     public bool controllerEnabled;
-
     public string currentDir;
-
-    public GameObject bubbles;
 
     void Start()
     {
@@ -44,8 +42,10 @@ public class PlayerMovement : NetworkBehaviour {
         // set ui active for local player only
         foreach (Canvas ui in canvases)
         {
+            // mobile canvas should already be active but just in case
             ui.gameObject.SetActive(true);
         }
+        hearableRange.SetActive(true);
     }
 
     void FixedUpdate ()

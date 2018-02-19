@@ -431,13 +431,14 @@ MonoBehaviour:
   m_OfflineScene: 
   m_OnlineScene: 
   m_SpawnPrefabs:
+  - {fileID: 1633558284011988, guid: 73ddc8f0f32104e489dba119804ebce5, type: 2}
+  - {fileID: 1565039067421404, guid: 4f4b410c65667ae488e94695bfc8d1a3, type: 2}
   - {fileID: 1287140479821922, guid: bbeb9229da4bbf446ad7cdd21d17f97a, type: 2}
   - {fileID: 1058100825843036, guid: 9eb8492db75244044b04be6642818b24, type: 2}
-  - {fileID: 1565039067421404, guid: 4f4b410c65667ae488e94695bfc8d1a3, type: 2}
   - {fileID: 1706380519448740, guid: 7e279b124c541734eb9a0c2973fdc35a, type: 2}
+  - {fileID: 1701261212673260, guid: 08234adc8939ecf4d8a46fdf5303a23f, type: 2}
   - {fileID: 1674456554491180, guid: 8ce7f1962f484f44ab7bb670dcb5b778, type: 2}
   - {fileID: 1502628693519090, guid: 83f61c390c267aa44853c03e404d95a3, type: 2}
-  - {fileID: 1633558284011988, guid: 73ddc8f0f32104e489dba119804ebce5, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -962,10 +963,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSettings:
-    PlayerName: Pikachu
-    PlayerPrimaryColor: {r: 0.986207, g: 1, b: 0, a: 0}
-    PlayerSecondaryColor: {r: 0, g: 0, b: 0, a: 0}
+    PlayerName: America
+    PlayerPrimaryColor: {r: 1, g: 0.10344827, b: 0, a: 0}
+    PlayerSecondaryColor: {r: 0, g: 0.46206903, b: 1, a: 0}
     ScrollInvert: 0
+  t: 0
 --- !u!4 &1291635222
 Transform:
   m_ObjectHideFlags: 0
@@ -1012,8 +1014,9 @@ MonoBehaviour:
   ammoPrefab: {fileID: 1674456554491180, guid: 8ce7f1962f484f44ab7bb670dcb5b778, type: 2}
   healthPrefab: {fileID: 1502628693519090, guid: 83f61c390c267aa44853c03e404d95a3,
     type: 2}
-  ammoPerPlayer: 10
-  healthPerPlayer: 10
+  ammoPerPlayer: 20
+  healthPerPlayer: 20
+  t: 0
 --- !u!114 &1314142530
 MonoBehaviour:
   m_ObjectHideFlags: 0

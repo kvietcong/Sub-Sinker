@@ -35,11 +35,7 @@ public class Torpedo : NetworkBehaviour
     private void Start()
     {
         bubbles = Instantiate(bubblesPrefab, transform.position + transform.up * 0.9f, transform.rotation * Quaternion.Euler(Vector3.right * -90));
-    }
-
-    private void Update()
-    {
-        bubbles.transform.position = transform.position + transform.up * 0.9f;
+        bubbles.GetComponent<TorpedoTrail>().source = this.gameObject;
     }
 
     void OnCollisionEnter2D(Collision2D coll)
@@ -90,16 +86,12 @@ public class Torpedo : NetworkBehaviour
         }
 
         SpawnExplosion();
-
-        var em = bubbles.GetComponent<ParticleSystem>().emission;
-        em.enabled = false;
-        
-
         NetworkServer.Destroy(this.gameObject);
     }
 
     void SpawnExplosion()
     {
-        Instantiate(explPrefab, transform.position, transform.rotation * Quaternion.Euler(Vector3.right * -90));
+        var b = Instantiate(explPrefab, transform.position, transform.rotation * Quaternion.Euler(Vector3.right * -90));
+        NetworkServer.Spawn(b);
     }
 }

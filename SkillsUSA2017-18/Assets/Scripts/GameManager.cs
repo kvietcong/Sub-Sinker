@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour {
     public delegate void OnPlayerKilledCallback(string player, string source);
     public OnPlayerKilledCallback onPlayerKilledCallback;
 
+    public float t;
+
 	void Awake () {
         if (instance != null)
         {
@@ -22,6 +24,11 @@ public class GameManager : MonoBehaviour {
         {
             instance = this;
         }
+    }
+
+    private void Update()
+    {
+        t += Time.deltaTime;
     }
 
     //private static Dictionary<string, Player> players = new Dictionary<string, Player>();

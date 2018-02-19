@@ -7,8 +7,8 @@ public class PlayerPickups : NetworkBehaviour {
     PlayerInventory ammo;
     PlayerHealth health;
 
-    public int ammoAmount = 2;
-    public float healthAmount = 20f;
+    public int ammoAmount;
+    public float healthAmount;
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
