@@ -7,7 +7,7 @@ using UnityEngine.UI;
 // this is info specific to each player; it is derived from GameManager
 public class PlayerInfo : NetworkBehaviour
 {
-    [SyncVar]
+    [SyncVar(hook = "OnChangeName")]
     [HideInInspector]
     public string playerName;
     [SyncVar(hook ="OnChangePC")]
@@ -26,7 +26,7 @@ public class PlayerInfo : NetworkBehaviour
     public GameObject nametag;
 
     void Start () {
-        SetColors();
+        ApplyChanges();
         if(isLocalPlayer)
         {
             UpdateToServer();
@@ -48,25 +48,31 @@ public class PlayerInfo : NetworkBehaviour
         decorColor = dColor;
     }
 
+    void OnChangeName(string name)
+    {
+        playerName = name;
+        ApplyChanges();
+    }
+
     void OnChangePC(Color pc)
     {
         primaryColor = pc;
-        SetColors();
+        ApplyChanges();
     }
 
     void OnChangeSC(Color sc)
     {
         secondaryColor = sc;
-        SetColors();
+        ApplyChanges();
     }
 
     void OnChangeDC(Color dc)
     {
         decorColor = dc;
-        SetColors();
+        ApplyChanges();
     }
 
-    public void SetColors()
+    public void ApplyChanges()
     {
         // main
         body.GetComponent<MeshRenderer>().materials[0].color = primaryColor;
