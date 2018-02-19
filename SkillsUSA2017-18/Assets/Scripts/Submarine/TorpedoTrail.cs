@@ -20,7 +20,7 @@ public class TorpedoTrail : MonoBehaviour {
         {
             if (source)
             {
-                transform.position = source.transform.position + transform.up * 0.9f;
+                transform.position = source.transform.position + transform.forward * 0.9f;
             }
             else
             {
