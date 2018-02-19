@@ -24,6 +24,7 @@ public class ServerManager : NetworkBehaviour {
     [SyncVar]
     public float respawnTime;
     //public GameMode gameMode;
+    // currently not functional
     public int serverSize;
     [SyncVar(hook = "OnChangeWidth")]
     public int mapWidth; // set minimums

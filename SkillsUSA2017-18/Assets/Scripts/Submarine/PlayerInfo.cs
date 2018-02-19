@@ -29,9 +29,14 @@ public class PlayerInfo : NetworkBehaviour
         SetColors();
         if(isLocalPlayer)
         {
-            CmdSetVars(GameManager.instance.playerSettings.PlayerName, GameManager.instance.playerSettings.PlayerPrimaryColor,
-                GameManager.instance.playerSettings.PlayerSecondaryColor, GameManager.instance.playerSettings.PlayerDecorColor);
+            UpdateToServer();
         }
+    }
+
+    public void UpdateToServer()
+    {
+        CmdSetVars(GameManager.instance.playerSettings.PlayerName, GameManager.instance.playerSettings.PlayerPrimaryColor,
+                GameManager.instance.playerSettings.PlayerSecondaryColor, GameManager.instance.playerSettings.PlayerDecorColor);
     }
 
     [Command]
