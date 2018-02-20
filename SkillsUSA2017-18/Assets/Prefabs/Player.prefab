@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 224537186060752896}
   - component: {fileID: 222390243973324526}
   - component: {fileID: 114249342725028598}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Ammo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 223502823725154470}
   - component: {fileID: 114639180732339114}
   - component: {fileID: 114961533684461824}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Mobile Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 224288719270261886}
   - component: {fileID: 222181819654731006}
   - component: {fileID: 114697407427476964}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Respawn Timer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 224387033152318346}
   - component: {fileID: 222350593778487200}
   - component: {fileID: 114015443607969310}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Foreground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 224811717182497394}
   - component: {fileID: 222014873320439450}
   - component: {fileID: 114437904889209228}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: SonarIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 224034691097715716}
   - component: {fileID: 222270356275226500}
   - component: {fileID: 114796140795420198}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: MissleIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4081468504835150}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 33595943307798764}
   - component: {fileID: 23919324227581940}
   - component: {fileID: 114930786473951638}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Propeller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,7 +172,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4900484481997540}
   - component: {fileID: 114657772184397448}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Submarine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 4166641111642192}
   - component: {fileID: 198600112253528040}
   - component: {fileID: 199469513763616510}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bubbles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 224526446095715842}
   - component: {fileID: 222547363989010124}
   - component: {fileID: 114182197468707648}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Healthbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 223614190693968160}
   - component: {fileID: 114036714227557748}
   - component: {fileID: 114489387357480644}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Static Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 224996522929574572}
   - component: {fileID: 222711921577353654}
   - component: {fileID: 114752060142787680}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: MissleShell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 4048013509576782}
   - component: {fileID: 33383443055972712}
   - component: {fileID: 23500092676250078}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Scope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,7 +275,7 @@ GameObject:
   - component: {fileID: 4899347716817508}
   - component: {fileID: 33705870977739342}
   - component: {fileID: 23584242011852934}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MainBod
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 224828179552924508}
   - component: {fileID: 222436679911806508}
   - component: {fileID: 114892958756355914}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Nametag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -310,7 +310,7 @@ GameObject:
   - component: {fileID: 222350572083790034}
   - component: {fileID: 114674841484995412}
   - component: {fileID: 114371262449669142}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Killfeed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -361,7 +361,7 @@ GameObject:
   - component: {fileID: 224702368090035922}
   - component: {fileID: 222306739496187550}
   - component: {fileID: 114573572730455386}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -379,7 +379,7 @@ GameObject:
   - component: {fileID: 222377873386699614}
   - component: {fileID: 114231637339298694}
   - component: {fileID: 114145329484230300}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -396,7 +396,7 @@ GameObject:
   - component: {fileID: 224230333266716540}
   - component: {fileID: 222153939854193820}
   - component: {fileID: 114092834249896880}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Hearable Range
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -413,7 +413,7 @@ GameObject:
   - component: {fileID: 224086135260591936}
   - component: {fileID: 222870262530529752}
   - component: {fileID: 114077184834748948}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: GridSticks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
