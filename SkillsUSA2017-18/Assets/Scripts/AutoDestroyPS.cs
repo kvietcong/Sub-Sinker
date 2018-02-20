@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class AutoDestroyPS : MonoBehaviour {
+public class AutoDestroyPS : NetworkBehaviour {
     ParticleSystem ps;
 
     void Update()
@@ -11,7 +12,7 @@ public class AutoDestroyPS : MonoBehaviour {
         {
             if (!ps.IsAlive())
             {
-                Destroy(gameObject);
+                NetworkServer.Destroy(gameObject);
             }
         }
     }

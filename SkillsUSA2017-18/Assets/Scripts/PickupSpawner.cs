@@ -10,11 +10,13 @@ public class PickupSpawner : NetworkBehaviour {
     public GameObject serverManagerPrefab;
     public GameObject ammoPrefab;
     public GameObject healthPrefab;
+    public GameObject jellyPrefab;
     bool spawned;
 
     GameObject[] pickups;
     public int ammoPerPlayer = 10;
     public int healthPerPlayer = 5;
+    public int jellyPerPlayer;
     int ammos;
     int healths;
 
@@ -107,6 +109,7 @@ public class PickupSpawner : NetworkBehaviour {
     {
         SpawnPickup(ammoPerPlayer, ammoPrefab);
         SpawnPickup(healthPerPlayer, healthPrefab);
+        SpawnPickup(jellyPerPlayer, jellyPrefab);
     }
 
     void SpawnPickup(int num, GameObject prefab)
