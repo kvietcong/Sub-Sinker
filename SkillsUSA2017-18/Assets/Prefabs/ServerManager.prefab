@@ -86,9 +86,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   respawnTime: 3
   serverSize: 12
-  mapWidth: 100
-  mapHeight: 100
-  randomMapSeed: 0
+  mapWidth: 80
+  mapHeight: 80
+  randomMapSeed: 1
   mapSeed: SEED
   tempSeed: 
   mapGenPrefab: {fileID: 1565039067421404, guid: 4f4b410c65667ae488e94695bfc8d1a3,

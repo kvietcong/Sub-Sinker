@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// works regardless on ControllerEnabled... i was lazy
 public class GridExpand : MonoBehaviour {
     RectTransform rect;
     public float scaleAmount;
@@ -16,7 +17,7 @@ public class GridExpand : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetButton("Map"))
+        if (Input.GetButton("Map") && !GameManager.instance.playerSettings.InputIsDisabled)
         {
             // keep constant height
             rect.localScale = new Vector3((scaleAmount / mapHeight) * mapWidth, scaleAmount, 1f);

@@ -26,8 +26,6 @@ public class EngineLight : NetworkBehaviour {
     PlayerHealth health;
     EngineLight lt;
 
-    public bool controllerEnabled;
-
     public GameObject nametag;
 
     public override void OnStartClient()
@@ -52,9 +50,11 @@ public class EngineLight : NetworkBehaviour {
             {
                 AdjustEngineLight(0);
                 CmdChangeRadius(0); // light off
+                nametag.SetActive(false);
             }
             return;
         }
+        nametag.SetActive(true);
 
         // i eyeballed this value....
         if (Vector3.Distance(transform.position, localPlayer.transform.position) > currentRad * currentRad * 0.08f)
@@ -71,14 +71,16 @@ public class EngineLight : NetworkBehaviour {
 
         // network awareness
         if (!isLocalPlayer)
-            return;
-
-        if (Input.GetKeyDown(KeyCode.F3))
         {
-            controllerEnabled = !controllerEnabled;
+            return;
         }
 
-        if (controllerEnabled)
+        if (GameManager.instance.playerSettings.InputIsDisabled)
+        {
+            return;
+        }
+
+        if (GameManager.instance.playerSettings.ControllerEnabled)
         {
             newRad += (Input.GetAxisRaw("C EngineUp") - Input.GetAxisRaw("C EngineDown")) * 0.2f; // slow it
             if (newRad == currentRad)

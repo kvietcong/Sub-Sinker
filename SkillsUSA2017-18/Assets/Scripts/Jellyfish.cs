@@ -25,7 +25,6 @@ public class Jellyfish : NetworkBehaviour
         Color jellyColor = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f, 0.75f, 0.75f);
         GetComponent<MeshRenderer>().materials[0].color = jellyColor;
         GetComponent<MeshRenderer>().materials[0].SetColor("_EmissionColor", jellyColor);
-        print(GetComponent<MeshRenderer>().materials[0].color);
         if (!isServer)
         {
             return;

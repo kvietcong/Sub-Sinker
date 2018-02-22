@@ -66,7 +66,11 @@ public class ServerManager : NetworkBehaviour {
         // debug map
         if (Input.GetKeyDown(KeyCode.F4))
         {
-            randomMapSeed = !randomMapSeed;
+            if (randomMapSeed)
+            {
+                // generates the map
+                tempSeed = UnityEngine.Random.value.ToString();
+            }
         }
     }
 

@@ -23,7 +23,6 @@ public class PlayerMovement : NetworkBehaviour {
     public GameObject model;
     public GameObject bubbles;
 
-    public bool controllerEnabled;
     public string currentDir;
 
     void Start()
@@ -50,24 +49,23 @@ public class PlayerMovement : NetworkBehaviour {
 
     void FixedUpdate ()
     {
+        // grid ui
+        indicator.anchoredPosition = new Vector2((transform.position.x / (ServerManager.instance.mapWidth * 1.5f)) * 50f,
+            (transform.position.y / (ServerManager.instance.mapHeight * 1.5f)) * 50f);
+
         // network awareness
         if (!isLocalPlayer)
         {
             return;
         }
-        if (!health.alive)
+        if (!health.alive || GameManager.instance.playerSettings.InputIsDisabled)
         {
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.F3))
-        {
-            controllerEnabled = !controllerEnabled;
-        }
-
         float moveHorizontal, moveVertical;
 
-        if (controllerEnabled)
+        if (GameManager.instance.playerSettings.ControllerEnabled)
         {
             moveHorizontal = Input.GetAxis("C Horizontal");
             moveVertical = Input.GetAxis("C Vertical");
@@ -81,10 +79,6 @@ public class PlayerMovement : NetworkBehaviour {
         Vector2 movement = new Vector2 (moveHorizontal, moveVertical);
         float speed = (maxSpeed - minSpeed) * lt.GetLightMultiplier() + minSpeed;
         AddForce(movement.normalized * speed);
-
-        // grid ui
-        indicator.anchoredPosition = new Vector2((transform.position.x / (ServerManager.instance.mapWidth * 1.5f)) * 50f,
-            (transform.position.y / (ServerManager.instance.mapHeight * 1.5f)) * 50f);
     }
 
     // visual effects

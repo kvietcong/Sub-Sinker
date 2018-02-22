@@ -24,8 +24,6 @@ public class Shoot : NetworkBehaviour {
     PlayerInventory ammo;
     PlayerHealth health;
 
-    public bool controllerEnabled;
-
     // Use this for initialization
     void Start()
     {
@@ -39,59 +37,15 @@ public class Shoot : NetworkBehaviour {
         if (!isLocalPlayer)
             return;
 
-        if (Input.GetKeyDown(KeyCode.F3))
-        {
-            controllerEnabled = !controllerEnabled;
-        }
-
-        if (health.alive)
-        {
-            bool shooting, pinging;
-            if (controllerEnabled)
-            {
-                shooting = Input.GetAxisRaw("C Torpedo") >= 0.5f;
-                pinging = Input.GetAxisRaw("C Ping") >= 0.5f;
-            }
-            else
-            {
-                shooting = Input.GetButton("Torpedo");
-                pinging = Input.GetButton("Ping");
-            }
-
-            if (shooting && timeSinceTorpedo >= torpedoRateOfFire)
-            {
-                if (ammo.ChangeAmmo(-1, "torpedo"))
-                {
-                    torpedoIndicator.enabled = true;
-                    torpedoShellIndicator.enabled = true;
-                    timeSinceTorpedo = 0;
-                    Vector2 direction = GetDirection();
-                    CmdFireTorp(direction, torpedoForce);
-                }
-                else
-                {
-                    print("No ammo for torpedo.");
-                }
-            }
-
-            if (pinging && timeSincePing >= pingRateOfFire)
-            {
-                pingIndicator.enabled = true;
-                timeSincePing = 0;
-                Vector2 direction = GetDirection();
-                CmdFirePing(direction, pingForce);
-            }
-        }
-
         pingIndicator.fillAmount = timeSincePing / pingRateOfFire;
-        torpedoIndicator.fillAmount = timeSinceTorpedo  / torpedoRateOfFire;
+        torpedoIndicator.fillAmount = timeSinceTorpedo / torpedoRateOfFire;
         torpedoShellIndicator.fillAmount = timeSinceTorpedo / torpedoRateOfFire;
 
-        if (timeSincePing > 1.5*pingRateOfFire)
+        if (timeSincePing > 1.5 * pingRateOfFire)
         {
             pingIndicator.enabled = false;
         }
-        if(timeSinceTorpedo > 1.5*torpedoRateOfFire)
+        if (timeSinceTorpedo > 1.5 * torpedoRateOfFire)
         {
             torpedoIndicator.enabled = false;
             torpedoShellIndicator.enabled = false;
@@ -99,6 +53,47 @@ public class Shoot : NetworkBehaviour {
 
         timeSincePing += Time.deltaTime;
         timeSinceTorpedo += Time.deltaTime;
+
+        if (!health.alive || GameManager.instance.playerSettings.InputIsDisabled)
+        {
+            return;
+        }
+
+        bool shooting, pinging;
+        if (GameManager.instance.playerSettings.ControllerEnabled)
+        {
+            shooting = Input.GetAxisRaw("C Torpedo") >= 0.5f;
+            pinging = Input.GetAxisRaw("C Ping") >= 0.5f;
+        }
+        else
+        {
+            shooting = Input.GetButton("Torpedo");
+            pinging = Input.GetButton("Ping");
+        }
+
+        if (shooting && timeSinceTorpedo >= torpedoRateOfFire)
+        {
+            if (ammo.ChangeAmmo(-1, "torpedo"))
+            {
+                torpedoIndicator.enabled = true;
+                torpedoShellIndicator.enabled = true;
+                timeSinceTorpedo = 0;
+                Vector2 direction = GetDirection();
+                CmdFireTorp(direction, torpedoForce);
+            }
+            else
+            {
+                print("No ammo for torpedo.");
+            }
+        }
+
+        if (pinging && timeSincePing >= pingRateOfFire)
+        {
+            pingIndicator.enabled = true;
+            timeSincePing = 0;
+            Vector2 direction = GetDirection();
+            CmdFirePing(direction, pingForce);
+        }
     }
 
     // called by client, run on server
@@ -133,7 +128,7 @@ public class Shoot : NetworkBehaviour {
 
     Vector2 GetDirection()
     {
-        if (controllerEnabled)
+        if (GameManager.instance.playerSettings.ControllerEnabled)
         {
             Vector2 direction = new Vector2(Input.GetAxis("C HorizontalShoot"), Input.GetAxis("C VerticalShoot"));
             if (direction.magnitude == 0)

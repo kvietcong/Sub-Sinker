@@ -964,11 +964,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSettings:
-    PlayerName: America
-    PlayerPrimaryColor: {r: 1, g: 0.10344827, b: 0, a: 0}
-    PlayerSecondaryColor: {r: 1, g: 1, b: 1, a: 0}
-    PlayerDecorColor: {r: 0, g: 0, b: 1, a: 0}
+    PlayerName: Player
+    PlayerPrimaryColor: {r: 0.15408738, g: 0.5514706, b: 0.3212624, a: 0}
+    PlayerSecondaryColor: {r: 0.875, g: 0.875, b: 0.875, a: 0}
+    PlayerDecorColor: {r: 0, g: 0, b: 0, a: 0}
     ScrollInvert: 0
+    ControllerEnabled: 0
+    InputIsDisabled: 0
   t: 0
 --- !u!4 &1291635222
 Transform:
