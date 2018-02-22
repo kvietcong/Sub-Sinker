@@ -1918,6 +1918,10 @@ Prefab:
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 157272, guid: 916ee089a0d7b63419075f91e1c657ec, type: 2}
+      propertyPath: m_Name
+      value: Picker 2.0 Primary
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 916ee089a0d7b63419075f91e1c657ec, type: 2}
   m_IsPrefabParent: 0
@@ -2605,7 +2609,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1057576321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2847,6 +2851,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1291635222}
   - component: {fileID: 1291635221}
+  - component: {fileID: 1291635223}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2887,6 +2892,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1291635223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1291635220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97ed5cadce72b174da2706fb3c268214, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerSettings: {fileID: 1057576320}
+  pickerOne: {fileID: 627638278}
+  pickerTwo: {fileID: 1982477751}
+  pickerThree: {fileID: 1464803009}
 --- !u!1 &1314142528
 GameObject:
   m_ObjectHideFlags: 0
@@ -4430,6 +4450,10 @@ Prefab:
     - target: {fileID: 11423364, guid: 916ee089a0d7b63419075f91e1c657ec, type: 2}
       propertyPath: color
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 157272, guid: 916ee089a0d7b63419075f91e1c657ec, type: 2}
+      propertyPath: m_Name
+      value: Picker 2.0 Decor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 916ee089a0d7b63419075f91e1c657ec, type: 2}
@@ -6003,6 +6027,10 @@ Prefab:
     - target: {fileID: 11423364, guid: 916ee089a0d7b63419075f91e1c657ec, type: 2}
       propertyPath: color
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 157272, guid: 916ee089a0d7b63419075f91e1c657ec, type: 2}
+      propertyPath: m_Name
+      value: Picker 2.0 Secondary
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 916ee089a0d7b63419075f91e1c657ec, type: 2}

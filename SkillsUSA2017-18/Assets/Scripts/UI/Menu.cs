@@ -6,13 +6,16 @@ using UnityEngine.UI;
 public class Menu : MonoBehaviour
 {
     public GameObject PlayerSettings;
+    public GameObject pickerOne;
+    public GameObject pickerTwo;
+    public GameObject pickerThree;
 
-	// Update is called once per frame
-	void Update ()
+    // Update is called once per frame
+    void Update ()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            if (PlayerSettings.active)
+            if (PlayerSettings.activeInHierarchy && !pickerOne.activeInHierarchy && !pickerTwo.activeInHierarchy && !pickerThree.activeInHierarchy)
             {
                 PlayerSettings.SetActive(false);
                 GameObject player = GameObject.Find("LocalPlayer");

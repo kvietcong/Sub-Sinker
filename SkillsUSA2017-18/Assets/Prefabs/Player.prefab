@@ -1104,7 +1104,6 @@ MonoBehaviour:
   torpedoShellIndicator: {fileID: 114752060142787680}
   pingRateOfFire: 1
   torpedoRateOfFire: 2
-  controllerEnabled: 0
 --- !u!114 &114371262449669142
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1449,7 +1448,6 @@ MonoBehaviour:
   minRad: 7
   circle: {fileID: 224230333266716540}
   model: {fileID: 1425146229112758}
-  controllerEnabled: 0
   nametag: {fileID: 1734684235844860}
 --- !u!114 &114892958756355914
 MonoBehaviour:
@@ -1532,7 +1530,6 @@ MonoBehaviour:
   hearableRange: {fileID: 1899075902520730}
   model: {fileID: 1425146229112758}
   bubbles: {fileID: 1465898636032708}
-  controllerEnabled: 0
   currentDir: 
 --- !u!198 &198600112253528040
 ParticleSystem:
