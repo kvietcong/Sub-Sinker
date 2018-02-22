@@ -42,6 +42,10 @@ public class ColorPicker : MonoBehaviour
                 gameObject.SetActive(false);
             }
         }
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     public Color CurrentColor
