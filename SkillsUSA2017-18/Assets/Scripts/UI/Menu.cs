@@ -20,10 +20,12 @@ public class Menu : MonoBehaviour
                 PlayerSettings.SetActive(false);
                 GameObject player = GameObject.Find("LocalPlayer");
                 player.GetComponent<PlayerInfo>().UpdateToServer();
+                GameManager.instance.playerSettings.InputIsDisabled = false;
             }
             else
             {
                 PlayerSettings.SetActive(true);
+                GameManager.instance.playerSettings.InputIsDisabled = true;
             }
         }
     }
