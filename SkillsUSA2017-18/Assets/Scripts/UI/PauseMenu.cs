@@ -11,6 +11,13 @@ public class PauseMenu : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        GameManager.instance.playerSettings.PlayerName = playerName.text;
+        string str = playerName.text;
+        str = str.Replace(" ", string.Empty);
+
+        // if it is not blank after removing whitespace
+        if (str != "")
+        {
+            GameManager.instance.playerSettings.PlayerName = playerName.text;
+        }
 	}
 }

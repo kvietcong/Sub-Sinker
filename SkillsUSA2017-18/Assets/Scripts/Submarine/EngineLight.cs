@@ -50,11 +50,10 @@ public class EngineLight : NetworkBehaviour {
             {
                 AdjustEngineLight(0);
                 CmdChangeRadius(0); // light off
-                nametag.SetActive(false);
             }
+            nametag.SetActive(false);
             return;
         }
-        nametag.SetActive(true);
 
         // i eyeballed this value....
         if (Vector3.Distance(transform.position, localPlayer.transform.position) > currentRad * currentRad * 0.08f)
