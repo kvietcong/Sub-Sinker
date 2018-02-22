@@ -965,9 +965,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSettings:
     PlayerName: Player
-    PlayerPrimaryColor: {r: 0, g: 1, b: 0.42068958, a: 1}
-    PlayerSecondaryColor: {r: 1, g: 0, b: 0, a: 1}
-    PlayerDecorColor: {r: 0, g: 0.751724, b: 1, a: 1}
+    PlayerPrimaryColor: {r: 0.30882353, g: 0.29212952, b: 0.27930364, a: 1}
+    PlayerSecondaryColor: {r: 1, g: 0.5586207, b: 0, a: 1}
+    PlayerDecorColor: {r: 1, g: 0.9724138, b: 0, a: 1}
     ScrollInvert: 0
     ControllerEnabled: 0
     InputIsDisabled: 0
