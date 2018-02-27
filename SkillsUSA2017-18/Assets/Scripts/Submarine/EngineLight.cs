@@ -55,7 +55,19 @@ public class EngineLight : NetworkBehaviour {
             return;
         }
 
-        // i eyeballed this value....
+        // represents the far left side of the circle
+        //Vector3 circleVector = (Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth / 2 + currentRad * currentRad * 2.8f, Camera.main.pixelHeight / 2, Camera.main.transform.position.z)));
+
+        //// equalize z values
+        //circleVector = new Vector3(circleVector.x, circleVector.y, localPlayer.transform.position.z);
+       
+        
+        //float dist = Vector3.Distance(circleVector, transform.position);
+
+        //print(currentRad * currentRad * 0.08f);
+        //print(dist + " dist");
+
+        // i used the eyeball values, which were vindicated by my own experiment (which is annoying to impliment)
         if (Vector3.Distance(transform.position, localPlayer.transform.position) > currentRad * currentRad * 0.08f)
         {
             // hide light/nametag when not within distance of localplayer
