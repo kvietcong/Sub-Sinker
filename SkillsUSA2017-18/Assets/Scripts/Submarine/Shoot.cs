@@ -11,8 +11,7 @@ public class Shoot : NetworkBehaviour {
     public float pingForce = 1000;
     public float torpedoForce = 1500;
     public Image pingIndicator;
-    public Image torpedoIndicator;
-    public Image torpedoShellIndicator;
+    public Text torpedoBar;
 
     // seconds per shot
     public float pingRateOfFire = 1f;
@@ -20,6 +19,8 @@ public class Shoot : NetworkBehaviour {
 
     public float torpedoRateOfFire = 2f;
     float timeSinceTorpedo;
+    string[] stages = new string[] { " [] ", " []  []  [] ", " []  []  []  []  [] ", " []  []  []  []  []  []  [] ", "Torpedo Ready", "No Torpedos Left"};
+    float torpedoPercentage;
 
     PlayerInventory ammo;
     PlayerHealth health;
@@ -37,18 +38,37 @@ public class Shoot : NetworkBehaviour {
         if (!isLocalPlayer)
             return;
 
+        torpedoPercentage = timeSinceTorpedo / torpedoRateOfFire * 100;
         pingIndicator.fillAmount = timeSincePing / pingRateOfFire;
-        torpedoIndicator.fillAmount = timeSinceTorpedo / torpedoRateOfFire;
-        torpedoShellIndicator.fillAmount = timeSinceTorpedo / torpedoRateOfFire;
 
         if (timeSincePing > 1.5 * pingRateOfFire)
         {
             pingIndicator.enabled = false;
         }
-        if (timeSinceTorpedo > 1.5 * torpedoRateOfFire)
+
+        if(torpedoPercentage>100)
         {
-            torpedoIndicator.enabled = false;
-            torpedoShellIndicator.enabled = false;
+            torpedoBar.text = stages[4];
+        }
+        if (torpedoPercentage < 95)
+        {
+            torpedoBar.text = stages[3];
+        }
+        if (torpedoPercentage < 65)
+        {
+            torpedoBar.text = stages[2];
+        }
+        if (torpedoPercentage < 45)
+        {
+            torpedoBar.text = stages[1];
+        }
+        if (torpedoPercentage < 25)
+        {
+            torpedoBar.text = stages[0];
+        }
+        if(ammo.currentAmmo[0]<=0)
+        {
+            torpedoBar.text = stages[5];
         }
 
         timeSincePing += Time.deltaTime;
@@ -75,8 +95,6 @@ public class Shoot : NetworkBehaviour {
         {
             if (ammo.ChangeAmmo(-1, "torpedo"))
             {
-                torpedoIndicator.enabled = true;
-                torpedoShellIndicator.enabled = true;
                 timeSinceTorpedo = 0;
                 Vector2 direction = GetDirection();
                 CmdFireTorp(direction, torpedoForce);

@@ -8,7 +8,7 @@ public class PlayerInventory : MonoBehaviour {
     public int[] maxAmmo;
     public int[] startAmmo;
     public string[] weapons;
-    int[] currentAmmo;
+    public int[] currentAmmo;
 
     public Text display;
 
