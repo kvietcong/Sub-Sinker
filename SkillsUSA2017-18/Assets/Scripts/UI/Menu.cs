@@ -11,10 +11,32 @@ public class Menu : MonoBehaviour
     public GameObject pickerOne;
     public GameObject pickerTwo;
     public GameObject pickerThree;
+    public Toggle ScrollInvert;
+    public Toggle Controller;
 
     // Update is called once per frame
     void Update ()
     {
+        //
+        if (ScrollInvert.isOn)
+        {
+            GameManager.instance.playerSettings.ScrollInvert = true;
+        }
+        else
+        {
+            GameManager.instance.playerSettings.ScrollInvert = false;
+        }
+
+        if (Controller.isOn)
+        {
+            GameManager.instance.playerSettings.ControllerEnabled = true;
+        }
+        else
+        {
+            GameManager.instance.playerSettings.ControllerEnabled = false;
+        }
+
+        //Exiting and opening
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if(GameSettings.activeInHierarchy)
