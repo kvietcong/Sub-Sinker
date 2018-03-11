@@ -12290,7 +12290,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Controller Toggle
+  m_Text: Enable Controller
 --- !u!114 &114460368268980322
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -14688,7 +14688,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.39215687}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.6862745}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
