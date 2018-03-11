@@ -11,6 +11,7 @@ public class Menu : MonoBehaviour
     public GameObject pickerOne;
     public GameObject pickerTwo;
     public GameObject pickerThree;
+    public GameObject Background;
     public Toggle ScrollInvert;
     public Toggle Controller;
 
@@ -65,11 +66,13 @@ public class Menu : MonoBehaviour
             else if(MainPauseMenu.activeInHierarchy)
             {
                 MainPauseMenu.SetActive(false);
+                Background.SetActive(false);
                 GameManager.instance.playerSettings.InputIsDisabled = false;
             }
             else
             {
                 MainPauseMenu.SetActive(true);
+                Background.SetActive(true);
                 GameManager.instance.playerSettings.InputIsDisabled = true;
             }
         }
