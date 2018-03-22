@@ -533,7 +533,7 @@ public class MapGenerator : NetworkBehaviour
         }
     }
 
-    public Vector2 GetSpawnPos()
+    public Vector3 GetSpawnPos()
     {
         int tileset_width = map.GetLength(0);
         int tileset_height = map.GetLength(1);

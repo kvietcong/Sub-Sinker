@@ -117,6 +117,14 @@ public class PickupSpawner : NetworkBehaviour {
         for (int i = 0; i < num; i++)
         {
             var spawnPosition = MapGenerator.instance.GetComponent<MapGenerator>().GetSpawnPos();
+
+            if (LayerMask.LayerToName(prefab.layer) == "Environment")
+            {
+                // put it behind map
+                spawnPosition = new Vector3(spawnPosition.x, spawnPosition.y, 2f);
+            }
+
+            print(spawnPosition);
             var pickup = (GameObject)Instantiate(prefab, spawnPosition, Quaternion.identity);
             NetworkServer.Spawn(pickup);
         }
