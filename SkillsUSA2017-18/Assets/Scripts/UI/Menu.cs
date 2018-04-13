@@ -14,6 +14,14 @@ public class Menu : MonoBehaviour
     public GameObject Background;
     public Toggle ScrollInvert;
     public Toggle Controller;
+    public Toggle FPS;
+    public Text FPSCounter;
+
+    private void Start()
+    {
+        FPSCounter = GameObject.Find("FPS").GetComponent<Text>();
+        FPS.isOn = GameObject.Find("FPS").activeInHierarchy;
+    }
 
     // Update is called once per frame
     void Update ()
@@ -35,6 +43,15 @@ public class Menu : MonoBehaviour
         else
         {
             GameManager.instance.playerSettings.ControllerEnabled = false;
+        }
+
+        if(FPS.isOn)
+        {
+            FPSCounter.enabled = true;
+        }
+        else
+        {
+            FPSCounter.enabled = false;
         }
 
         //Exiting and opening

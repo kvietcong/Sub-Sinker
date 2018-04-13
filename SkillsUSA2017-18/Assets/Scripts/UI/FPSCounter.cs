@@ -15,7 +15,7 @@ public class FPSCounter : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        text.text = "FPS: " + 1 / Time.deltaTime;
+        text.text = "FPS: " + Mathf.RoundToInt(1 / Time.deltaTime);
         float t = (1f / Time.deltaTime - 15f) / 45f;
         text.color = Color.Lerp(Color.red, Color.green, t);
     }
