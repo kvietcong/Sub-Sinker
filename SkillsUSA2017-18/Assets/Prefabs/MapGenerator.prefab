@@ -118,7 +118,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c33c503053521e5479122a8a2a4926a7, type: 2}
+  - {fileID: 2100000, guid: 02af95d62fb3e68499b4e3f51eb2bf33, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -197,8 +197,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b00fb8ce361e8a34a98a593cadd2d12a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cave: {fileID: 33748437876409286}
   walls: {fileID: 33734737528123634}
+  cave: {fileID: 33748437876409286}
 --- !u!114 &114259164874989112
 MonoBehaviour:
   m_ObjectHideFlags: 1

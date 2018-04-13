@@ -36,10 +36,10 @@ public class MeshGenerator : MonoBehaviour
         }
 
         Mesh mesh = new Mesh();
-        cave.sharedMesh = mesh;
+        cave.mesh = mesh;
 
         Mesh mesh2 = new Mesh();
-        walls.sharedMesh = mesh2;
+        walls.mesh = mesh2;
 
         mesh.vertices = vertices.ToArray();
         mesh.triangles = triangles.ToArray();
@@ -48,6 +48,43 @@ public class MeshGenerator : MonoBehaviour
         mesh2.vertices = vertices.ToArray();
         mesh2.triangles = triangles.ToArray();
         mesh2.RecalculateNormals();
+        
+        int tileAmount = 1;
+        Vector2[] uvs = new Vector2[vertices.Count];
+        for (int i = 0; i < vertices.Count; i++)
+        {
+            float percentX = Mathf.InverseLerp(-map.GetLength(0) / 2 * squareSize, map.GetLength(0) / 2 * squareSize, vertices[i].x) * tileAmount;
+            float percentY = Mathf.InverseLerp(-map.GetLength(1) / 2 * squareSize, map.GetLength(0) / 2 * squareSize, vertices[i].z) * tileAmount;
+            uvs[i] = new Vector2(percentX, percentY);
+        }
+        mesh.uv = uvs;
+        mesh2.uv = uvs;
+
+        for (int i = 0; i < mesh.vertices.Length; i++)
+        {
+            float x = mesh.vertices[i].x;
+
+            if (i + 1 < mesh.vertices.Length && x == mesh.vertices[i + 1].x && i > 1 && mesh.vertices[i - 1].x == x)
+            {
+                //Fix bug texture
+                x = mesh.vertices[i].z;
+
+            }
+            uvs[i] = new Vector2(x, mesh.vertices[i].y);
+        }
+
+        for (int i = 0; i < mesh2.vertices.Length; i++)
+        {
+            float x = mesh2.vertices[i].x;
+
+            if (i + 1 < mesh2.vertices.Length && x == mesh2.vertices[i + 1].x && i > 1 && mesh2.vertices[i - 1].x == x)
+            {
+                //Fix bug texture
+                x = mesh2.vertices[i].z;
+
+            }
+            uvs[i] = new Vector2(x, mesh2.vertices[i].y);
+        }
 
         Generate2DColliders();
         CreateWallMesh();
