@@ -22,6 +22,8 @@ public class PlayerHealth : NetworkBehaviour
     public Text killfeed;
     public GameObject Explosion;
 
+    private AudioSource AudSrc;
+
     private void Start()
     {
         barWidth = healthBar.sizeDelta.x;
@@ -29,13 +31,17 @@ public class PlayerHealth : NetworkBehaviour
         {
             Respawn();
         }
-            
+
+        AudSrc = GetComponent<AudioSource>();
+
     }
 
     [Command]
     public void CmdTakeDamage(float amount, string enemyName, Color enemyColor)
     {
         currentHealth -= amount;
+        AudSrc.volume = amount / 100f;
+        AudSrc.Play();
 
         #region Death
         if (currentHealth <= 0 && alive)

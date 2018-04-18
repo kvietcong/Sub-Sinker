@@ -9,6 +9,8 @@ public class Ping : NetworkBehaviour
     public float lightZOffset = -3f;
     public float firstLightIntensity = 6f;
 
+    private AudioSource AudSrc;
+
     // num collisions with wall
     int collCount;
 
@@ -30,6 +32,7 @@ public class Ping : NetworkBehaviour
     void Start()
     {
         collCount = 0;
+        AudSrc = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -44,6 +47,8 @@ public class Ping : NetworkBehaviour
     void OnCollisionEnter2D(Collision2D coll)
     {
         collCount++;
+        AudSrc.Play();
+        AudSrc.volume = 0.6f / (collCount+1);
 
         // spawn new light
         SpawnLight();
