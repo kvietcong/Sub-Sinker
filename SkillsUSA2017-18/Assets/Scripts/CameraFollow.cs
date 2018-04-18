@@ -12,16 +12,26 @@ public class CameraFollow : MonoBehaviour
     private float m_ZoomSpeed;                      // Reference speed for the smooth damping of the orthographic size.
     private Vector3 m_MoveVelocity;                 // Reference velocity for the smooth damping of the position.
     private Vector3 m_DesiredPosition;              // The position the camera is moving towards.
+    bool on;
 
     // Use this for initialization
     void Start ()
     {
-        
+        on = false;
     }
 	
 	// Update is called once per frame
 	void FixedUpdate ()
     {
+        if (Input.GetKeyDown(KeyCode.F6))
+        {
+            on = !on;
+            transform.position = Vector3.SmoothDamp(transform.position, new Vector3(-gameObject.transform.position.x, -gameObject.transform.position.y, -650), ref m_MoveVelocity, 10);
+        }
+        if (on)
+        {
+            return;
+        }
         if (player == null)
         {
             return;

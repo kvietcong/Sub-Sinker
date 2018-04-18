@@ -47,6 +47,19 @@ public class MapGenerator : NetworkBehaviour
         darkBG.transform.localScale = new Vector3(ServerManager.instance.mapWidth * 3f / 10f + 15, 1, ServerManager.instance.mapHeight * 3f / 10f + 15);
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.F5))
+        {
+            ServerManager.instance.tempSeed = ServerManager.instance.randomMapSeed.ToString();
+            GenerateMap(ServerManager.instance.tempSeed);
+            GameObject waterBG = GameObject.Find("WaterBackground");
+            GameObject darkBG = GameObject.Find("DarkBackground");
+            waterBG.transform.localScale = new Vector3(ServerManager.instance.mapWidth * 3f / 10f, 1, ServerManager.instance.mapHeight * 3f / 10f);
+            darkBG.transform.localScale = new Vector3(ServerManager.instance.mapWidth * 3f / 10f + 15, 1, ServerManager.instance.mapHeight * 3f / 10f + 15);
+        }
+    }
+
     public void GenerateMap(string seed)
     {
         generated = false;
