@@ -20,6 +20,7 @@ public class PlayerHealth : NetworkBehaviour
     float respawnProgress;
 
     public Text killfeed;
+    public GameObject Explosion;
 
     private void Start()
     {
@@ -41,7 +42,7 @@ public class PlayerHealth : NetworkBehaviour
         { 
             currentHealth = 0;
 
-            // todo: play some explosion or something
+            Instantiate(Explosion, transform.position, transform.rotation);
             // note: alive disables aspects of PlayerMovement, Shoot, EngineLight, and ModelDisable
             alive = false;
             respawnProgress = 0;

@@ -13978,6 +13978,7 @@ MonoBehaviour:
   healthBar: {fileID: 224387033152318346}
   alive: 0
   killfeed: {fileID: 114674841484995412}
+  Explosion: {fileID: 100000, guid: fb1312d91b8716042b1151f9b514fc16, type: 2}
 --- !u!114 &114585850396190346
 MonoBehaviour:
   m_ObjectHideFlags: 1
