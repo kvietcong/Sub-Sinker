@@ -123,8 +123,6 @@ public class PickupSpawner : NetworkBehaviour {
                 // put it behind map
                 spawnPosition = new Vector3(spawnPosition.x, spawnPosition.y, 2f);
             }
-
-            print(spawnPosition);
             var pickup = (GameObject)Instantiate(prefab, spawnPosition, Quaternion.identity);
             NetworkServer.Spawn(pickup);
         }

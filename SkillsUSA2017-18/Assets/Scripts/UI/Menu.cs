@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class Menu : MonoBehaviour
+
+public class Menu : NetworkBehaviour
 {
     public GameObject MainPauseMenu;
     public GameObject GameSettings;
@@ -26,6 +28,10 @@ public class Menu : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
         //
         if (ScrollInvert.isOn)
         {

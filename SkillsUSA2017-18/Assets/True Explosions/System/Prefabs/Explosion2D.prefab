@@ -8,8 +8,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 400002}
-  - component: {fileID: 114944141679389970}
   - component: {fileID: 82077119722919162}
+  - component: {fileID: 114798946226645196}
+  - component: {fileID: 114536784942420172}
   m_Layer: 0
   m_Name: Explosion2D
   m_TagString: Untagged
@@ -10420,7 +10421,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &114944141679389970
+--- !u!114 &114536784942420172
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -10432,3 +10433,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyTime: 3
+--- !u!114 &114798946226645196
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 251
+    i1: 19
+    i2: 18
+    i3: 217
+    i4: 27
+    i5: 135
+    i6: 22
+    i7: 4
+    i8: 43
+    i9: 17
+    i10: 81
+    i11: 249
+    i12: 181
+    i13: 20
+    i14: 252
+    i15: 22
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0

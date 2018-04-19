@@ -48,7 +48,8 @@ public class PlayerHealth : NetworkBehaviour
         { 
             currentHealth = 0;
 
-            Instantiate(Explosion, transform.position, transform.rotation);
+            var expl = (GameObject)Instantiate(Explosion, transform.position, transform.rotation);
+            NetworkServer.Spawn(expl);
             // note: alive disables aspects of PlayerMovement, Shoot, EngineLight, and ModelDisable
             alive = false;
             respawnProgress = 0;

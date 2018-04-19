@@ -1,18 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class DestroyAfterTime : MonoBehaviour
 {
     public float destroyTime = 5;
-	// Use this for initialization
+    float et;
+
 	void Start ()
     {
-        Destroy(gameObject, destroyTime);
+        et = 0;
     }
 
-    private void Awake()
+    private void Update()
     {
-        Destroy(gameObject, destroyTime);
+        et += Time.deltaTime;
+        if (et > destroyTime)
+        {
+            NetworkServer.Destroy(gameObject);
+        }
     }
 }

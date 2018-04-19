@@ -5,9 +5,13 @@ using UnityEngine.Networking;
 
 public class AutoDestroyPS : NetworkBehaviour {
     ParticleSystem ps;
-
+    private void Start()
+    {
+        ps = GetComponent<ParticleSystem>();
+    }
     void Update()
     {
+
         if (ps)
         {
             if (!ps.IsAlive())
