@@ -24,6 +24,7 @@ public class PlayerMovement : NetworkBehaviour {
     public GameObject bubbles;
 
     public string currentDir;
+    bool boost;
 
     void Start()
     {
@@ -69,15 +70,24 @@ public class PlayerMovement : NetworkBehaviour {
         {
             moveHorizontal = Input.GetAxis("C Horizontal");
             moveVertical = Input.GetAxis("C Vertical");
+            boost = Input.GetButton("C Boost");
         }
         else
         {
             moveHorizontal = Input.GetAxis("Horizontal");
             moveVertical = Input.GetAxis("Vertical");
+            boost = Input.GetButton("Boost");
         }
 
         Vector2 movement = new Vector2 (moveHorizontal, moveVertical);
         float speed = (maxSpeed - minSpeed) * lt.GetLightMultiplier() + minSpeed;
+        if(boost)
+        {
+            // bad magic numbers :(
+            AddForce(movement.normalized * speed * .65f);
+            health.CmdTakeDamage(speed * Time.deltaTime * .5f, gameObject.GetComponent<PlayerInfo>().playerName,
+                    gameObject.GetComponent<PlayerInfo>().primaryColor);
+        }
         AddForce(movement.normalized * speed);
     }
 
