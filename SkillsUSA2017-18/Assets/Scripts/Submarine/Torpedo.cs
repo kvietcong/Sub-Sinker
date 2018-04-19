@@ -12,10 +12,14 @@ public class Torpedo : NetworkBehaviour
     [SyncVar]
     public NetworkInstanceId spawnedBy;
 
+    public Vector3 srcPos;
+
     public float explosionForce = 20f;
     public float explosionRadius = 20f;
 
-    public float hitDmg = 35f;
+    public float maxDist = 300f;
+
+    public float maxHitDmg = 35f;
     public float splashDmgMax = 30f;
 
     GameObject source;
@@ -52,7 +56,10 @@ public class Torpedo : NetworkBehaviour
             var health = hit.GetComponent<PlayerHealth>();
             if (health != null)
             {
-                health.CmdTakeDamage(hitDmg, source.GetComponent<PlayerInfo>().playerName, source.GetComponent<PlayerInfo>().primaryColor); 
+                print("dmg: " + Mathf.Lerp(maxHitDmg, 0, Vector3.Distance(transform.position, srcPos) / maxDist) + ", dist to src: " + Vector3.Distance(transform.position, srcPos));
+                health.CmdTakeDamage(Mathf.Lerp(maxHitDmg, 0, Vector3.Distance(transform.position, srcPos) / maxDist), 
+                    source.GetComponent<PlayerInfo>().playerName, source.GetComponent<PlayerInfo>().primaryColor); 
+                
             }
         }
 
@@ -73,7 +80,7 @@ public class Torpedo : NetworkBehaviour
                     var health = a_player.GetComponent<PlayerHealth>();
                     if (health != null)
                     {
-                        float damage = Mathf.SmoothStep(0, splashDmgMax, (explosionRadius - Vector3.Distance(transform.position, a_player.transform.position)) / explosionRadius);
+                        float damage = Mathf.Lerp(Mathf.SmoothStep(0, splashDmgMax, (explosionRadius - Vector3.Distance(transform.position, a_player.transform.position)) / explosionRadius), 0, Vector3.Distance(transform.position, srcPos) / maxDist);
                         health.CmdTakeDamage(damage, source.GetComponent<PlayerInfo>().playerName, source.GetComponent<PlayerInfo>().primaryColor);
                     }
                 }

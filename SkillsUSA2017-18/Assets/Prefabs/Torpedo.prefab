@@ -319,10 +319,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 847a412fe126b1c4ea30497f9b4ca1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionForce: 1000
-  explosionRadius: 10
-  hitDmg: 35
-  splashDmgMax: 20
+  srcPos: {x: 0, y: 0, z: 0}
+  explosionForce: 700
+  explosionRadius: 15
+  maxDist: 150
+  maxHitDmg: 35
+  splashDmgMax: 35
   bubblesPrefab: {fileID: 1525932551599544, guid: 750fd9f39ee87fa428c154a42d7a223f,
     type: 2}
   explPrefab: {fileID: 1701261212673260, guid: 08234adc8939ecf4d8a46fdf5303a23f, type: 2}

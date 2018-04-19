@@ -134,6 +134,7 @@ public class Shoot : NetworkBehaviour {
 
         torpedo.GetComponent<Rigidbody2D>().AddForce(direction.normalized * firingForce);
         torpedo.GetComponent<Torpedo>().spawnedBy = netId;
+        torpedo.GetComponent<Torpedo>().srcPos = transform.position;
 
         NetworkServer.Spawn(torpedo);
     }
