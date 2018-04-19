@@ -10,6 +10,8 @@ public class Menu : NetworkBehaviour
     public GameObject MainPauseMenu;
     public GameObject GameSettings;
     public GameObject PlayerSettings;
+    public GameObject ServerSettings;
+    public GameObject ServerSettingsGate;
     public GameObject pickerOne;
     public GameObject pickerTwo;
     public GameObject pickerThree;
@@ -23,6 +25,10 @@ public class Menu : NetworkBehaviour
     {
         FPSCounter = GameObject.Find("FPS").GetComponent<Text>();
         FPS.isOn = GameObject.Find("FPS").activeInHierarchy;
+        if(!isServer)
+        {
+            ServerSettingsGate.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -85,6 +91,12 @@ public class Menu : NetworkBehaviour
                     pickerTwo.SetActive(false);
                     pickerThree.SetActive(false);
                 }
+            }
+            else if (ServerSettings.activeInHierarchy)
+            {
+                ServerSettings.SetActive(false);
+                GameObject player = GameObject.Find("LocalPlayer");
+                MainPauseMenu.SetActive(true);
             }
             else if(MainPauseMenu.activeInHierarchy)
             {
