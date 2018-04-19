@@ -31,9 +31,22 @@ public class ServerSettings : MonoBehaviour
         widthIndicator.text = width.value.ToString();
         heightIndicator.text = height.value.ToString();
         respawnIndicator.text = respawn.value.ToString();
+    }
+
+    public void Apply()
+    {
+        if (ServerManager.instance.mapWidth != (int)width.value)
+        {
+            ServerManager.instance.mapWidth = (int)width.value;
+        }
+        if (ServerManager.instance.mapHeight != (int)height.value)
+        {
+            ServerManager.instance.mapHeight = (int)height.value;
+        }
+        if (ServerManager.instance.respawnTime != (int)respawn.value)
+        {
+            ServerManager.instance.respawnTime = (int)respawn.value;
+        }
         
-        ServerManager.instance.mapWidth = (int)width.value;
-        ServerManager.instance.mapHeight = (int)height.value;
-        ServerManager.instance.respawnTime = (int)respawn.value;
     }
 }
