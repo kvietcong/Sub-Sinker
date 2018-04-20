@@ -438,9 +438,12 @@ MonoBehaviour:
   - {fileID: 1706380519448740, guid: 7e279b124c541734eb9a0c2973fdc35a, type: 2}
   - {fileID: 1701261212673260, guid: 08234adc8939ecf4d8a46fdf5303a23f, type: 2}
   - {fileID: 1674456554491180, guid: 8ce7f1962f484f44ab7bb670dcb5b778, type: 2}
-  - {fileID: 1502628693519090, guid: 83f61c390c267aa44853c03e404d95a3, type: 2}
+  - {fileID: 1928874389983780, guid: 98f43e1b656e79840a14882c8a82a4e5, type: 2}
   - {fileID: 1003728381875858, guid: dc092727d71461f49a6bbaccf425dd11, type: 2}
   - {fileID: 100000, guid: fb1312d91b8716042b1151f9b514fc16, type: 2}
+  - {fileID: 1829539105854136, guid: 36d7c71039afe474eab8ae3db6e03535, type: 2}
+  - {fileID: 1258237655649294, guid: cd104478a78034a44bbeda32c1e9f089, type: 2}
+  - {fileID: 1115816802321798, guid: f16bb23f552b2484bbb1b6b43534263e, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -1029,13 +1032,20 @@ MonoBehaviour:
   serverManagerPrefab: {fileID: 1633558284011988, guid: 73ddc8f0f32104e489dba119804ebce5,
     type: 2}
   ammoPrefab: {fileID: 1674456554491180, guid: 8ce7f1962f484f44ab7bb670dcb5b778, type: 2}
-  healthPrefab: {fileID: 1502628693519090, guid: 83f61c390c267aa44853c03e404d95a3,
+  healthPrefab: {fileID: 1928874389983780, guid: 98f43e1b656e79840a14882c8a82a4e5,
     type: 2}
   jellyPrefab: {fileID: 1003728381875858, guid: dc092727d71461f49a6bbaccf425dd11,
     type: 2}
+  shipPrefab: {fileID: 1115816802321798, guid: f16bb23f552b2484bbb1b6b43534263e, type: 2}
+  seaweedPrefab: {fileID: 1829539105854136, guid: 36d7c71039afe474eab8ae3db6e03535,
+    type: 2}
+  fishPrefab: {fileID: 1258237655649294, guid: cd104478a78034a44bbeda32c1e9f089, type: 2}
   ammoPerPlayer: 10
   healthPerPlayer: 20
   jellyPerPlayer: 15
+  ships: 2
+  seaweeds: 30
+  fishPerPlayer: 50
   t: 0
 --- !u!114 &1314142530
 MonoBehaviour:
@@ -1505,7 +1515,7 @@ Light:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1972140198}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}

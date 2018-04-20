@@ -27,6 +27,7 @@ public class EngineLight : NetworkBehaviour {
     EngineLight lt;
 
     public GameObject nametag;
+    public GameObject bubbles;
 
     public override void OnStartClient()
     {
@@ -73,11 +74,13 @@ public class EngineLight : NetworkBehaviour {
             // hide light/nametag when not within distance of localplayer
             engineLight.intensity = 0;
             nametag.SetActive(false);
+            bubbles.SetActive(false);
         }
         else
         {
             engineLight.intensity = startIntensity;
             nametag.SetActive(true);
+            bubbles.SetActive(true);
         }
 
         // network awareness

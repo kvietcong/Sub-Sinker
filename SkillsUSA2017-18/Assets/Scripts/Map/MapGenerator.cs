@@ -38,13 +38,6 @@ public class MapGenerator : NetworkBehaviour
 
         spawnableCoords = new List<Coord>();
         GenerateMap(ServerManager.instance.tempSeed);
-
-        // lazy
-        GameObject waterBG = GameObject.Find("WaterBackground");
-        GameObject darkBG = GameObject.Find("DarkBackground");
-        // set size to cover map
-        waterBG.transform.localScale = new Vector3(ServerManager.instance.mapWidth * 3f / 10f, 1, ServerManager.instance.mapHeight * 3f / 10f);
-        darkBG.transform.localScale = new Vector3(ServerManager.instance.mapWidth * 3f / 10f + 15, 1, ServerManager.instance.mapHeight * 3f / 10f + 15);
     }
 
     private void Update()
@@ -97,6 +90,14 @@ public class MapGenerator : NetworkBehaviour
 
         // generating is done
         generated = true;
+
+
+        // lazy
+        GameObject waterBG = GameObject.Find("WaterBackground");
+        GameObject darkBG = GameObject.Find("DarkBackground");
+        // set size to cover map
+        waterBG.transform.localScale = new Vector3(ServerManager.instance.mapWidth * 3f / 10f, 1, ServerManager.instance.mapHeight * 3f / 10f);
+        darkBG.transform.localScale = new Vector3(ServerManager.instance.mapWidth * 3f / 10f + 15, 1, ServerManager.instance.mapHeight * 3f / 10f + 15);
     }
 
     void ProcessMap()
@@ -558,5 +559,28 @@ public class MapGenerator : NetworkBehaviour
         float y = 3*(map_y - ServerManager.instance.mapHeight / 2);
 
         return new Vector2(x, y);
+    }
+
+    public Vector3 GetGroundSpawnPos()
+    {
+        int tileset_width = map.GetLength(0);
+        int tileset_height = map.GetLength(1);
+
+        // exclude edges
+        int map_x = UnityEngine.Random.Range(1, tileset_width - 1);
+        int map_y = UnityEngine.Random.Range(1, tileset_height - 1);
+
+            // sometimes this check makes it go out of bounds
+            while (map[map_x - 1, map_y + 1] == 1 || map[map_x, map_y + 1] == 1 || map[map_x + 1, map_y + 1] == 1 ||
+                map[map_x - 1, map_y] == 1 || map[map_x, map_y] == 1 || map[map_x + 1, map_y] == 1 ||
+                map[map_x - 1, map_y - 1] == 0 || map[map_x, map_y - 1] == 0 || map[map_x + 1, map_y - 1] == 0) // BREAK when on "floor"
+            {
+                map_x = UnityEngine.Random.Range(1, tileset_width - 1);
+                map_y = UnityEngine.Random.Range(1, tileset_height - 1);
+            }
+            float x = 3 * (map_x - ServerManager.instance.mapWidth / 2); // 3x scale
+            float y = 3 * (map_y - ServerManager.instance.mapHeight / 2);
+
+            return new Vector2(x, y);
     }
 }

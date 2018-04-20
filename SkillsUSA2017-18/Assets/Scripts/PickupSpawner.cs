@@ -11,12 +11,18 @@ public class PickupSpawner : NetworkBehaviour {
     public GameObject ammoPrefab;
     public GameObject healthPrefab;
     public GameObject jellyPrefab;
+    public GameObject shipPrefab;
+    public GameObject seaweedPrefab;
+    public GameObject fishPrefab;
     bool spawned;
 
     GameObject[] pickups;
     public int ammoPerPlayer = 10;
     public int healthPerPlayer = 5;
-    public int jellyPerPlayer;
+    public int jellyPerPlayer = 15;
+    public int ships = 2;
+    public int seaweeds = 30;
+    public int fishPerPlayer = 50;
     int ammos;
     int healths;
 
@@ -110,13 +116,24 @@ public class PickupSpawner : NetworkBehaviour {
         SpawnPickup(ammoPerPlayer, ammoPrefab);
         SpawnPickup(healthPerPlayer, healthPrefab);
         SpawnPickup(jellyPerPlayer, jellyPrefab);
+        SpawnPickup(fishPerPlayer, fishPrefab);
+        SpawnPickup(seaweeds, seaweedPrefab, true);
+        SpawnPickup(ships, shipPrefab, true);
     }
 
-    void SpawnPickup(int num, GameObject prefab)
+    void SpawnPickup(int num, GameObject prefab, bool ground = false)
     {
         for (int i = 0; i < num; i++)
         {
-            var spawnPosition = MapGenerator.instance.GetComponent<MapGenerator>().GetSpawnPos();
+            Vector3 spawnPosition;
+            if (ground)
+            {
+                spawnPosition = MapGenerator.instance.GetComponent<MapGenerator>().GetGroundSpawnPos();
+            }
+            else
+            {
+                spawnPosition = MapGenerator.instance.GetComponent<MapGenerator>().GetSpawnPos();
+            }
 
             if (LayerMask.LayerToName(prefab.layer) == "Environment")
             {
@@ -124,6 +141,18 @@ public class PickupSpawner : NetworkBehaviour {
                 spawnPosition = new Vector3(spawnPosition.x, spawnPosition.y, 2f);
             }
             var pickup = (GameObject)Instantiate(prefab, spawnPosition, Quaternion.identity);
+
+            // bad and lazy :(
+            if (pickup.name == "seaweed(Clone)")
+            {
+                pickup.transform.eulerAngles = new Vector3(270f, 90f, 0);
+                pickup.transform.position += new Vector3(0, 1.6f, 0);
+            }
+            else if (pickup.name == "garbageship(Clone)")
+            {
+                pickup.transform.eulerAngles = new Vector3(Random.Range(-10f, 10f), -90f, 0);
+                pickup.transform.position += new Vector3(0, Random.Range(0.5f, 2f), 0.57f);
+            }
             NetworkServer.Spawn(pickup);
         }
     }

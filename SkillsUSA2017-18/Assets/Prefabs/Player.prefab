@@ -19002,6 +19002,7 @@ MonoBehaviour:
   circle: {fileID: 224230333266716540}
   model: {fileID: 1425146229112758}
   nametag: {fileID: 1734684235844860}
+  bubbles: {fileID: 1465898636032708}
 --- !u!114 &114850711649057460
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -21452,7 +21453,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1582524506
+  randomSeed: 739058398
   InitialModule:
     serializedVersion: 3
     enabled: 1
