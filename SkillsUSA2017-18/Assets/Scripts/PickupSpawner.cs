@@ -164,5 +164,11 @@ public class PickupSpawner : NetworkBehaviour {
         {
             NetworkServer.Destroy(pickup);
         }
+
+        pickups = GameObject.FindGameObjectsWithTag("Environment");
+        foreach (GameObject pickup in pickups)
+        {
+            NetworkServer.Destroy(pickup);
+        }
     }
 }

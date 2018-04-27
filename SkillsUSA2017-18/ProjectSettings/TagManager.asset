@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Map
   - Pick Up
+  - Environment
   layers:
   - Default
   - TransparentFX
