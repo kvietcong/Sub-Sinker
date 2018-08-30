@@ -1,5 +1,5 @@
 # Sub Sinker
-This game is a collaboration between myself and FGVel0city for the 2017-2018 SkillsUSA Game Design competition. Combining strategy, stealth, and action, this deceptively difficult game challenges players to balance risk and reward in order to destroy their opponents.
+This game is a collaboration between imfrendy (Judah) and FGVel0city (KV) for the 2017-2018 SkillsUSA Game Design competition. Combining strategy, stealth, and action, this deceptively difficult game challenges players to balance risk and reward in order to destroy their opponents.
 
 ### How to install and run:
 Download this repo and open the project in Unity. Then, build it and run the executable it creates.
