@@ -23,7 +23,15 @@ public class FlipSub : MonoBehaviour {
     {
         if (transform.rotation.eulerAngles.y != targetDir)
         {
-            transform.rotation = Quaternion.Slerp(Quaternion.Euler(0,startDir,0), Quaternion.Euler(0,targetDir,0), flipTimer / flipDuration);
+            float lerpTime = flipTimer / flipDuration;
+            if (lerpTime >= 0.5f) {
+                transform.rotation = Quaternion.Slerp(Quaternion.Euler(0, 270f, 0), Quaternion.Euler(0, targetDir, 0), (lerpTime - 0.5f) * 2);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Slerp(Quaternion.Euler(0, startDir, 0), Quaternion.Euler(0, 270f, 0), lerpTime * 2);
+            }
+            print("FLIPPING.. progress is " + lerpTime);
         }
 
         flipTimer += Time.deltaTime;
@@ -37,37 +45,39 @@ public class FlipSub : MonoBehaviour {
 
     void Flip (string dir)
     {
-        flipped = false;
         if (dir == "right")
         {
             if (transform.rotation.eulerAngles.y != 180)
             {
+                float rot = Mathf.Round(transform.rotation.eulerAngles.y);
+                if (rot == 0)
+                {
+                    rot = 360;
+                }
+                flipped = false;
                 targetDir = 180;
-                startDir = 0;
-                flipTimer = transform.rotation.eulerAngles.y / 180;
+                startDir = 0; // 0  is 360
+                flipTimer = flipDuration * ((360 - rot) / 180);
+                print("timer: " + flipTimer);
+                print("from rot: " + rot);
             }
         }
         else if (dir == "left")
         {
             if (transform.rotation.eulerAngles.y != 0)
             {
-                targetDir = 0;
+                float rot = Mathf.Round(transform.rotation.eulerAngles.y);
+                flipped = false;
+                targetDir = 0; // 0 is 360
                 startDir = 180;
-                flipTimer = (180 - transform.rotation.eulerAngles.y) / 180;
+                flipTimer = flipDuration * ((rot - 180)  / 180);
+                print("timer: " + flipTimer);
+                print("from rot: " + rot);
             }
         }
         else
         {
-            targetDir = Mathf.Abs(targetDir - 180); // flip from current direction
-            if (targetDir == 0)
-            {
-                flipTimer = (180 - transform.rotation.eulerAngles.y) / 180;
-            }
-            else
-            {
-                flipTimer = transform.rotation.eulerAngles.y / 180;
-            }
-                
+            print("y u do dis");
         }
     }
 }
