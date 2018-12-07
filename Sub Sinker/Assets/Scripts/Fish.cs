@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Fish : MonoBehaviour {
     Rigidbody2D rb;
-    float trend;
     public float forceScale;
     float baseSpeed;
     int dir; // -1 = left
@@ -15,7 +14,6 @@ public class Fish : MonoBehaviour {
         gameObject.transform.localScale = new Vector3(Random.Range(1f, 3f), Random.Range(1f, 3f), Random.Range(1f, 3f));
 
         rb = gameObject.GetComponent<Rigidbody2D>();
-        trend = Random.Range(0f, 10f);
 
         dir = Random.Range(0, 1) * 2 - 1;
         baseSpeed = Random.Range(0, 15f);
@@ -23,16 +21,7 @@ public class Fish : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        rb.AddForce(new Vector2(Random.Range(baseSpeed - 2f, baseSpeed + 2f) * Time.deltaTime * dir, Random.Range(-trend, trend) * Time.deltaTime) * forceScale);
-        trend += Random.Range(0f, 5f) * Time.deltaTime;
-        if(trend >= 10f)
-        {
-            trend = 10f;
-        }
-        else if (trend <= 0f)
-        {
-            trend = 0f;
-        }
+        rb.AddForce(new Vector2(Random.Range(baseSpeed - 2f, baseSpeed + 2f) * Time.deltaTime * dir, 0) * forceScale);
 
         if (dir == -1)
         {
