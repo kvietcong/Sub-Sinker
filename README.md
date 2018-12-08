@@ -18,6 +18,8 @@ Left click: Fire a torpedo
 
 Right click: Fire a SONAR ping, illuminating the walls it bounces off
 
+Shift: Expand grid
+
 ### Gameplay:
 Collect health kits (tools) and ammo (torpedos) around the map.
 
@@ -35,23 +37,29 @@ Press F2 to provide global illumination.
 Press F3 to reveal the whole map.
 
 
-## To Do/issues:
+#### To Do/issues:
 Refactor cooldowns with IEnumerators instead of the mess it currently is
 
 Add new movement options like a quick dash or boost
 
-Improve visuals and add to environment (i.e. implement jellyfish model)
+Improve visuals and add to environment (e.g. implement jellyfish model), improve fish behavior
 
 Replace network UI and allow for custom ports
 
-Improve map texture and allow it to be dynamic/tile, as well as texture the sides of walls
+Improve level texture and allow it to be dynamic/tile, as well as texture the sides of walls
 
 Map generator flips width and height (currently UI fix)
 
-Allow radar to stretch properly with non-square dimensions
+Allow radar grid to stretch properly with non-square dimensions, make it display more info (e.g. currently visible players)
 
 Allow players to bounce off walls without screwing up other stuff
 
 Physics seem to affect host and clients differently
 
-Improve ping indicator (lol)
+Improve ping cooldown UI (lol)
+
+Add more sounds like pickup indicator and ambient noise
+
+Add pickups to inventory to use later instead of insta-heal
+
+Add TDM, CTF, permadeath, and more modes
