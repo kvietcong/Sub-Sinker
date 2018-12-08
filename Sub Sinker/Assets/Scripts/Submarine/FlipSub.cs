@@ -31,7 +31,6 @@ public class FlipSub : MonoBehaviour {
             {
                 transform.rotation = Quaternion.Slerp(Quaternion.Euler(0, startDir, 0), Quaternion.Euler(0, 270f, 0), lerpTime * 2);
             }
-            print("FLIPPING.. progress is " + lerpTime);
         }
 
         flipTimer += Time.deltaTime;
@@ -58,8 +57,6 @@ public class FlipSub : MonoBehaviour {
                 targetDir = 180;
                 startDir = 0; // 0  is 360
                 flipTimer = flipDuration * ((360 - rot) / 180);
-                print("timer: " + flipTimer);
-                print("from rot: " + rot);
             }
         }
         else if (dir == "left")
@@ -71,13 +68,11 @@ public class FlipSub : MonoBehaviour {
                 targetDir = 0; // 0 is 360
                 startDir = 180;
                 flipTimer = flipDuration * ((rot - 180)  / 180);
-                print("timer: " + flipTimer);
-                print("from rot: " + rot);
             }
         }
         else
         {
-            print("y u do dis");
+            print("set dir to left or right, currently it is " + dir);
         }
     }
 }

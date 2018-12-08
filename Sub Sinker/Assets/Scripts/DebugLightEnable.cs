@@ -13,10 +13,13 @@ public class DebugLightEnable : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        // debug light toggle
-        if (Input.GetKeyDown(KeyCode.F2))
+        if (Debug.isDebugBuild)
         {
-            debugLight.enabled = !debugLight.enabled;
+            // debug light toggle
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                debugLight.enabled = !debugLight.enabled;
+            }
         }
     }
 }

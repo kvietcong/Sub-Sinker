@@ -10,15 +10,10 @@ public class MapGenerator : NetworkBehaviour
 
     [Range(0, 100)]
     public int randomFillPercent;
-
     public int minRoomSize = 50;
-
     public int minChunkSize = 50;
-
     public int passageSize = 2;
-
     public bool debugLines = false;
-
     int[,] map;
 
     List<Coord> spawnableCoords;
@@ -40,10 +35,9 @@ public class MapGenerator : NetworkBehaviour
         GenerateMap(ServerManager.instance.tempSeed);
     }
 
-    private void Update()
-    {
-    }
-
+    // while this does properly generate maps, the x and y vars are reversed
+    // since 2d arrays are [y, x] aka [rows, columns]
+    // therefore width is used as height and vice versa
     public void GenerateMap(string seed)
     {
         generated = false;
@@ -95,9 +89,13 @@ public class MapGenerator : NetworkBehaviour
         // lazy
         GameObject waterBG = GameObject.Find("WaterBackground");
         GameObject darkBG = GameObject.Find("DarkBackground");
+
         // set size to cover map
-        waterBG.transform.localScale = new Vector3(ServerManager.instance.mapWidth * 3f / 10f, 1, ServerManager.instance.mapHeight * 3f / 10f);
-        darkBG.transform.localScale = new Vector3(ServerManager.instance.mapWidth * 3f / 10f + 15, 1, ServerManager.instance.mapHeight * 3f / 10f + 15);
+        // note: REVERSED because the function uses width as height and vice versa
+        waterBG.transform.localScale = new Vector3(ServerManager.instance.mapHeight * 3f / 10f, 1,
+            ServerManager.instance.mapWidth * 3f / 10f);
+        darkBG.transform.localScale = new Vector3(ServerManager.instance.mapHeight * 3f / 10f + 15, 1,
+            ServerManager.instance.mapWidth * 3f / 10f + 15);
     }
 
     void ProcessMap()

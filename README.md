@@ -27,14 +27,31 @@ Jellyfish (currently model-less) can illuminate the game world slightly.
 
 Use the grid in the bottom right to remember the layout of the trenches.
 
-### Debug
+### Debug build only
 Press F1 to self-destruct.
 
 Press F2 to provide global illumination.
 
-Press F4 to regenerate the map (Host only).
+Press F3 to reveal the whole map.
 
-Press F6 to reveal the whole map.
 
-### Known Issues
-Too many
+## To Do/issues:
+Refactor cooldowns with IEnumerators instead of the mess it currently is
+
+Add new movement options like a quick dash or boost
+
+Improve visuals and add to environment (i.e. implement jellyfish model)
+
+Replace network UI and allow for custom ports
+
+Improve map texture and allow it to be dynamic/tile, as well as texture the sides of walls
+
+Map generator flips width and height (currently UI fix)
+
+Allow radar to stretch properly with non-square dimensions
+
+Allow players to bounce off walls without screwing up other stuff
+
+Physics seem to affect host and clients differently
+
+Improve ping indicator (lol)

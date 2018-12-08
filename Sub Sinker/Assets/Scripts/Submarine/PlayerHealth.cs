@@ -92,13 +92,16 @@ public class PlayerHealth : NetworkBehaviour
             respawnProgress += Time.deltaTime;
         }
 
-        // debug death
-        if (Input.GetKeyDown(KeyCode.F1))
+        if (Debug.isDebugBuild)
         {
-            if (isLocalPlayer)
+            // debug death
+            if (Input.GetKeyDown(KeyCode.F1))
             {
-                CmdTakeDamage(100, gameObject.GetComponent<PlayerInfo>().playerName,
-                    gameObject.GetComponent<PlayerInfo>().primaryColor);
+                if (isLocalPlayer)
+                {
+                    CmdTakeDamage(100, gameObject.GetComponent<PlayerInfo>().playerName,
+                        gameObject.GetComponent<PlayerInfo>().primaryColor);
+                }
             }
         }
     }

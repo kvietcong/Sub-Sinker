@@ -23,22 +23,22 @@ public class CameraFollow : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate ()
     {
-        
-        if (Input.GetKeyDown(KeyCode.F6))
+        if (Debug.isDebugBuild)
         {
-            on = !on;
+            if (Input.GetKeyDown(KeyCode.F3))
+            {
+                on = !on;
+            }
         }
         if (on)
         {
             transform.position = Vector3.SmoothDamp(transform.position, new Vector3(0, 0, -650), ref m_MoveVelocity, 4);
             return;
         }
-        if (player == null)
+        if (player != null)
         {
-            return;
+            transform.position = Vector3.SmoothDamp(transform.position, player.transform.position + offset, ref m_MoveVelocity, m_DampTime);
         }
-
-        transform.position = Vector3.SmoothDamp(transform.position, player.transform.position + offset, ref m_MoveVelocity, m_DampTime);
     }
 
     public void SetPlayer(GameObject thePlayer)

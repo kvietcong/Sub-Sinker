@@ -48,37 +48,20 @@ public class ServerManager : NetworkBehaviour {
     {
         if (isServer)
         {
-            if (randomMapSeed)
-            {
-                tempSeed = UnityEngine.Random.value.ToString();
-            }
-            else
-            {
-                tempSeed = mapSeed;
-            }
+            // temp seed generates new map -> will result in warning
+            SetTempSeed();
+            // map generates on instantiate
             GameObject mapGen = Instantiate(mapGenPrefab, new Vector3(), Quaternion.identity);
             NetworkServer.Spawn(mapGen);
         }
     }
 
-    private void Update()
-    {
-        // debug map
-        if (Input.GetKeyDown(KeyCode.F4))
-        {
-            if (randomMapSeed)
-            {
-                // generates the map
-                tempSeed = UnityEngine.Random.value.ToString();
-            }
-        }
-    }
-
     // run on server and clients
-    void RegenerateMap()
+    public void RegenerateMap()
     {
         if (MapGenerator.instance)
         {
+            SetTempSeed();
             MapGenerator.instance.GetComponent<MapGenerator>().GenerateMap(tempSeed);
             if (isServer)
             {
@@ -86,12 +69,21 @@ public class ServerManager : NetworkBehaviour {
                 PickupSpawner.instance.InitSpawnPickups();
             }
             // respawn local player
+            // expected beginning error
             GameObject.Find("LocalPlayer").GetComponent<SubSpawn>().Respawn();
         }
         else
         {
-            // expected at start
+            // expected at start due to temp seed hook
             Debug.LogWarning("MapGenerator not instantiated");
+        }
+    }
+
+    void SetTempSeed()
+    {
+        if (isServer)
+        {
+            tempSeed = randomMapSeed ? UnityEngine.Random.value.ToString() : mapSeed;
         }
     }
 
@@ -130,12 +122,13 @@ public class ServerManager : NetworkBehaviour {
 
     void OnChangeSeed(string seed)
     {
+        mapSeed = seed;
         if (!randomMapSeed)
         {
-            mapSeed = seed;
+            // apparently, changing temp seed here does not trigger a RegenerateMap
+            tempSeed = mapSeed;
+            RegenerateMap();
         }
-        tempSeed = mapSeed;
-        RegenerateMap();
     }
 
     void OnChangeTemp(string seed)
