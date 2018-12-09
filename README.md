@@ -48,7 +48,7 @@ Replace network UI and allow for custom ports
 
 Improve level texture and allow it to be dynamic/tile, as well as texture the sides of walls
 
-Map generator flips width and height (currently UI fix)
+Map generator flips width and height
 
 Allow radar grid to stretch properly with non-square dimensions, make it display more info (e.g. currently visible players)
 
