@@ -1213,7 +1213,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1163606375139786
 GameObject:
   m_ObjectHideFlags: 1
@@ -5055,8 +5055,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4893085160611570}
-  - component: {fileID: 33007535178606374}
-  - component: {fileID: 23292427874792980}
   - component: {fileID: 50617956558018798}
   - component: {fileID: 61916732107585890}
   - component: {fileID: 70334390699241306}
@@ -6231,41 +6229,6 @@ Transform:
   m_Father: {fileID: 4081468504835150}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23292427874792980
-MeshRenderer:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1788335911100524}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
 --- !u!23 &23500092676250078
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -6378,13 +6341,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33007535178606374
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1788335911100524}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &33383443055972712
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -10018,8 +9974,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7568f9da011d4d645a0f1f9d07d7b1ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  height: {fileID: 114245097145408658}
-  width: {fileID: 114317780167332210}
+  height: {fileID: 114317780167332210}
+  width: {fileID: 114245097145408658}
   respawn: {fileID: 114367589513339126}
   widthIndicator: {fileID: 114633748489698040}
   heightIndicator: {fileID: 114370056074253870}
